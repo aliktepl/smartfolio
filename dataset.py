@@ -1,6 +1,8 @@
 import praw
 import pandas as pd
 import re
+from textblob import TextBlob
+import openpyxl
 
 
 # search queries in posts
@@ -21,14 +23,14 @@ clientid = "DMtFbBZI6naKOBJ7DVigcQ"
 clientsecret = "ZgVu9bYXW38L4wnEdhY6HWpr7Yrkvw"
 
 reddit = praw.Reddit(client_id=clientid, client_secret=clientsecret, user_agent="human_behavior")
-subreddit = reddit.subreddit('mentalhealth')
+subreddit = reddit.subreddit('cryptocurrency')
 titles = []
 urls = []
 text = []
 first_ts = 1e11
 last_ts = 0
 # queries to search in mentalhealth subreddit
-topic_lst = ['gaming', 'videogames', 'video games', 'computer games', 'console games', 'gamer']
+topic_lst = ['bitcoin']
 
 for topic in topic_lst:
     for submission in subreddit.search(topic, sort='relevance', limit=1000):
@@ -47,4 +49,4 @@ data = data.drop_duplicates(subset=['Title', 'URL', 'Text'])
 query = search_queries(data, "")
 for q in query:
     print(q)
-data.to_excel('data_mentalhealth.xlsx', index=False)
+data.to_excel('data_bitcoin.xlsx', index=False)
