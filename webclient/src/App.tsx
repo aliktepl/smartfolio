@@ -1,12 +1,20 @@
 import './App.css'
-import SideBar from "./SideBar.tsx";
+import Sidebar from "./Sidebar.tsx";
+import Dashboard from "./Dashboard.tsx";
 
 function App() {
 
   return (
-          <div>
-              <SideBar/>
+      <div className="app">
+          <div className="sidebar">
+              <div className="sidebar-content">
+                  <Sidebar/>
+              </div>
           </div>
+          <div className="main-content">
+              <Dashboard/>
+          </div>
+      </div>
   )
 }
 

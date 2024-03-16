@@ -2,17 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-  .sidebar-icon {
-    @apply relative flex items-center justify-center h-12 w-12 mt-2 mb-2 mx-auto
-    text-[#9E9E9E]
-    hover:bg-blue-800 hover:text-white
-    rounded-3xl hover:rounded-xl
-    transition-all duration-300 cursor-pointer
+@layer base {
+  :root {
+    @apply bg-primary
   }
 
-  .sidebar-tooltip {
-    @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md
-    text-white bg-gray-900 text-xs font-bold transition-all duration-100 scale-0 origin-left
+}
+
+@layer components {
+
+  .app {
+    @apply flex h-screen overflow-hidden;
+  }
+
+  .sidebar {
+    @apply w-64 flex-shrink-0 bg-sidebar text-white;
+  }
+
+  .sidebar-content {
+    @apply flex flex-col h-full;
+  }
+
+  .main-content {
+    @apply flex-1 overflow-auto;
+  }
+
+  .sidebar-content nav {
+    @apply flex flex-col items-center;
+  }
+
+  .sidebar-content nav ul {
+    @apply w-full;
+  }
+
+  .sidebar-content nav ul li a {
+    @apply flex items-center justify-start w-full px-4 py-2
+    hover:bg-blue-800 hover:text-white
+    rounded-3xl hover:rounded-xl
+    transition-all duration-300 cursor-pointer;
+  }
+
+  .sidebar-content nav ul li a svg {
+    @apply flex-shrink-0;
   }
 }
