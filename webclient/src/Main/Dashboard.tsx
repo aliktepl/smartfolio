@@ -1,4 +1,4 @@
-const Dashboard = () => {
+function Dashboard () {
 
     const cryptoPrices = [
         {name: 'Bitcoin', symbol: 'BTC', price: 52291, change: 0.25},
@@ -76,6 +76,6 @@ const Dashboard = () => {
             </div>
         </div>
     );
-};
+}
 
 export default Dashboard;
