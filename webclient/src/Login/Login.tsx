@@ -1,23 +1,27 @@
-import {useState}  from 'react';
+import {SetStateAction, useState} from 'react';
 import Logo from "../assets/Logo.tsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {AuthProvider} from "../App.tsx";
 
-function Login () {
+function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Get the navigate function
 
-    const handleEmailChange = (e) => {
+    const handleEmailChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setEmail(e.target.value);
     };
 
-    const handlePasswordChange = (e) => {
+    const handlePasswordChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    async function handleSubmit (e: { preventDefault: () => void; }) {
         e.preventDefault();
         // Handle login logic here
-    };
+        await AuthProvider.signIn()
+        navigate('/');
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center">

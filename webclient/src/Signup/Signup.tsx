@@ -1,25 +1,25 @@
-import {useState}  from 'react';
+import {SetStateAction, useState} from 'react';
 import Logo from "../assets/Logo.tsx";
 import {Link} from "react-router-dom";
 
-function Signup()  {
+function Signup() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleNameChange = (e) => {
+    const handleNameChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setName(e.target.value);
     }
 
-    const handleEmailChange = (e) => {
+    const handleEmailChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setEmail(e.target.value);
     };
 
-    const handlePasswordChange = (e) => {
+    const handlePasswordChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         // Handle login logic here
     };
@@ -69,14 +69,14 @@ function Signup()  {
                     </div>
                     <div className="flex justify-center mb-6">
                         <span className="text-white pr-1">Already have an Account?</span>
-                        <Link to={'/'} className="text-blue-500 hover:text-blue-400 focus:outline-none">
+                        <Link to={'/login'} className="text-blue-500 hover:text-blue-400 focus:outline-none">
                             Login Here!
                         </Link>
                     </div>
                     <button
                         type="submit"
                         className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        Login
+                        Sign Up
                     </button>
                 </form>
             </div>

@@ -1,7 +1,15 @@
 import {FaCog, FaSearch, FaSignOutAlt, FaWallet} from 'react-icons/fa';
 import {RxDashboard} from "react-icons/rx";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, redirect} from "react-router-dom";
 import Logo from "../assets/Logo.tsx";
+import {AuthProvider} from "../App.tsx";
+
+export async function sidebarLoader() {
+    if(!AuthProvider.isAuthenticated) {
+        return redirect("/login")
+    }
+    return null
+}
 
 function Sidebar () {
     return (
@@ -20,8 +28,7 @@ function Sidebar () {
                         <nav className="flex-grow p-4">
                             <ul className="space-y-4">
                                 <li>
-                                    <Link to={'/'}
-                                          className="flex items-center text-[#9E9E9E] hover:text-white">
+                                    <Link to={'/'} className="flex items-center text-[#9E9E9E] hover:text-white">
                                         <RxDashboard className="mr-2"/>
                                         Dashboard
                                     </Link>
@@ -43,7 +50,7 @@ function Sidebar () {
                         <nav className="p-4 border-t border-gray-800">
                             <ul className="space-y-4">
                                 <li>
-                                    <Link to='/settings' className="flex items-center text-[#9E9E9E] hover:text-white">
+                                    <Link to={'/settings'} className="flex items-center text-[#9E9E9E] hover:text-white">
                                         <FaCog className="mr-2"/>
                                         Settings
                                     </Link>
