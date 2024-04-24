@@ -7,9 +7,10 @@ import Signup from "./Signup/Signup.tsx";
 import Explore from "./Main/Explore.tsx";
 import Wallet from "./Main/Wallet.tsx";
 import Settings from "./Main/Settings.tsx";
+import Coin from "./Main/Coin.tsx";
 
 export const AuthProvider = {
-    isAuthenticated: false,
+    isAuthenticated: true,
     async signIn() {
         this.isAuthenticated = true
     },
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
             {
                 index:true,
                 element: <Dashboard/>
+            },
+            {
+                path: ":id",
+                element: <Coin/>
             },
             {
                 path: "explore",
