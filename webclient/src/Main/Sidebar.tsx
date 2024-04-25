@@ -1,10 +1,10 @@
 import {FaCog, FaSearch, FaSignOutAlt, FaWallet} from 'react-icons/fa';
 import {RxDashboard} from "react-icons/rx";
-import {Link, Outlet, redirect} from "react-router-dom";
+import {NavLink, Outlet, redirect} from "react-router-dom";
 import Logo from "../assets/Logo.tsx";
-import {AuthProvider} from "../App.tsx";
+import {AuthProvider} from "../Authentication/AuthProvider.tsx";
 
-export async function sidebarLoader() {
+export async function loader() {
     if(!AuthProvider.isAuthenticated) {
         return redirect("/login")
     }
@@ -12,12 +12,13 @@ export async function sidebarLoader() {
 }
 
 function Sidebar () {
+
     return (
         <div className="app">
             <div className="sidebar">
                 <div className="sidebar-content">
                     <div className="fixed bg-sidebar text-white h-screen w-64 flex flex-col">
-                        <div className="flex items-center justify-center h-20 border-b border-gray-800">
+                        <div className="flex items-center justify-center h-20 border-gray-800">
                             <div className="flex">
                                 <Logo></Logo>
                                 <h1 className="text-2xl ml-2 font-bold">
@@ -28,38 +29,43 @@ function Sidebar () {
                         <nav className="flex-grow p-4">
                             <ul className="space-y-4">
                                 <li>
-                                    <Link to={'/'} className="flex items-center text-[#9E9E9E] hover:text-white">
+                                    <NavLink to={'/'} className={({isActive})=>
+                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:text-white"}}>
                                         <RxDashboard className="mr-2"/>
                                         Dashboard
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to={'/explore'} className="flex items-center text-[#9E9E9E] hover:text-white">
+                                    <NavLink to={'/explore'} className={({isActive})=>
+                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:text-white"}}>
                                         <FaSearch className="mr-2"/>
                                         Explore
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to={'/wallet'} className="flex items-center text-[#9E9E9E] hover:text-white">
+                                    <NavLink to={'/wallet'} className={({isActive})=>
+                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:text-white"}}>
                                         <FaWallet className="mr-2"/>
                                         Wallet
-                                    </Link>
+                                    </NavLink>
                                 </li>
                             </ul>
                         </nav>
                         <nav className="p-4 border-t border-gray-800">
                             <ul className="space-y-4">
                                 <li>
-                                    <Link to={'/settings'} className="flex items-center text-[#9E9E9E] hover:text-white">
+                                    <NavLink to={'/settings'} className={({isActive})=>
+                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:text-white"}}>
                                         <FaCog className="mr-2"/>
                                         Settings
-                                    </Link>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <Link to={'/login'} className="flex items-center text-[#9E9E9E] hover:text-white">
+                                    <NavLink to={'/logout'} className={({isActive})=>
+                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:text-white"}}>
                                         <FaSignOutAlt className="mr-2"/>
                                         Logout
-                                    </Link>
+                                    </NavLink>
                                 </li>
                             </ul>
                         </nav>

@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    @apply bg-primary
+    @apply bg-primary text-white
   }
 
 }
@@ -37,8 +37,7 @@
 
   .sidebar-content nav ul li a {
     @apply flex items-center justify-start w-full px-4 py-2
-    hover:bg-blue-800 hover:text-white
-    rounded-3xl hover:rounded-xl
+    hover:bg-blue-800 hover:text-white hover:rounded-xl
     transition-all duration-300 cursor-pointer;
   }
 

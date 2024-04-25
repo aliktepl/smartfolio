@@ -1,7 +1,7 @@
 import {SetStateAction, useState} from 'react';
 import Logo from "../assets/Logo.tsx";
 import {Link, useNavigate} from "react-router-dom";
-import {AuthProvider} from "../App.tsx";
+import {AuthProvider} from "../Authentication/AuthProvider.tsx";
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -19,8 +19,8 @@ function Login() {
     async function handleSubmit (e: { preventDefault: () => void; }) {
         e.preventDefault();
         // Handle login logic here
-        await AuthProvider.signIn()
-        navigate('/');
+        await AuthProvider.signIn(email)
+        navigate('/', {replace: true});
     }
 
     return (
@@ -67,7 +67,7 @@ function Login() {
                     </div>
                     <button
                         type="submit"
-                        className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        className="w-full py-2 px-4 bg-blue-600 text-white rounded-3xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         Login
                     </button>
                 </form>

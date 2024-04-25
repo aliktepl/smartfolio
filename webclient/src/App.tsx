@@ -1,23 +1,14 @@
 import './App.css'
 import Dashboard from "./Main/Dashboard.tsx";
-import Sidebar, {sidebarLoader} from "./Main/Sidebar.tsx"
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import Sidebar, {loader as sidebarLoader} from "./Main/Sidebar.tsx";
+import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import Login from "./Login/Login.tsx";
 import Signup from "./Signup/Signup.tsx";
 import Explore from "./Main/Explore.tsx";
 import Wallet from "./Main/Wallet.tsx";
 import Settings from "./Main/Settings.tsx";
 import Coin from "./Main/Coin.tsx";
-
-export const AuthProvider = {
-    isAuthenticated: true,
-    async signIn() {
-        this.isAuthenticated = true
-    },
-    async signOut() {
-        this.isAuthenticated = false
-    }
-}
+import {AuthProvider} from "./Authentication/AuthProvider.tsx";
 
 const router = createBrowserRouter([
     {
@@ -29,16 +20,25 @@ const router = createBrowserRouter([
         element: <Signup/>
     },
     {
+        path: "/logout",
+        async loader() {
+            await AuthProvider.signOut()
+            return redirect("/login")
+        }
+    },
+
+    {
         path: "/",
         element: <Sidebar/>,
         loader: sidebarLoader,
+        errorElement: <div>404 Not Found</div>,
         children: [
             {
                 index:true,
                 element: <Dashboard/>
             },
             {
-                path: ":id",
+                path: ":coinId",
                 element: <Coin/>
             },
             {

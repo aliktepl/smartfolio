@@ -1,21 +1,22 @@
 import CoinCard from "./Cards/CoinCard.tsx";
 import NewsCard from "./Cards/NewsCard.tsx";
+import {AuthProvider} from "../Authentication/AuthProvider.tsx";
 
 function Dashboard () {
 
     const cryptoPrices = [
-        {name: 'Bitcoin', symbol: 'BTC', price: 52291, change: 0.25},
-        {name: 'Litecoin', symbol: 'LTC', price: 8291, change: 0.25},
-        {name: 'Ethereum', symbol: 'ETH', price: 28291, change: 0.25},
-        {name: 'Solana', symbol: 'SOL', price: 14291, change: -0.25},
+        {name: 'Bitcoin', symbol: 'btc', price: 52291, change: 0.25},
+        {name: 'Litecoin', symbol: 'ltc', price: 8291, change: 0.25},
+        {name: 'Ethereum', symbol: 'eth', price: 28291, change: 0.25},
+        {name: 'Solana', symbol: 'sol', price: 14291, change: -0.25},
     ];
 
     const wallet = [
-        {name: 'Ethereum', symbol: 'ETH', amount: 0.12543, change: -13.4},
-        {name: 'Bitcoin', symbol: 'BTC', amount: 0.12543, change: -6.0},
-        {name: 'Litecoin', symbol: 'LTC', amount: 0.12543, change: 14.25},
-        {name: 'Solana', symbol: 'SOL', amount: 0.12543, change: -2.0},
-        {name: 'Binance Coin', symbol: 'BNB', amount: 0.12543, change: 12.0},
+        {name: 'Ethereum', symbol: 'eth', amount: 0.12543, change: -13.4},
+        {name: 'Bitcoin', symbol: 'btc', amount: 0.12543, change: -6.0},
+        {name: 'Litecoin', symbol: 'ltc', amount: 0.12543, change: 14.25},
+        {name: 'Solana', symbol: 'sol', amount: 0.12543, change: -2.0},
+        {name: 'Binance Coin', symbol: 'bnb', amount: 0.12543, change: 12.0},
     ];
 
     const news = [
@@ -40,7 +41,7 @@ function Dashboard () {
     return (
         <div className="text-white p-6">
             <h1 className="text-2xl font-bold mb-4">
-                Welcome, Yoav!
+                Welcome, {AuthProvider.user}!
             </h1>
             <h2 className="text-lg font-semibold mb-4">
                 Hottest Right Now
