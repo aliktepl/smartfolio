@@ -29,7 +29,7 @@ urls = []
 text = []
 first_ts = 1e11
 last_ts = 0
-# queries to search in mentalhealth subreddit
+# queries to search in bitcoin subreddit
 topic_lst = ['bitcoin']
 
 for topic in topic_lst:
