@@ -1,16 +1,37 @@
-import { useParams } from "react-router-dom";
+import {useLoaderData} from "react-router-dom";
+
+export async function loader({params}) {
+    return params.coinId;
+}
 
 function Coin() {
-    const  {coinId}  = useParams();
+    const loaderData = useLoaderData();
+
     return (
-        <div className="flex items-center justify-between py-2 px-4">
+        <>
+            {/*header*/}
+            <div className="flex items-center justify-between py-2 px-4">
             <span className="relative right-0 justify-self-center text-white font-semibold">
-                {coinId}
+                {loaderData}
             </span>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                + Add To Wallet
-            </button>
-        </div>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    + Add To Wallet
+                </button>
+            </div>
+            {/*charts*/}
+            <div className={'grid grid-cols-2 text-white font-semibold'}>
+                <div className={'justify-self-center'}>
+                    technical
+                </div>
+                <div className={'justify-self-center'}>
+                    sentiment
+                </div>
+            </div>
+            {/*sentiment breakdown*/}
+            <div className={'flex justify-center  font-semibold text-white'}>
+                sentiment breakdown
+            </div>
+        </>
     );
 }
 

@@ -1,6 +1,7 @@
 import './App.css'
 import Dashboard from "./Main/Dashboard.tsx";
 import Sidebar, {loader as sidebarLoader} from "./Main/Sidebar.tsx";
+import {loader as coinLoader} from "./Main/Coin.tsx";
 import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import Login from "./Login/Login.tsx";
 import Signup from "./Signup/Signup.tsx";
@@ -39,7 +40,8 @@ const router = createBrowserRouter([
             },
             {
                 path: ":coinId",
-                element: <Coin/>
+                element: <Coin/>,
+                loader: coinLoader
             },
             {
                 path: "explore",
