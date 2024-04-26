@@ -1,16 +1,17 @@
 import {SetStateAction, useState} from 'react';
 import Logo from "../assets/Logo.tsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Signup() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleNameChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setName(e.target.value);
-    }
+    };
 
     const handleEmailChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setEmail(e.target.value);
@@ -22,11 +23,12 @@ function Signup() {
 
     const handleConfirmPasswordChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setConfirmPassword(e.target.value);
-    }
+    };
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         // Handle login logic here
+        navigate('/login')
     };
 
     return (
