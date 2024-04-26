@@ -2,7 +2,7 @@ import CoinCard from "./Cards/CoinCard.tsx";
 import NewsCard from "./Cards/NewsCard.tsx";
 import {AuthProvider} from "../Authentication/AuthProvider.tsx";
 
-function Dashboard () {
+function Dashboard() {
 
     const cryptoPrices = [
         {name: 'Bitcoin', symbol: 'btc', price: 52291, change: 0.25},
@@ -43,31 +43,33 @@ function Dashboard () {
             <h1 className="text-2xl font-bold mb-4">
                 Welcome, {AuthProvider.user}!
             </h1>
-            <h2 className="text-lg font-semibold mb-4">
-                Hottest Right Now
+            <h2 className="text-lg text-center font-semibold mb-4">
+                Hottest Right Now!
             </h2>
             <div className="grid grid-cols-4 gap-4 mb-6">
                 {cryptoPrices.map((crypto) => (
                     CoinCard(crypto)
                 ))}
             </div>
-            <h2 className="text-lg font-semibold mb-4">My Wallet</h2>
-            <div className="grid grid-cols-2 gap-4 mb-6">
-                {wallet.map((asset) => (
-                    <div key={asset.symbol} className="bg-gray-800 p-4 rounded">
-                        <h3 className="font-semibold">{asset.name}</h3>
-                        <p>${(asset.amount * cryptoPrices.find((crypto) => crypto.symbol === asset.symbol)?.price).toLocaleString()}</p>
-                        <p className={`${asset.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                            {asset.change > 0 ? '+' : ''}{asset.change.toFixed(2)}%
-                        </p>
-                    </div>
-                ))}
-            </div>
-            <h2 className="text-lg font-semibold mb-4">Top News</h2>
             <div className="grid grid-cols-2 gap-4">
-                {news.map((article, index) => (
-                    NewsCard(article, index)
-                ))}
+                <div className="grid grid-cols-1 gap-4 ">
+                    <h2 className="text-lg font-semibold">My Wallet</h2>
+                    {wallet.map((asset) => (
+                        <div key={asset.symbol} className="bg-gray-800 p-4 shadow rounded">
+                            <h3 className="font-semibold">{asset.name}</h3>
+                            <p>${(asset.amount * cryptoPrices.find((crypto) => crypto.symbol === asset.symbol)?.price).toLocaleString()}</p>
+                            <p className={`${asset.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                {asset.change > 0 ? '+' : ''}{asset.change.toFixed(2)}%
+                            </p>
+                        </div>
+                    ))}
+                </div>
+                <div className="grid grid-cols-1 gap-4 ">
+                    <h2 className="text-lg font-semibold">Top News</h2>
+                    {news.map((article, index) => (
+                        NewsCard(article, index)
+                    ))}
+                </div>
             </div>
         </div>
     );
