@@ -1,12 +1,9 @@
 import {useLoaderData} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
 
-interface Params {
-    coinId: string;
-}
-
-
-export async function loader({params}: { params: Params }) {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+export async function loader({params}) {
     return params.coinId;
 }
 

@@ -11,9 +11,9 @@ import {
 import {Link} from "react-router-dom";
 
 
-function CoinCard(coin) {
+function CoinCard({coin}) {
     return (
-        <Link to={coin.symbol} key={coin.symbol}>
+        <Link to={coin.symbol}>
             <Card>
                 <CardHeader>
                     <CardTitle>{coin.name}</CardTitle>

@@ -1,8 +1,8 @@
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 
-function WalletCard(asset, cryptoPrices) {
+function WalletCard({asset, cryptoPrices}) {
     return (
-        <div key={asset.symbol} className={'mb-4'}>
+        <div className={'mb-4'}>
             <Card>
                 <CardHeader>
                     <CardTitle>

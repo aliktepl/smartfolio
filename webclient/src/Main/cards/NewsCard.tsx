@@ -1,8 +1,8 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 
-function NewsCard(article, index) {
+function NewsCard({article}) {
     return (
-        <div key={index} className={'mb-4'}>
+        <div className={'mb-4'}>
             <Card>
                 <CardHeader>
                     <CardTitle>
