@@ -37,7 +37,7 @@ function Signup() {
                 <div className="mb-6 flex justify-center">
                     <Logo/>
                 </div>
-                <h2 className="text-3xl font-bold text-white text-center mb-6">Sign Up</h2>
+                <h2 className="text-3xl font-bold text-center mb-6">Sign Up</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-gray-300 font-bold mb-2">
@@ -49,7 +49,7 @@ function Signup() {
                             value={name}
                             onChange={handleNameChange}
                             placeholder="Enter your name"
-                            className="w-full px-3 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                            className="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                     </div>
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-gray-300 font-bold mb-2">
@@ -61,7 +61,7 @@ function Signup() {
                             value={email}
                             onChange={handleEmailChange}
                             placeholder="Enter your email address"
-                            className="w-full px-3 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <div className="mb-4">
@@ -74,7 +74,7 @@ function Signup() {
                             value={password}
                             onChange={handlePasswordChange}
                             placeholder="Enter your Password"
-                            className="w-full px-3 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <div className="mb-4">
@@ -87,7 +87,7 @@ function Signup() {
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
                             placeholder="Confirm your Password"
-                            className="w-full px-3 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                     <div className="flex justify-center mb-6">
@@ -98,7 +98,7 @@ function Signup() {
                     </div>
                     <button
                         type="submit"
-                        className="w-full py-2 px-4 bg-blue-600 text-white rounded-3xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        className="w-full py-2 px-4 bg-blue-600 rounded-3xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         Sign Up
                     </button>
                 </form>
