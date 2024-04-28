@@ -27,7 +27,7 @@ function CoinCard(coin) {
                 </CardFooter>
             </Card>
         </Link>
-    )
+    );
 }
 
 export default CoinCard;

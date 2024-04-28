@@ -14,7 +14,7 @@ function NewsCard(article, index) {
             {/*<h3 className="font-semibold">{article.source}</h3>*/}
             {/*<p>{article.headline}</p>*/}
         </div>
-    )
+    );
 }
 
 export default NewsCard;

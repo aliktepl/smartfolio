@@ -1,6 +1,7 @@
 import CoinCard from "./Cards/CoinCard.tsx";
 import NewsCard from "./Cards/NewsCard.tsx";
 import {AuthProvider} from "../Authentication/AuthProvider.tsx";
+import WalletCard from "@/Main/Cards/WalletCard.tsx";
 
 function Dashboard() {
 
@@ -55,13 +56,7 @@ function Dashboard() {
                 <div className="grid grid-cols-1 gap-4 ">
                     <h2 className="text-lg font-semibold">My Wallet</h2>
                     {wallet.map((asset) => (
-                        <div key={asset.symbol} className="bg-gray-800 p-4 shadow rounded">
-                            <h3 className="font-semibold">{asset.name}</h3>
-                            <p>${(asset.amount * cryptoPrices.find((crypto) => crypto.symbol === asset.symbol)?.price).toLocaleString()}</p>
-                            <p className={`${asset.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                                {asset.change > 0 ? '+' : ''}{asset.change.toFixed(2)}%
-                            </p>
-                        </div>
+                        WalletCard(asset, cryptoPrices)
                     ))}
                 </div>
                 <div className="grid grid-cols-1 gap-4 ">
