@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Shadcn Theme */
+
 @layer base {
     :root {
         --background: 222.2 84% 4.9%;
@@ -76,6 +78,8 @@
     }
 }
 
+/* My Designs */
+
 @layer components {
 
     .app {
@@ -83,7 +87,7 @@
     }
 
     .sidebar {
-        @apply w-64 flex-shrink-0 bg-accent text-white;
+        @apply w-64 flex-shrink-0 bg-secondary;
     }
 
     .sidebar-content {
@@ -104,7 +108,7 @@
 
     .sidebar-content nav ul li a {
         @apply flex items-center justify-start w-full px-4 py-2
-        hover:bg-blue-800 hover:text-white hover:rounded-xl
+        hover:rounded-xl
         transition-all duration-300 cursor-pointer;
     }
 

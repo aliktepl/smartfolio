@@ -1,13 +1,16 @@
-import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 
 function WalletCard(asset, cryptoPrices) {
     return (
-        <div key={asset.symbol}>
+        <div key={asset.symbol} className={'mb-4'}>
             <Card>
                 <CardHeader>
                     <CardTitle>
                         {asset.name}
                     </CardTitle>
+                    <CardDescription>
+                        {asset.symbol.toUpperCase()}
+                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <p>${(asset.amount * cryptoPrices.find((crypto) => crypto.symbol === asset.symbol)?.price).toLocaleString()}</p>

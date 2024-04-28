@@ -1,11 +1,16 @@
-import {Card, CardContent, CardHeader} from "@/components/ui/card.tsx";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 
 function NewsCard(article, index) {
     return (
-        <div key={index}>
+        <div key={index} className={'mb-4'}>
             <Card>
                 <CardHeader>
-                    {article.source}
+                    <CardTitle>
+                        {article.source}
+                    </CardTitle>
+                    <CardDescription>
+                        {article.time}
+                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     {article.headline}

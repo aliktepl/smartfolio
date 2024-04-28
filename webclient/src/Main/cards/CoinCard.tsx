@@ -1,6 +1,7 @@
 import {
     Card,
     CardContent,
+    CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
@@ -16,6 +17,7 @@ function CoinCard(coin) {
             <Card>
                 <CardHeader>
                     <CardTitle>{coin.name}</CardTitle>
+                    <CardDescription>{coin.symbol.toUpperCase()}</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <p>{coin.price.toLocaleString()}$</p>

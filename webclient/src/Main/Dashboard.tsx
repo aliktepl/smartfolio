@@ -1,7 +1,10 @@
-import CoinCard from "./Cards/CoinCard.tsx";
-import NewsCard from "./Cards/NewsCard.tsx";
+import CoinCard from "@/Main/cards/CoinCard.tsx";
+import NewsCard from "@/Main/cards/NewsCard.tsx";
 import {AuthProvider} from "../Authentication/AuthProvider.tsx";
-import WalletCard from "@/Main/Cards/WalletCard.tsx";
+import WalletCard from "@/Main/cards/WalletCard.tsx";
+import {useRouteLoaderData} from "react-router-dom";
+import {Coin} from '@/Main/wallet/columns.tsx'
+
 
 function Dashboard() {
 
@@ -12,55 +15,53 @@ function Dashboard() {
         {name: 'Solana', symbol: 'sol', price: 14291, change: -0.25},
     ];
 
-    const wallet = [
-        {name: 'Ethereum', symbol: 'eth', amount: 0.12543, change: -13.4},
-        {name: 'Bitcoin', symbol: 'btc', amount: 0.12543, change: -6.0},
-        {name: 'Litecoin', symbol: 'ltc', amount: 0.12543, change: 14.25},
-        {name: 'Solana', symbol: 'sol', amount: 0.12543, change: -2.0},
-        {name: 'Binance Coin', symbol: 'bnb', amount: 0.12543, change: 12.0},
-    ];
-
     const news = [
         {
             source: 'Bloomberg',
+            time: 'just now',
             headline: 'Solana have jumped by 40% over the last two days despite increased threat of hackers.',
         },
         {
             source: 'Financial Times',
+            time: 'just now',
             headline: 'Solana have jumped by 40% over the last two days despite increased threat of hackers.',
         },
         {
             source: 'CNN',
+            time: 'just now',
             headline: 'Solana have jumped by 40% over the last two days despite increased threat of hackers.',
         },
         {
             source: 'Fox News',
+            time: 'just now',
             headline: 'Solana have jumped by 40% over the last two days despite increased threat of hackers.',
         },
     ];
 
+    const wallet = useRouteLoaderData("root") as Coin[];
+
     return (
-        <div className="text-white p-6">
+        <div className="p-6">
             <h1 className="text-2xl mb-4">
                 Welcome, {AuthProvider.user}!
             </h1>
             <h2 className="text-lg text-center mb-4">
                 Hottest Right Now!
             </h2>
-            <div className="grid grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-4 gap-4 mb-4">
                 {cryptoPrices.map((crypto) => (
                     CoinCard(crypto)
                 ))}
             </div>
             <div className="grid grid-cols-2 gap-4">
-                <div className="grid grid-cols-1 gap-4 ">
-                    <h2 className="text-lg font-semibold">My Wallet</h2>
+                <div className="">
+                    <h2 className="text-lg text-center mb-4">My Wallet</h2>
                     {wallet.map((asset) => (
                         WalletCard(asset, cryptoPrices)
                     ))}
                 </div>
-                <div className="grid grid-cols-1 gap-4 ">
-                    <h2 className="text-lg font-semibold">Top News</h2>
+                <div className="">
+                    <h2 className="text-lg text-center mb-4">Top News</h2>
                     {news.map((article, index) => (
                         NewsCard(article, index)
                     ))}

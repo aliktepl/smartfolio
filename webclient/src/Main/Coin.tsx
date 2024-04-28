@@ -1,25 +1,29 @@
 import {useLoaderData} from "react-router-dom";
+import {Button} from "@/components/ui/button.tsx";
 
-export async function loader({params}) {
+interface Params {
+    coinId: string;
+}
+
+
+export async function loader({params}: { params: Params }) {
     return params.coinId;
 }
 
 function Coin() {
-    const loaderData = useLoaderData();
+    const loaderData = useLoaderData() as string;
 
     return (
         <>
             {/*header*/}
             <div className="flex items-center justify-between py-2 px-4">
-            <span className="relative right-0 justify-self-center text-white font-semibold">
-                {loaderData}
-            </span>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    + Add To Wallet
-                </button>
+                <span className="relative right-0 justify-self-center">
+                    {loaderData}
+                </span>
+                <Button className='bg-blue-500 hover:bg-blue-700 text-foreground'>+ Add To Wallet</Button>
             </div>
             {/*charts*/}
-            <div className={'grid grid-cols-2 text-white font-semibold'}>
+            <div className={'grid grid-cols-2'}>
                 <div className={'justify-self-center'}>
                     technical
                 </div>
@@ -28,7 +32,7 @@ function Coin() {
                 </div>
             </div>
             {/*sentiment breakdown*/}
-            <div className={'flex justify-center  font-semibold text-white'}>
+            <div className={'flex justify-center'}>
                 sentiment breakdown
             </div>
         </>

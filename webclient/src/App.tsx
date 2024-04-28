@@ -6,7 +6,7 @@ import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import Login from "./Login/Login.tsx";
 import Signup from "./Signup/Signup.tsx";
 import Explore from "./Main/Explore.tsx";
-import Wallet from "./Main/Wallet.tsx";
+import Wallet from "@/Main/wallet/Wallet.tsx"
 import Settings from "./Main/Settings.tsx";
 import Coin from "./Main/Coin.tsx";
 import {AuthProvider} from "./Authentication/AuthProvider.tsx";
@@ -30,12 +30,13 @@ const router = createBrowserRouter([
 
     {
         path: "/",
+        id: "root",
         element: <Sidebar/>,
         loader: sidebarLoader,
         errorElement: <div>404 Not Found</div>,
         children: [
             {
-                index:true,
+                index: true,
                 element: <Dashboard/>
             },
             {
@@ -45,10 +46,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "explore",
-                element: <Explore />,
+                element: <Explore/>,
             },
             {
                 path: "wallet",
+                id: "wallet",
                 element: <Wallet/>,
             },
             {
