@@ -2,21 +2,25 @@ import {SetStateAction, useState} from 'react';
 import Logo from "../assets/Logo.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {AuthProvider} from "../Authentication/AuthProvider.tsx";
+import {Button} from "@/components/ui/button"
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
+import {Input} from "@/components/ui/input"
+import {Label} from "@/components/ui/label"
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Get the navigate function
+    const navigate = useNavigate();
 
     const handleEmailChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setEmail(e.target.value);
-    };
+    }
 
     const handlePasswordChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setPassword(e.target.value);
-    };
+    }
 
-    async function handleSubmit (e: { preventDefault: () => void; }) {
+    async function handleSubmit(e: { preventDefault: () => void; }) {
         e.preventDefault();
         // Handle login logic here
         await AuthProvider.signIn(email)
@@ -24,56 +28,44 @@ function Login() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div className="max-w-md w-full bg-sidebar rounded-lg shadow-md p-8">
-                <div className="mb-6 flex justify-center">
-                    <Logo/>
-                </div>
-                <h2 className="text-3xl font-bold text-center mb-6">Welcome to SmartFolio</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-300 font-bold mb-2">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={handleEmailChange}
-                            placeholder="Enter your email address"
-                            className="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="password" className="block text-gray-300 font-bold mb-2">
-                            Password
-                        </label>
-                        <div className="relative">
-                            <input
-                                type="password"
-                                id="password"
-                                value={password}
-                                onChange={handlePasswordChange}
-                                placeholder="Enter your Password"
-                                className="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            />
+        <div className='flex h-screen items-center'>
+            <Card className="mx-auto w-full max-w-sm">
+                <CardHeader>
+                    <CardTitle>
+                        <div className="mb-6 flex justify-center">
+                            <Logo/>
                         </div>
-                    </div>
-                    <div className="flex justify-center mb-6">
-                        <span className="pr-1">Don't have an account yet?</span>
-                        <Link to={'/signup'} className="text-blue-500 hover:text-blue-400 focus:outline-none">
-                            Sign Up Here!
-                        </Link>
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full py-2 px-4 bg-blue-600 rounded-3xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        Login
-                    </button>
-                </form>
-            </div>
+                        <h2 className="font-bold text-center mb-6">Welcome to SmartFolio</h2>
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleSubmit}>
+                        <div className="grid gap-4">
+                            <div className="grid gap-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input id="email" type="email" value={email} onChange={handleEmailChange}
+                                       placeholder="m@example.com" required/>
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="password">Password</Label>
+                                <Input id="password" type="password" value={password} onChange={handlePasswordChange}
+                                       required/>
+                            </div>
+                            <Button type="submit" className="w-full">
+                                Login
+                            </Button>
+                        </div>
+                        <div className="mt-4 text-center text-sm">
+                            Don&apos;t have an account?{" "}
+                            <Link to={'/signup'} className="underline">
+                                Sign up
+                            </Link>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
         </div>
-    );
+    )
 }
 
 export default Login;

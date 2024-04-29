@@ -17,7 +17,7 @@ function Coin() {
                 <span className="relative right-0 justify-self-center">
                     {loaderData}
                 </span>
-                <Button className='bg-blue-500 hover:bg-blue-700 text-foreground'>+ Add To Wallet</Button>
+                <Button >+ Add To Wallet</Button>
             </div>
             {/*charts*/}
             <div className={'grid grid-cols-2'}>
