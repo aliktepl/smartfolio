@@ -4,6 +4,7 @@ import {AuthProvider} from "../Authentication/AuthProvider.tsx";
 import WalletCard from "@/Main/cards/WalletCard.tsx";
 import {useRouteLoaderData} from "react-router-dom";
 import {Coin} from '@/Main/wallet/columns.tsx'
+import {ModeToggle} from "@/components/mode-toggle.tsx";
 
 
 function Dashboard() {
@@ -42,6 +43,7 @@ function Dashboard() {
 
     return (
         <div className="p-6">
+            <div className='hidden'><ModeToggle/></div>
             <h1 className="text-2xl mb-4">
                 Welcome, {AuthProvider.user}!
             </h1>
@@ -50,20 +52,20 @@ function Dashboard() {
             </h2>
             <div className="grid grid-cols-4 gap-4 mb-4">
                 {cryptoPrices.map((crypto) => (
-                    <CoinCard coin={crypto} key={crypto.symbol} />
+                    <CoinCard coin={crypto} key={crypto.symbol}/>
                 ))}
             </div>
             <div className="grid grid-cols-2 gap-4">
                 <div className="">
                     <h2 className="text-lg text-center mb-4">My Wallet</h2>
                     {wallet.map((asset) => (
-                        <WalletCard asset={asset} cryptoPrices={cryptoPrices} key={asset.symbol} />
+                        <WalletCard asset={asset} cryptoPrices={cryptoPrices} key={asset.symbol}/>
                     ))}
                 </div>
                 <div className="">
                     <h2 className="text-lg text-center mb-4">Top News</h2>
                     {news.map((article, index) => (
-                        <NewsCard article={article} key={index} />
+                        <NewsCard article={article} key={index}/>
                     ))}
                 </div>
             </div>

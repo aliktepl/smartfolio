@@ -16,8 +16,6 @@ function NewsCard({article}) {
                     {article.headline}
                 </CardContent>
             </Card>
-            {/*<h3 className="font-semibold">{article.source}</h3>*/}
-            {/*<p>{article.headline}</p>*/}
         </div>
     );
 }

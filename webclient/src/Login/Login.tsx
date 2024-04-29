@@ -6,6 +6,7 @@ import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
 import {Label} from "@/components/ui/label"
+import {ModeToggle} from "@/components/mode-toggle.tsx";
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -29,6 +30,7 @@ function Login() {
 
     return (
         <div className='flex h-screen items-center'>
+            <div className='hidden'><ModeToggle/></div>
             <Card className="mx-auto w-full max-w-sm">
                 <CardHeader>
                     <CardTitle>
@@ -49,7 +51,7 @@ function Login() {
                             <div className="grid gap-2">
                                 <Label htmlFor="password">Password</Label>
                                 <Input id="password" type="password" value={password} onChange={handlePasswordChange}
-                                       required/>
+                                       placeholder="Enter your password" required/>
                             </div>
                             <Button type="submit" className="w-full">
                                 Login

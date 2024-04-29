@@ -1,5 +1,6 @@
 import {useLoaderData} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
+import {ModeToggle} from "@/components/mode-toggle.tsx";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
@@ -14,10 +15,11 @@ function Coin() {
         <>
             {/*header*/}
             <div className="flex items-center justify-between py-2 px-4">
+                <div className='hidden'><ModeToggle/></div>
                 <span className="relative right-0 justify-self-center">
                     {loaderData}
                 </span>
-                <Button >+ Add To Wallet</Button>
+                <Button>+ Add To Wallet</Button>
             </div>
             {/*charts*/}
             <div className={'grid grid-cols-2'}>

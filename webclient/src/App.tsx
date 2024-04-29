@@ -10,6 +10,8 @@ import Wallet from "@/Main/wallet/Wallet.tsx"
 import Settings from "./Main/Settings.tsx";
 import Coin from "./Main/Coin.tsx";
 import {AuthProvider} from "./Authentication/AuthProvider.tsx";
+import { ThemeProvider } from "@/components/theme-provider"
+
 
 const router = createBrowserRouter([
     {
@@ -64,7 +66,10 @@ const router = createBrowserRouter([
 
 function App() {
     return (
-        <RouterProvider router={router}/>
+        // UI is flickering when refreshing, FIX THIS
+        <ThemeProvider defaultTheme='dark' storageKey="vite-ui-theme">
+            <RouterProvider router={router}/>
+        </ThemeProvider>
     )
 }
 

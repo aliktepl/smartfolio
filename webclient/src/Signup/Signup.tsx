@@ -5,6 +5,7 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx
 import {Label} from "@/components/ui/label.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
+import {ModeToggle} from "@/components/mode-toggle.tsx";
 
 function Signup() {
     const [name, setName] = useState('');
@@ -37,6 +38,7 @@ function Signup() {
 
     return (
         <div className='flex h-screen items-center'>
+            <div className='hidden'><ModeToggle/></div>
             <Card className="mx-auto w-full max-w-sm">
                 <CardHeader>
                     <CardTitle>
@@ -67,7 +69,8 @@ function Signup() {
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="confirmPassword">Password Confirmation</Label>
-                                <Input id="confirmPassword" type="password" value={confirmPassword} onChange={handleConfirmPasswordChange}
+                                <Input id="confirmPassword" type="password" value={confirmPassword}
+                                       onChange={handleConfirmPasswordChange}
                                        placeholder="Confirm your password" required/>
                             </div>
                             <Button type="submit" className="w-full">

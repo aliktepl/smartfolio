@@ -23,8 +23,8 @@ function Sidebar () {
         <div className="app">
             <div className="sidebar">
                 <div className="sidebar-content">
-                    <div className="fixed bg-sidebar h-screen w-64 flex flex-col">
-                        <div className="flex items-center justify-center h-20 border-gray-800">
+                    <div className="fixed h-screen w-64 flex flex-col">
+                        <div className="flex items-center justify-center h-20">
                             <div className="flex">
                                 <Logo></Logo>
                                 <h1 className="text-2xl ml-2 font-bold">
@@ -35,22 +35,25 @@ function Sidebar () {
                         <nav className="flex-grow p-4">
                             <ul className="space-y-4">
                                 <li>
-                                    <NavLink to={'/'} className={({isActive})=>
-                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"}}>
+                                    <NavLink to={'/'} className={({isActive}) => {
+                                        return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"
+                                    }}>
                                         <RxDashboard className="mr-2"/>
                                         Dashboard
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={'/explore'} className={({isActive})=>
-                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"}}>
+                                    <NavLink to={'/explore'} className={({isActive}) => {
+                                        return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"
+                                    }}>
                                         <FaSearch className="mr-2"/>
                                         Explore
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={'/wallet'} className={({isActive})=>
-                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"}}>
+                                    <NavLink to={'/wallet'} className={({isActive}) => {
+                                        return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"
+                                    }}>
                                         <FaWallet className="mr-2"/>
                                         Wallet
                                     </NavLink>
@@ -60,15 +63,17 @@ function Sidebar () {
                         <nav className="p-4 border-t border-gray-800">
                             <ul className="space-y-4">
                                 <li>
-                                    <NavLink to={'/settings'} className={({isActive})=>
-                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"}}>
+                                    <NavLink to={'/settings'} className={({isActive}) => {
+                                        return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"
+                                    }}>
                                         <FaCog className="mr-2"/>
                                         Settings
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={'/logout'} className={({isActive})=>
-                                    {return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"}}>
+                                    <NavLink to={'/logout'} className={({isActive}) => {
+                                        return isActive ? "bg-blue-800 text-white rounded-xl" : "text-[#9E9E9E] hover:ring-1 hover:text-white"
+                                    }}>
                                         <FaSignOutAlt className="mr-2"/>
                                         Logout
                                     </NavLink>
