@@ -14,21 +14,21 @@ function Signup() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleNameChange = (e: { target: { value: SetStateAction<string>; }; }) => {
+    const handleNameChange = (e: { target: { value: SetStateAction<string> } }) => {
         setName(e.target.value);
-    };
+    }
 
-    const handleEmailChange = (e: { target: { value: SetStateAction<string>; }; }) => {
+    const handleEmailChange = (e: { target: { value: SetStateAction<string> } }) => {
         setEmail(e.target.value);
-    };
+    }
 
-    const handlePasswordChange = (e: { target: { value: SetStateAction<string>; }; }) => {
+    const handlePasswordChange = (e: { target: { value: SetStateAction<string> } }) => {
         setPassword(e.target.value);
-    };
+    }
 
-    const handleConfirmPasswordChange = (e: { target: { value: SetStateAction<string>; }; }) => {
+    const handleConfirmPasswordChange = (e: { target: { value: SetStateAction<string> } }) => {
         setConfirmPassword(e.target.value);
-    };
+    }
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
@@ -74,12 +74,12 @@ function Signup() {
                                        placeholder="Confirm your password" required/>
                             </div>
                             <Button type="submit" className="w-full">
-                                Login
+                                Sign Up
                             </Button>
                         </div>
                         <div className="mt-4 text-center text-sm">
                             Already have an account?{" "}
-                            <Link to={'/login'} className="underline">
+                            <Link to={'/login'} className="underline text-primary">
                                 Login here!
                             </Link>
                         </div>
