@@ -2,7 +2,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 
 function NewsCard({article}) {
     return (
-        <div className={'mb-4'}>
+        <div className="mb-4">
             <Card>
                 <CardHeader>
                     <CardTitle>

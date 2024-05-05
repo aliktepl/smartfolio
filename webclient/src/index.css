@@ -85,21 +85,8 @@
 /* My Designs */
 
 @layer components {
-
-    .app {
-        @apply flex h-screen overflow-hidden;
-    }
-
-    .sidebar {
-        @apply w-64 flex-shrink-0 bg-secondary;
-    }
-
     .sidebar-content {
         @apply flex flex-col h-full;
-    }
-
-    .main-content {
-        @apply flex-1 overflow-auto;
     }
 
     .sidebar-content nav {

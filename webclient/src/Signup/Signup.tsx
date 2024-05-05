@@ -45,7 +45,7 @@ function Signup() {
                         <div className="mb-6 flex justify-center">
                             <Logo/>
                         </div>
-                        <h2 className="font-bold text-center mb-6">Sign Up</h2>
+                        <h2 className="font-bold text-center">Sign Up</h2>
                     </CardTitle>
                 </CardHeader>
                 <CardContent>

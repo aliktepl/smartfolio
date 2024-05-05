@@ -3,7 +3,7 @@ import NewsCard from "@/Main/cards/NewsCard.tsx";
 import {AuthProvider} from "../Authentication/AuthProvider.tsx";
 import WalletCard from "@/Main/cards/WalletCard.tsx";
 import {useRouteLoaderData} from "react-router-dom";
-import {Coin} from '@/Main/wallet/columns.tsx'
+import {WalletRow} from '@/Main/wallet/columns.tsx'
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 
 
@@ -39,7 +39,7 @@ function Dashboard() {
         },
     ];
 
-    const wallet = useRouteLoaderData("root") as Coin[];
+    const wallet = useRouteLoaderData("root") as WalletRow[];
 
     return (
         <div className="p-6">
@@ -47,8 +47,8 @@ function Dashboard() {
             <h1 className="text-2xl mb-4">
                 Welcome, {AuthProvider.user}!
             </h1>
-            <h2 className="text-lg text-center mb-4">
-                Hottest Right Now!
+            <h2 className="text-center mb-4">
+                Hottest Right Now
             </h2>
             <div className="grid grid-cols-4 gap-4 mb-4">
                 {cryptoPrices.map((crypto) => (
@@ -56,17 +56,19 @@ function Dashboard() {
                 ))}
             </div>
             <div className="grid grid-cols-2 gap-4">
-                <div className="">
-                    <h2 className="text-lg text-center mb-4">My Wallet</h2>
+                <div>
+                    <h2 className="text-center mb-4">My Top Coins</h2>
                     {wallet.map((asset) => (
                         <WalletCard asset={asset} cryptoPrices={cryptoPrices} key={asset.symbol}/>
                     ))}
                 </div>
-                <div className="">
-                    <h2 className="text-lg text-center mb-4">Top News</h2>
-                    {news.map((article, index) => (
-                        <NewsCard article={article} key={index}/>
-                    ))}
+                <div>
+                    <h2 className="text-center mb-4">Top News</h2>
+                    <div className="grid grid-cols-2 gap-4">
+                        {news.map((article, index) => (
+                            <NewsCard article={article} key={index}/>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

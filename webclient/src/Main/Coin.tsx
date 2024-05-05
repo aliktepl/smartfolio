@@ -4,12 +4,13 @@ import {ModeToggle} from "@/components/mode-toggle.tsx";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
+// eslint-disable-next-line react-refresh/only-export-components
 export async function loader({params}) {
     return params.coinId;
 }
 
 function Coin() {
-    const loaderData = useLoaderData() as string;
+    const coinId = useLoaderData() as string;
 
     return (
         <>
@@ -17,7 +18,7 @@ function Coin() {
             <div className="flex items-center justify-between py-2 px-4">
                 <div className='hidden'><ModeToggle/></div>
                 <span className="relative right-0 justify-self-center">
-                    {loaderData}
+                    {coinId}
                 </span>
                 <Button>+ Add To Wallet</Button>
             </div>

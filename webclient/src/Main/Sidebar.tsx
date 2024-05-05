@@ -22,8 +22,8 @@ export async function loader() {
 function Sidebar () {
 
     return (
-        <div className="app">
-            <div className="sidebar">
+        <div className="flex h-screen overflow-hidden bg-muted/40">
+            <aside className="w-64 flex-shrink-0 bg-background">
                 <div className="sidebar-content">
                     <div className="fixed h-screen w-64 flex flex-col">
                         <div className="flex items-center justify-center h-20">
@@ -62,7 +62,7 @@ function Sidebar () {
                                 </li>
                             </ul>
                         </nav>
-                        <nav className="p-4 border-t border-gray-800">
+                        <nav className="p-4">
                             <ul className="space-y-4">
                                 <li>
                                     <NavLink to={'/settings'} className={({isActive}) => {
@@ -84,10 +84,10 @@ function Sidebar () {
                         </nav>
                     </div>
                 </div>
-            </div>
-            <div className="main-content">
+            </aside>
+            <main className="flex-1 overflow-auto">
                 <Outlet/>
-            </div>
+            </main>
         </div>
     );
 }

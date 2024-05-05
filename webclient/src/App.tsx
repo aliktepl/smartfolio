@@ -1,4 +1,3 @@
-import './App.css'
 import Dashboard from "./Main/Dashboard.tsx";
 import Sidebar, {loader as sidebarLoader} from "./Main/Sidebar.tsx";
 import {loader as coinLoader} from "./Main/Coin.tsx";

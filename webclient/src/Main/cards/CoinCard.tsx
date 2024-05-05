@@ -2,7 +2,6 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -11,7 +10,7 @@ import {
 import {Link} from "react-router-dom";
 
 
-function CoinCard({coin}) {
+function CoinCard({ coin }) {
     return (
         <Link to={coin.symbol}>
             <Card>
