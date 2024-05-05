@@ -89,21 +89,7 @@
         @apply flex flex-col h-full;
     }
 
-    .sidebar-content nav {
-        @apply flex flex-col items-center;
-    }
-
-    .sidebar-content nav ul {
-        @apply w-full;
-    }
-
     .sidebar-content nav ul li a {
-        @apply flex items-center justify-start w-full px-4 py-2
-        hover:rounded-xl
-        transition-all duration-300 cursor-pointer;
-    }
-
-    .sidebar-content nav ul li a svg {
-        @apply flex-shrink-0;
+        @apply flex items-center justify-start w-full px-4 py-2;
     }
 }

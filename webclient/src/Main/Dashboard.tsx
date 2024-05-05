@@ -44,10 +44,10 @@ function Dashboard() {
     return (
         <div className="p-6">
             <div className='hidden'><ModeToggle/></div>
-            <h1 className="text-2xl mb-4">
+            <h1 className="text-2xl font-bold mb-4">
                 Welcome, {AuthProvider.user}!
             </h1>
-            <h2 className="text-center mb-4">
+            <h2 className="text-center font-semibold mb-4">
                 Hottest Right Now
             </h2>
             <div className="grid grid-cols-4 gap-4 mb-4">
@@ -57,13 +57,13 @@ function Dashboard() {
             </div>
             <div className="grid grid-cols-2 gap-4">
                 <div>
-                    <h2 className="text-center mb-4">My Top Coins</h2>
+                    <h2 className="text-center font-semibold mb-4">My Top Coins</h2>
                     {wallet.map((asset) => (
                         <WalletCard asset={asset} cryptoPrices={cryptoPrices} key={asset.symbol}/>
                     ))}
                 </div>
                 <div>
-                    <h2 className="text-center mb-4">Top News</h2>
+                    <h2 className="text-center font-semibold mb-4">Top News</h2>
                     <div className="grid grid-cols-2 gap-4">
                         {news.map((article, index) => (
                             <NewsCard article={article} key={index}/>
