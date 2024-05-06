@@ -86,7 +86,7 @@
 
 @layer components {
     .sidebar-content {
-        @apply flex flex-col h-full;
+        @apply flex flex-col gap-4 px-2 fixed h-screen w-64;
     }
 
     .sidebar-content nav ul li a {

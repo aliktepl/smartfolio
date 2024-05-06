@@ -50,12 +50,12 @@ function Dashboard() {
             <h2 className="text-center font-semibold mb-4">
                 Hottest Right Now
             </h2>
-            <div className="grid grid-cols-4 gap-4 mb-4">
+            <div className="grid gap-4 mb-4 sm:grid-cols-2 lg:grid-cols-4">
                 {cryptoPrices.map((crypto) => (
                     <CoinCard coin={crypto} key={crypto.symbol}/>
                 ))}
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-4 lg:grid-cols-2">
                 <div>
                     <h2 className="text-center font-semibold mb-4">My Top Coins</h2>
                     {wallet.map((asset) => (
@@ -64,7 +64,7 @@ function Dashboard() {
                 </div>
                 <div>
                     <h2 className="text-center font-semibold mb-4">Top News</h2>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid gap-4 md:grid-cols-2">
                         {news.map((article, index) => (
                             <NewsCard article={article} key={index}/>
                         ))}

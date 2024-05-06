@@ -6,7 +6,7 @@ import {AuthProvider} from "../Authentication/AuthProvider.tsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
-    if(!AuthProvider.isAuthenticated) {
+    if (!AuthProvider.isAuthenticated) {
         return redirect("/login")
     }
     return [
@@ -19,73 +19,71 @@ export async function loader() {
     ]
 }
 
-function Sidebar () {
+function Sidebar() {
 
     return (
-        <div className="flex h-screen overflow-hidden bg-muted/40">
-            <aside className="w-64 flex-shrink-0 bg-background">
+        <div className="flex min-h-screen w-full bg-muted/40">
+            <aside className="w-64 bg-background sm:flex border-r flex-col">
                 <div className="sidebar-content">
-                    <div className="fixed h-screen w-64 flex flex-col">
-                        <div className="flex items-center justify-center h-20">
-                            <div className="flex">
-                                <Logo></Logo>
-                                <h1 className="text-2xl ml-2 font-bold">
-                                    SmartFolio
-                                </h1>
-                            </div>
+                    <div className="flex items-center justify-center h-20">
+                        <div className="flex">
+                            <Logo></Logo>
+                            <h1 className="text-2xl ml-2 font-bold">
+                                SmartFolio
+                            </h1>
                         </div>
-                        <nav className="flex-grow p-4 flex flex-col items-center">
-                            <ul className="space-y-4 w-full">
-                                <li>
-                                    <NavLink to={'/'} className={({isActive}) => {
-                                        return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
-                                    }}>
-                                        <RxDashboard className="mr-2"/>
-                                        Dashboard
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={'/explore'} className={({isActive}) => {
-                                        return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
-                                    }}>
-                                        <FaSearch className="mr-2"/>
-                                        Explore
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={'/wallet'} className={({isActive}) => {
-                                        return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
-                                    }}>
-                                        <FaWallet className="mr-2"/>
-                                        Wallet
-                                    </NavLink>
-                                </li>
-                            </ul>
-                        </nav>
-                        <nav className="p-4 flex flex-col items-center">
-                            <ul className="space-y-4 w-full">
-                                <li>
-                                    <NavLink to={'/settings'} className={({isActive}) => {
-                                        return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
-                                    }}>
-                                        <FaCog className="mr-2"/>
-                                        Settings
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={'/logout'} className={ ({isActive}) => {
-                                        return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
-                                    }}>
-                                        <FaSignOutAlt className="mr-2"/>
-                                        Logout
-                                    </NavLink>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
+                    <nav className="flex-grow p-4 flex flex-col items-center">
+                        <ul className="space-y-4 w-full">
+                            <li>
+                                <NavLink to={'/'} className={({isActive}) => {
+                                    return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
+                                }}>
+                                    <RxDashboard className="mr-2"/>
+                                    Dashboard
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={'/explore'} className={({isActive}) => {
+                                    return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
+                                }}>
+                                    <FaSearch className="mr-2"/>
+                                    Explore
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={'/wallet'} className={({isActive}) => {
+                                    return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
+                                }}>
+                                    <FaWallet className="mr-2"/>
+                                    Wallet
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </nav>
+                    <nav className="p-4 flex flex-col items-center">
+                        <ul className="space-y-4 w-full">
+                            <li>
+                                <NavLink to={'/settings'} className={({isActive}) => {
+                                    return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
+                                }}>
+                                    <FaCog className="mr-2"/>
+                                    Settings
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={'/logout'} className={({isActive}) => {
+                                    return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
+                                }}>
+                                    <FaSignOutAlt className="mr-2"/>
+                                    Logout
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </aside>
-            <main className="flex-1 overflow-auto">
+            <main className="flex-1">
                 <Outlet/>
             </main>
         </div>
