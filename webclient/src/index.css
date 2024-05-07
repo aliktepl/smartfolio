@@ -4,7 +4,6 @@
 
 /* Shadcn Theme */
 
-
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -86,7 +85,7 @@
 
 @layer components {
     .sidebar-content {
-        @apply flex flex-col gap-4 px-2 fixed h-screen w-64;
+        @apply flex flex-col gap-4 px-2 fixed w-64 h-screen;
     }
 
     .sidebar-content nav ul li a {

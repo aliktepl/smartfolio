@@ -6,7 +6,6 @@ import {useRouteLoaderData} from "react-router-dom";
 import {WalletRow} from '@/Main/wallet/columns.tsx'
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 
-
 function Dashboard() {
 
     const cryptoPrices = [
@@ -44,9 +43,11 @@ function Dashboard() {
     return (
         <div className="p-6">
             <div className='hidden'><ModeToggle/></div>
-            <h1 className="text-2xl font-bold mb-4">
-                Welcome, {AuthProvider.user}!
-            </h1>
+            <header>
+                <h1 className="text-2xl font-bold mb-4">
+                    Welcome, {AuthProvider.user}!
+                </h1>
+            </header>
             <h2 className="text-center font-semibold mb-4">
                 Hottest Right Now
             </h2>

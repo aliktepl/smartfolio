@@ -65,7 +65,6 @@ const router = createBrowserRouter([
 
 function App() {
     return (
-        // UI is flickering when refreshing, FIX THIS
         <ThemeProvider defaultTheme='dark' storageKey="vite-ui-theme">
             <RouterProvider router={router}/>
         </ThemeProvider>
