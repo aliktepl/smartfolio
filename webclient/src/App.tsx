@@ -1,4 +1,3 @@
-import './App.css'
 import Dashboard from "./Main/Dashboard.tsx";
 import Sidebar, {loader as sidebarLoader} from "./Main/Sidebar.tsx";
 import {loader as coinLoader} from "./Main/Coin.tsx";
@@ -6,10 +5,12 @@ import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import Login from "./Login/Login.tsx";
 import Signup from "./Signup/Signup.tsx";
 import Explore from "./Main/Explore.tsx";
-import Wallet from "./Main/Wallet.tsx";
+import Wallet from "@/Main/wallet/Wallet.tsx"
 import Settings from "./Main/Settings.tsx";
 import Coin from "./Main/Coin.tsx";
 import {AuthProvider} from "./Authentication/AuthProvider.tsx";
+import { ThemeProvider } from "@/components/theme-provider"
+
 
 const router = createBrowserRouter([
     {
@@ -30,12 +31,13 @@ const router = createBrowserRouter([
 
     {
         path: "/",
+        id: "root",
         element: <Sidebar/>,
         loader: sidebarLoader,
         errorElement: <div>404 Not Found</div>,
         children: [
             {
-                index:true,
+                index: true,
                 element: <Dashboard/>
             },
             {
@@ -45,10 +47,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "explore",
-                element: <Explore />,
+                element: <Explore/>,
             },
             {
                 path: "wallet",
+                id: "wallet",
                 element: <Wallet/>,
             },
             {
@@ -62,7 +65,9 @@ const router = createBrowserRouter([
 
 function App() {
     return (
-        <RouterProvider router={router}/>
+        <ThemeProvider defaultTheme='dark' storageKey="vite-ui-theme">
+            <RouterProvider router={router}/>
+        </ThemeProvider>
     )
 }
 
