@@ -10,16 +10,9 @@ import {Button} from "@/components/ui/button.tsx";
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
     if (!AuthProvider.isAuthenticated) {
-        return redirect("/login")
+        return redirect("/login");
     }
-    return [
-        // Should fetch user.
-        {name: 'Ethereum', symbol: 'eth', amount: 0.12546, change: -13.4},
-        {name: 'Bitcoin', symbol: 'btc', amount: 0.12547, change: -6.0},
-        {name: 'Litecoin', symbol: 'ltc', amount: 0.12548, change: 14.25},
-        {name: 'Solana', symbol: 'sol', amount: 0.12549, change: -2.0},
-        {name: 'Binance Coin', symbol: 'bnb', amount: 0.12543, change: 12.0},
-    ]
+    return null;
 }
 
 function Sidebar() {

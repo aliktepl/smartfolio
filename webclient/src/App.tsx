@@ -1,16 +1,15 @@
-import Dashboard from "./Main/Dashboard.tsx";
+import Dashboard, {loader as dashboardLoader} from "./Main/Dashboard.tsx";
 import Sidebar, {loader as sidebarLoader} from "./Main/Sidebar.tsx";
-import {loader as coinLoader} from "./Main/Coin.tsx";
+import {loader as coinLoader} from "@/Main/Coin.tsx";
 import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
-import Login from "./Login/Login.tsx";
-import Signup from "./Signup/Signup.tsx";
-import Explore from "./Main/Explore.tsx";
-import Wallet from "@/Main/wallet/Wallet.tsx"
-import Settings from "./Main/Settings.tsx";
-import Coin from "./Main/Coin.tsx";
-import {AuthProvider} from "./Authentication/AuthProvider.tsx";
+import Login from "@/Login/Login.tsx";
+import Signup from "@/Signup/Signup.tsx";
+import Explore from "@/Main/Explore.tsx";
+import Wallet, {loader as walletLoader} from "@/Main/wallet/Wallet.tsx"
+import Settings from "@/Main/Settings.tsx";
+import Coin from "@/Main/Coin.tsx";
+import {AuthProvider} from "@/Authentication/AuthProvider.tsx";
 import { ThemeProvider } from "@/components/theme-provider"
-
 
 const router = createBrowserRouter([
     {
@@ -38,7 +37,8 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Dashboard/>
+                element: <Dashboard/>,
+                loader: dashboardLoader,
             },
             {
                 path: ":coinId",
@@ -53,6 +53,7 @@ const router = createBrowserRouter([
                 path: "wallet",
                 id: "wallet",
                 element: <Wallet/>,
+                loader: walletLoader
             },
             {
                 path: "settings",
