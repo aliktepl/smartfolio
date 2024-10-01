@@ -1,7 +1,10 @@
 import {WalletRow, columns } from "./columns"
+import {Coin, columns } from "./columns"
+import { useEffect, useState } from "react";
 import { DataTable } from "./data-table"
 import {useLoaderData} from "react-router-dom";
 import {ModeToggle} from "@/components/mode-toggle.tsx";
+
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
@@ -14,9 +17,18 @@ export async function loader() {
     ]
 }
 
-
 export default function Wallet() {
-    const data = useLoaderData() as WalletRow[];
+    //const data = useRouteLoaderData("root") as Coin[];
+
+    const [data, setData] = useState<Coin[]>([]);
+
+    // Fetch wallet data from the backend
+    useEffect(() => {
+      fetch("http://localhost:3000/Users/wallet")
+        .then((response) => response.json())
+        .then((walletData) => setData(walletData))
+        .catch((error) => console.error("Error fetching wallet data:", error));
+    }, []);
 
     return (
         <div className="container mx-auto py-10">

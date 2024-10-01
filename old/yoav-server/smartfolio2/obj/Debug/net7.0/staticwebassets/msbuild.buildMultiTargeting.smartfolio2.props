@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\smartfolio2.props" />
+</Project>
