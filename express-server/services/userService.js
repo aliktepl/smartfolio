@@ -19,7 +19,8 @@ exports.getUserWallet = async (userId) => {
     { name: "Bitcoin",symbol: "BTC" , amount: 12 , change: 0.25 },
     { name: "Ethereum",symbol: "ETH" , amount: 4 , change: 0.30 },
     { name: "Cardano",symbol: "CAR" , amount: 1 , change: 0.10 },
-    { name: "DogeCoin",symbol: "DOG" , amount: 9 , change: 0.90 }
+    { name: "DogeCoin",symbol: "DOG" , amount: 9 , change: 0.90 },
+    { name: "Solana", symbol: "SOL", amount: 100, change: 0.35 },
   ]
   return walletData
 
