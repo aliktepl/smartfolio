@@ -1,5 +1,5 @@
 import {SetStateAction, useState} from 'react';
-import Logo from "../assets/Logo.tsx";
+import Logo from "@/assets/Logo.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {Label} from "@/components/ui/label.tsx";

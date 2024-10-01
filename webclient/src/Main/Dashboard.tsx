@@ -1,10 +1,22 @@
 import CoinCard from "@/Main/cards/CoinCard.tsx";
 import NewsCard from "@/Main/cards/NewsCard.tsx";
-import {AuthProvider} from "../Authentication/AuthProvider.tsx";
+import {AuthProvider} from "@/Authentication/AuthProvider.tsx";
 import WalletCard from "@/Main/cards/WalletCard.tsx";
-import {useRouteLoaderData} from "react-router-dom";
+import {useLoaderData} from "react-router-dom";
 import {WalletRow} from '@/Main/wallet/columns.tsx'
 import {ModeToggle} from "@/components/mode-toggle.tsx";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function loader() {
+    return [
+        // Should fetch user.
+        {name: 'Ethereum', symbol: 'eth', amount: 0.12546, change: -13.4},
+        {name: 'Bitcoin', symbol: 'btc', amount: 0.12547, change: -6.0},
+        {name: 'Litecoin', symbol: 'ltc', amount: 0.12548, change: 14.25},
+        {name: 'Solana', symbol: 'sol', amount: 0.12549, change: -2.0},
+        {name: 'Binance Coin', symbol: 'bnb', amount: 0.12543, change: 12.0},
+    ]
+}
 
 function Dashboard() {
 
@@ -38,7 +50,7 @@ function Dashboard() {
         },
     ];
 
-    const wallet = useRouteLoaderData("root") as WalletRow[];
+    const wallet = useLoaderData() as WalletRow[];
 
     return (
         <div className="p-6">

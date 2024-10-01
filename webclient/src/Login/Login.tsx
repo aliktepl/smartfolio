@@ -1,7 +1,7 @@
 import {SetStateAction, useState} from 'react';
-import Logo from "../assets/Logo.tsx";
+import Logo from "@/assets/Logo.tsx";
 import {Link, useNavigate} from "react-router-dom";
-import {AuthProvider} from "../Authentication/AuthProvider.tsx";
+import {AuthProvider} from "@/Authentication/AuthProvider.tsx";
 import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
