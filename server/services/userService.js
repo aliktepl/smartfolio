@@ -15,6 +15,7 @@ const User = require('../models/userModel');  // The User model to interact with
 
 exports.getUserWallet = async (userId) => {
 
+
   const walletData = [
     { name: "Bitcoin",symbol: "BTC" , amount: 12 , change: 0.25 },
     { name: "Ethereum",symbol: "ETH" , amount: 4 , change: 0.30 },
@@ -23,6 +24,4 @@ exports.getUserWallet = async (userId) => {
     { name: "Solana", symbol: "SOL", amount: 100, change: 0.35 },
   ]
   return walletData
-
 }
-
