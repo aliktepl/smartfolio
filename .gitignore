@@ -1,4 +1,4 @@
 admin
 .idea
 server/node_modules
-webclient/node_modules
+client/node_modules
