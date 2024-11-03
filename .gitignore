@@ -1,6 +1,4 @@
-vision
+admin
 .idea
-.vs
-architucture.docx
-detail.txt
-Jira.doc
+server/node_modules
+webclient/node_modules
