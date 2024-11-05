@@ -18,6 +18,7 @@ export default function Wallet() {
         .then((response) => response.json())
         .then((walletData) => setData(walletData))
         .catch((error) => console.error("Error fetching wallet data:", error));
+        console.log(data)
     }, []);
 
     return (
