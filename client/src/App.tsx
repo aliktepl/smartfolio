@@ -1,6 +1,7 @@
 import Dashboard, {loader as dashboardLoader} from "./Main/Dashboard.tsx";
 import Sidebar, {loader as sidebarLoader} from "./Main/Sidebar.tsx";
 import Coin, {loader as coinLoader} from "@/Main/Coin.tsx";
+import {loader as settingsLoader} from "@/Main/Settings.tsx"
 import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import Login, {loader as loginLoader} from "@/Login/Login.tsx";
 import Explore from "@/Main/Explore.tsx";
@@ -18,10 +19,10 @@ const router = createBrowserRouter([
     {
         path: "/logout",
         async loader() {
-            await AuthProvider.signOut()
-            await fetch("http://localhost:3000/auth/logout", {
+            const res = await fetch("http://localhost:3000/auth/logout", {
                 credentials: "include", // Ensures cookies are sent with the request
             });
+            console.log(res)
             return redirect("/login")
         }
     },
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
             {
                 path: "settings",
                 element: <Settings/>,
+                loader: settingsLoader,
             }
         ]
     }

@@ -2,7 +2,7 @@ import {WalletRow, columns } from "./columns"
 import { DataTable } from "./data-table"
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {useLoaderData} from "react-router-dom";
-import { redirect } from "react-router-dom";
+import {redirect} from "react-router-dom";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {

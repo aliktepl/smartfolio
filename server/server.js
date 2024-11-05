@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 app.use(cors({
-        origin: "http://localhost:5174",
+        origin: "http://localhost:5173",
         method: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         credentials: true
     }
@@ -24,6 +24,7 @@ app.use(
 );
 
 app.use(passport.initialize());
+// noinspection JSCheckFunctionSignatures
 app.use(passport.session());
 
 //linking a path to a specific router
