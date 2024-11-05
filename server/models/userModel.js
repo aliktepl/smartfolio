@@ -1,29 +1,18 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+// models/User.js
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db'); // Adjust the path as necessary
 
-// // Define the User model
-// const User = sequelize.define('User', {
-//   id: {
-//     type: DataTypes.INTEGER,
-//     autoIncrement: true,
-//     primaryKey: true,
-//   },
-//   name: {
-//     type: DataTypes.STRING,
-//     allowNull: false,
-//   },
-//   email: {
-//     type: DataTypes.STRING,
-//     allowNull: false,
-//     unique: true,
-//   },
-//   // Assuming wallet is a JSON column that stores balance and coin information
-//   wallet: {
-//     type: DataTypes.JSON, 
-//     allowNull: true,
-//   }
-// }, {
-//   tableName: 'users',
-// });
+const User = sequelize.define('User', {
+    googleId: {
+        type: DataTypes.STRING,
+        unique: true
+    },
+    username: {
+        type: DataTypes.STRING
+    },
+    email: {
+        type: DataTypes.STRING
+    }
+});
 
-// module.exports = User;
+module.exports = User;

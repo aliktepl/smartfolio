@@ -6,7 +6,7 @@ interface AuthProvider {
 }
 
 export const AuthProvider: AuthProvider = {
-    isAuthenticated: true,
+    isAuthenticated: false,
     user: null,
     async signIn(user: string) {
         this.isAuthenticated = true;

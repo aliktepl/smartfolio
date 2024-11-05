@@ -2,20 +2,35 @@ import CoinCard from "@/Main/cards/CoinCard.tsx";
 import NewsCard from "@/Main/cards/NewsCard.tsx";
 import {AuthProvider} from "@/Authentication/AuthProvider.tsx";
 import WalletCard from "@/Main/cards/WalletCard.tsx";
-import {useLoaderData} from "react-router-dom";
+import {redirect, useLoaderData} from "react-router-dom";
 import {WalletRow} from '@/Main/wallet/columns.tsx'
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
-    return [
-        // Should fetch user.
-        {name: 'Ethereum', symbol: 'eth', amount: 0.12546, change: -13.4},
-        {name: 'Bitcoin', symbol: 'btc', amount: 0.12547, change: -6.0},
-        {name: 'Litecoin', symbol: 'ltc', amount: 0.12548, change: 14.25},
-        {name: 'Solana', symbol: 'sol', amount: 0.12549, change: -2.0},
-        {name: 'Binance Coin', symbol: 'bnb', amount: 0.12543, change: 12.0},
-    ]
+    try {
+        const response = await fetch("http://localhost:3000/users/wallet", {
+            credentials: "include", // Ensures cookies are sent with the request
+        });
+
+        // Check if the response is unauthorized
+        if (response.status === 401) {
+            // Redirect to login page or handle unauthorized access
+            console.error("Unauthorized access. Redirecting to login...");
+            return redirect("/login");
+        }
+        // Check for other non-success statuses
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+        }
+
+        // Parse and return the JSON data
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching wallet data:", error);
+        // Optionally return null or a default fallback object if needed
+        return null;
+    }
 }
 
 function Dashboard() {
