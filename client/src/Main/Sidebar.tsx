@@ -9,9 +9,9 @@ import {Button} from "@/components/ui/button.tsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
-    if (!AuthProvider.isAuthenticated) {
-        return redirect("/login");
-    }
+    // if (!AuthProvider.isAuthenticated) {
+    //     return redirect("/login");
+    // }
     return null;
 }
 

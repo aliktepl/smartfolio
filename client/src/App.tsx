@@ -1,39 +1,35 @@
 import Dashboard, {loader as dashboardLoader} from "./Main/Dashboard.tsx";
 import Sidebar, {loader as sidebarLoader} from "./Main/Sidebar.tsx";
-import {loader as coinLoader} from "@/Main/Coin.tsx";
+import Coin, {loader as coinLoader} from "@/Main/Coin.tsx";
 import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
-import Login from "@/Login/Login.tsx";
-import Signup from "@/Signup/Signup.tsx";
+import Login, {loader as loginLoader} from "@/Login/Login.tsx";
 import Explore from "@/Main/Explore.tsx";
 import Wallet, {loader as walletLoader} from "@/Main/wallet/Wallet.tsx"
 import Settings from "@/Main/Settings.tsx";
-import Coin from "@/Main/Coin.tsx";
 import {AuthProvider} from "@/Authentication/AuthProvider.tsx";
-import { ThemeProvider } from "@/components/theme-provider"
+import {ThemeProvider} from "@/components/theme-provider"
 
 const router = createBrowserRouter([
     {
         path: "/login",
-        element: <Login/>
-    },
-    {
-        path: "/signup",
-        element: <Signup/>
+        element: <Login/>,
+        loader: loginLoader
     },
     {
         path: "/logout",
         async loader() {
             await AuthProvider.signOut()
+            await fetch("http://localhost:3000/auth/logout", {
+                credentials: "include", // Ensures cookies are sent with the request
+            });
             return redirect("/login")
         }
     },
-
     {
         path: "/",
         id: "root",
         element: <Sidebar/>,
         loader: sidebarLoader,
-        errorElement: <div>404 Not Found</div>,
         children: [
             {
                 index: true,
