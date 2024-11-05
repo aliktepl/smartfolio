@@ -17,7 +17,7 @@ function WalletCard({asset, cryptoPrices}) {
                         {(asset.amount * cryptoPrices.find((crypto) => crypto.symbol === asset.symbol)?.price).toLocaleString()}$
                     </p>
                     <p className={`${asset.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        {asset.change > 0 ? '+' : ''}{asset.change.toFixed(2)}%
+                        {asset.change > 0 ? '+' : ''}{asset.change}%
                     </p>
                 </CardContent>
             </Card>
