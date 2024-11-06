@@ -11,22 +11,16 @@ export async function loader() {
         const response = await fetch("http://localhost:3000/users/wallet", {
             credentials: "include", // Ensures cookies are sent with the request
         });
-
-        // Check if the response is unauthorized
         if (response.status === 401) {
             // Redirect to login page or handle unauthorized access
             return redirect("/login");
         }
-        // Check for other non-success statuses
         if (!response.ok) {
             return new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
-
-        // Parse and return the JSON data
         return await response.json();
     } catch (error) {
         console.error("Error fetching wallet data:", error);
-        // Optionally return null or a default fallback object if needed
         return null;
     }
 }
@@ -64,6 +58,7 @@ function Dashboard() {
     ];
 
     const wallet = useLoaderData() as WalletRow[];
+    console.log(wallet)
 
     return (
         <div className="p-6">
@@ -85,7 +80,7 @@ function Dashboard() {
                 <div>
                     <h2 className="text-center font-semibold mb-4">My Top Coins</h2>
                     {wallet.map((asset) => (
-                        <WalletCard asset={asset} cryptoPrices={cryptoPrices} key={asset.symbol}/>
+                        <WalletCard asset={asset} cryptoPrices={cryptoPrices} key={asset.id}/>
                     ))}
                 </div>
                 <div>
