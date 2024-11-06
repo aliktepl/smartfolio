@@ -2,8 +2,8 @@ const userService = require('../services/userService');
 
 exports.getWallet = async (req, res) => {
   try {
-    //TODO - get the right user id here:
-    const userId = 1
+
+    const userId = req.user.id
     // Assuming the user ID is available in the request (from authentication)
     // Call the service to get wallet information
     const walletData = await userService.getUserWallet(userId);
@@ -13,14 +13,21 @@ exports.getWallet = async (req, res) => {
     res.status(500).json({ message: 'Error retrieving wallet information' });
   }
 };
-
-// controllers/userController.js
-exports.getUsers = async (req, res) => {
+exports.getUser= async (req, res) => {
   try {
-    const users = await userService.getAllUsers(); // Get users from the service
-    res.json(users); // Send users as a JSON response
+    const username = req.user.displayName
+    res.status(200).json(username);
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
+    res.status(500).json({ message: 'Error retrieving wallet information' });
   }
 };
+// controllers/userController.js
+// exports.getUsers = async (req, res) => {
+//   try {
+//     const users = await userService.getAllUsers(); // Get users from the service
+//     res.json(users); // Send users as a JSON response
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('Server error');
+//   }
+// };

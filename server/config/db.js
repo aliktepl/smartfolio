@@ -9,15 +9,26 @@
 // module.exports = sequelize;
 
 
-const { Pool } = require('pg');
+// const { Pool } = require('pg');
+//
+// const pool = new Pool({
+//   user: 'smartfolio',
+//   host: 'localhost',
+//   database: 'postgres',
+//   password: '1234',
+//   port: 5432,
+// });
+// pool.connect();
 
-const pool = new Pool({
-  user: 'smartfolio',
+const postgres = require('postgres');
+
+// Configure the connection
+const pool = postgres({
   host: 'localhost',
-  database: 'postgres',
-  password: '1234',
   port: 5432,
+  database: 'postgres',
+  username: 'smartfolio',
+  password: '1234'
 });
-pool.connect();
 
 module.exports = pool;
