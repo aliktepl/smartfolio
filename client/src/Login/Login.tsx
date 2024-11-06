@@ -2,15 +2,29 @@ import Logo from "@/assets/Logo.tsx";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {Button} from "@/components/ui/button.tsx";
+import {redirect} from "react-router-dom";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
-    return null
+    try {
+        const response = await fetch("http://localhost:3000/api/user", {
+            credentials: "include", // Ensures cookies are sent with the request
+        });
+        if (response.ok) {
+            console.log(response.status);
+            return redirect("/");
+        } else {
+            return null
+        }
+    } catch (error) {
+        console.error("Error connecting to server", error);
+        return null;
+    }
 }
 
 function Login() {
     async function handleLogin() {
-        window.location.href = 'http://localhost:3000/auth/google';
+        window.location.href = 'http://localhost:3000/api/auth/google';
     }
 
     return (

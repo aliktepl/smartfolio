@@ -3,6 +3,7 @@ import {ArrowUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 
 export interface WalletRow {
+    id: number;
     name: string;
     symbol: string;
     amount: number;

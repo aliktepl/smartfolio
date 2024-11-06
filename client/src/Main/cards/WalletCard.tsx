@@ -2,7 +2,6 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 
 // @ts-ignore
 function WalletCard({asset, cryptoPrices}) {
-    
     return (
         <div className="mb-4">
             <Card>

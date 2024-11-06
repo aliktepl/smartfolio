@@ -4,7 +4,7 @@ import Coin, {loader as coinLoader} from "@/Main/Coin.tsx";
 import {loader as settingsLoader} from "@/Main/Settings.tsx"
 import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
 import Login, {loader as loginLoader} from "@/Login/Login.tsx";
-import Explore from "@/Main/Explore.tsx";
+import Explore from "@/Main/explore/Explore.tsx";
 import Wallet, {loader as walletLoader} from "@/Main/wallet/Wallet.tsx"
 import Settings from "@/Main/Settings.tsx";
 import {ThemeProvider} from "@/components/theme-provider"

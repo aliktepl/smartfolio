@@ -7,7 +7,7 @@ import {redirect} from "react-router-dom";
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
     try {
-        const response = await fetch("http://localhost:3000/users/wallet", {
+        const response = await fetch("http://localhost:3000/api/wallet", {
             credentials: "include", // Ensures cookies are sent with the request
         });
 

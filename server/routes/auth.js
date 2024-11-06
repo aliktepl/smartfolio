@@ -3,7 +3,6 @@ const passport = require('passport');
 require('../config/passport')
 
 const isLoggedIn = (req, res, next) => {
-    console.log(req.isAuthenticated());
     req.isAuthenticated() ? next() : res.sendStatus(401);
 }
 
@@ -14,7 +13,7 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 
 // Google callback route
 router.get('/google/callback', passport.authenticate('google', {
-    failureRedirect: 'http://localhost:5173/login'
+    failureRedirect: 'http://localhost:5173/login',
 }), (req, res) => {
     res.redirect(`http://localhost:5173`);
 });
