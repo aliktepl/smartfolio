@@ -23,7 +23,9 @@ export async function loader() {
         }
 
         // Parse and return the JSON data
-        return await response.json();
+        const res = await response.json()
+        console.log("wallet: ",res)
+        return await res;
     } catch (error) {
         console.error("Error fetching wallet data:", error);
         // Optionally return null or a default fallback object if needed

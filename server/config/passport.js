@@ -2,6 +2,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const dotenv = require("dotenv");
 dotenv.config();
+const userService = require('../services/userService');
 
 // Set up Passport Google Strategy
 passport.use(
@@ -12,6 +13,7 @@ passport.use(
         },
         function (accessToken, refreshToken, profile, done) {
             // Here you would find or create a user in the database
+            userService.addUser(profile)
             done(null, profile);
         })
 );
