@@ -1,14 +1,14 @@
 import CoinCard from "@/Main/cards/CoinCard.tsx";
 import NewsCard from "@/Main/cards/NewsCard.tsx";
-import WalletCard from "@/Main/cards/WalletCard.tsx";
-import {redirect, useLoaderData} from "react-router-dom";
+// import WalletCard from "@/Main/cards/WalletCard.tsx";
+import {redirect, useLoaderData, useRouteLoaderData} from "react-router-dom";
 import {WalletRow} from '@/Main/wallet/columns.tsx'
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
     try {
-        const response = await fetch("http://localhost:3000/api/user", {
+        const response = await fetch("http://localhost:3000/api/wallet", {
             credentials: "include", // Ensures cookies are sent with the request
         });
         if (response.status === 401) {
@@ -58,6 +58,7 @@ function Dashboard() {
     ];
 
     const wallet = useLoaderData() as WalletRow[];
+    const user = useRouteLoaderData('root') as string
     console.log(wallet)
 
     return (
@@ -65,7 +66,7 @@ function Dashboard() {
             <div className='hidden'><ModeToggle/></div>
             <header>
                 <h1 className="text-2xl font-bold mb-4">
-                    Welcome!
+                    Welcome, {user}!
                 </h1>
             </header>
             <h2 className="text-center font-semibold mb-4">
@@ -77,12 +78,12 @@ function Dashboard() {
                 ))}
             </div>
             <div className="grid gap-4 lg:grid-cols-2">
-                <div>
-                    <h2 className="text-center font-semibold mb-4">My Top Coins</h2>
-                    {wallet.map((asset) => (
-                        <WalletCard asset={asset} cryptoPrices={cryptoPrices} key={asset.id}/>
-                    ))}
-                </div>
+                {/*<div>*/}
+                {/*    <h2 className="text-center font-semibold mb-4">My Top Coins</h2>*/}
+                {/*    {wallet.map((asset) => (*/}
+                {/*        <WalletCard asset={asset} cryptoPrices={cryptoPrices} key={asset.symbol}/>*/}
+                {/*    ))}*/}
+                {/*</div>*/}
                 <div>
                     <h2 className="text-center font-semibold mb-4">Top News</h2>
                     <div className="grid gap-4 md:grid-cols-2">
