@@ -10,12 +10,11 @@ export async function loader() {
             return redirect("/login");
         }
         if (!response.ok) {
-            throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+            return new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
         return await response.json();
     } catch (error) {
         console.error("Error fetching wallet data:", error);
-        // Optionally return null or a default fallback object if needed
         return null;
     }
 }

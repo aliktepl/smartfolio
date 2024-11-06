@@ -6,7 +6,6 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {PanelLeft} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
     return null;
 }
