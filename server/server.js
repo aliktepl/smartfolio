@@ -23,14 +23,15 @@ app.use(
     })
 );
 
-// noinspection JSCheckFunctionSignatures
-app.use(passport.session());
+app.use(passport.session({pauseStream : false}));
 
 //linking a path to a specific router
 const userRouter = require("./routes/user");
-app.use("/users", userRouter);
+app.use("/api/user", userRouter);
 const authRouter = require("./routes/auth").router;
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
+const walletRouter = require("./routes/wallet");
+app.use("/api/wallet", walletRouter);
 
 PORT = process.env.PORT || 3000;
 

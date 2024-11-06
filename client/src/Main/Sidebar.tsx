@@ -1,13 +1,27 @@
 import {FaCog, FaSearch, FaSignOutAlt, FaWallet} from 'react-icons/fa';
 import {RxDashboard} from "react-icons/rx";
-import {NavLink, Outlet} from "react-router-dom";
+import {NavLink, Outlet, redirect} from "react-router-dom";
 import Logo from "../assets/Logo.tsx";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {PanelLeft} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
 
 export async function loader() {
-    return null;
+    try {
+        const response = await fetch("http://localhost:3000/api/user", {
+            credentials: "include", // Ensures cookies are sent with the request
+        });
+        if (response.status === 401) {
+            return redirect("/login");
+        }
+        if (!response.ok) {
+            return new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+    }
 }
 
 function Sidebar() {

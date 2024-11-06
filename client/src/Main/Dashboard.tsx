@@ -8,7 +8,7 @@ import {ModeToggle} from "@/components/mode-toggle.tsx";
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
     try {
-        const response = await fetch("http://localhost:3000/users/wallet", {
+        const response = await fetch("http://localhost:3000/api/user", {
             credentials: "include", // Ensures cookies are sent with the request
         });
         if (response.status === 401) {
@@ -20,7 +20,7 @@ export async function loader() {
         }
         return await response.json();
     } catch (error) {
-        console.error("Error fetching wallet data:", error);
+        console.error("Error fetching data:", error);
         return null;
     }
 }
