@@ -45,12 +45,10 @@ class User {
 
 
         try {
-            console.log("model-id:",id)
+
             const result = await pool.query('SELECT * FROM wallets;');
             delete result.rows.id
-            const final = result.rows
-            console.log("model2:" ,final)
-            return final;
+            return result.rows;
         } catch (error) {
             console.error('Error executing query', error.stack);
         }

@@ -23,7 +23,6 @@ app.use(
     })
 );
 
-app.use(passport.initialize());
 // noinspection JSCheckFunctionSignatures
 app.use(passport.session());
 

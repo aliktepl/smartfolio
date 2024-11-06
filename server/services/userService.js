@@ -22,7 +22,6 @@ class UserService {
     return await User.findAll(); // Calls the model method to fetch all users
   }
   static async getUserWallet() {
-    console.log("service")
     return await User.findWalletById(1); // Calls the model method to fetch all users
   }
 

@@ -1,6 +1,8 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 
+// @ts-ignore
 function WalletCard({asset, cryptoPrices}) {
+    
     return (
         <div className="mb-4">
             <Card>
@@ -14,7 +16,7 @@ function WalletCard({asset, cryptoPrices}) {
                 </CardHeader>
                 <CardContent>
                     <p>
-                        {(asset.amount * cryptoPrices.find((crypto) => crypto.symbol === asset.symbol)?.price).toLocaleString()}$
+                        {(asset.amount * cryptoPrices.find((crypto: { symbol: any; }) => crypto.symbol === asset.symbol)?.price).toLocaleString()}$
                     </p>
                     <p className={`${asset.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
                         {asset.change > 0 ? '+' : ''}{asset.change}%

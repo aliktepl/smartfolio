@@ -1,6 +1,5 @@
 import CoinCard from "@/Main/cards/CoinCard.tsx";
 import NewsCard from "@/Main/cards/NewsCard.tsx";
-import {AuthProvider} from "@/Authentication/AuthProvider.tsx";
 import WalletCard from "@/Main/cards/WalletCard.tsx";
 import {redirect, useLoaderData} from "react-router-dom";
 import {WalletRow} from '@/Main/wallet/columns.tsx'
@@ -16,7 +15,6 @@ export async function loader() {
         // Check if the response is unauthorized
         if (response.status === 401) {
             // Redirect to login page or handle unauthorized access
-            console.error("Unauthorized access. Redirecting to login...");
             return redirect("/login");
         }
         // Check for other non-success statuses
@@ -72,7 +70,7 @@ function Dashboard() {
             <div className='hidden'><ModeToggle/></div>
             <header>
                 <h1 className="text-2xl font-bold mb-4">
-                    Welcome, {AuthProvider.user}!
+                    Welcome!
                 </h1>
             </header>
             <h2 className="text-center font-semibold mb-4">

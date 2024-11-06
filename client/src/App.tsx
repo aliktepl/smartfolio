@@ -7,7 +7,6 @@ import Login, {loader as loginLoader} from "@/Login/Login.tsx";
 import Explore from "@/Main/Explore.tsx";
 import Wallet, {loader as walletLoader} from "@/Main/wallet/Wallet.tsx"
 import Settings from "@/Main/Settings.tsx";
-import {AuthProvider} from "@/Authentication/AuthProvider.tsx";
 import {ThemeProvider} from "@/components/theme-provider"
 
 const router = createBrowserRouter([
@@ -19,11 +18,14 @@ const router = createBrowserRouter([
     {
         path: "/logout",
         async loader() {
-            const res = await fetch("http://localhost:3000/auth/logout", {
-                credentials: "include", // Ensures cookies are sent with the request
-            });
-            console.log(res)
-            return redirect("/login")
+            try {
+                await fetch("http://localhost:3000/auth/logout", {
+                    credentials: "include"
+                });
+                return redirect("/login")
+            } catch (error) {
+                throw redirect('/login')
+            }
         }
     },
     {
@@ -60,7 +62,6 @@ const router = createBrowserRouter([
         ]
     }
 ]);
-
 
 function App() {
     return (

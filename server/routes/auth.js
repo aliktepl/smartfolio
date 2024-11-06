@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 require('../config/passport')
 
 const isLoggedIn = (req, res, next) => {
-    console.log(req.user);
-    req.user ? next() : res.sendStatus(401);
+    console.log(req.isAuthenticated());
+    req.isAuthenticated() ? next() : res.sendStatus(401);
 }
 
 const router = express.Router();

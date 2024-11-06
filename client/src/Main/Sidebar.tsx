@@ -1,8 +1,7 @@
 import {FaCog, FaSearch, FaSignOutAlt, FaWallet} from 'react-icons/fa';
 import {RxDashboard} from "react-icons/rx";
-import {NavLink, Outlet, redirect} from "react-router-dom";
+import {NavLink, Outlet} from "react-router-dom";
 import Logo from "../assets/Logo.tsx";
-import {AuthProvider} from "../Authentication/AuthProvider.tsx";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {PanelLeft} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
@@ -13,7 +12,6 @@ export async function loader() {
 }
 
 function Sidebar() {
-
     return (
         <div className="flex min-h-screen w-full bg-muted/40">
             <aside className="w-64 bg-background hidden sm:flex border-r">

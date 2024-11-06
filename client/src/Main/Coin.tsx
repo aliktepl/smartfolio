@@ -2,9 +2,11 @@ import {useLoaderData} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {
-    Dialog, DialogClose,
+    Dialog,
+    DialogClose,
     DialogContent,
-    DialogDescription, DialogFooter,
+    DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -26,9 +28,11 @@ function Coin() {
         <>
             {/*header*/}
             <div className="flex items-center justify-between py-2 px-4">
-                <div className='hidden'><ModeToggle/></div>
-                <span className="relative right-0 justify-self-center">
-                    {coinId}
+                <div className="hidden">
+                    <ModeToggle/>
+                </div>
+                <span className="flex-grow text-center">
+                    {coinId.toUpperCase()}
                 </span>
                 <Dialog>
                     <DialogTrigger asChild>

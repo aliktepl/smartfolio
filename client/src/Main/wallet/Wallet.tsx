@@ -19,7 +19,7 @@ export async function loader() {
         }
         // Check for other non-success statuses
         if (!response.ok) {
-            throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+            return new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
 
         // Parse and return the JSON data
