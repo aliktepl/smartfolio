@@ -32,6 +32,8 @@ const authRouter = require("./routes/auth").router;
 app.use("/api/auth", authRouter);
 const walletRouter = require("./routes/wallet");
 app.use("/api/wallet", walletRouter);
+const coinsRouter = require("./routes/coins");
+app.use("/api/coins", coinsRouter);
 
 PORT = process.env.PORT || 3000;
 
