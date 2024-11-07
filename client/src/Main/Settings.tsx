@@ -20,7 +20,6 @@ export async function loader() {
     }
 }
 
-
 function Settings() {
 
     const navigate = useNavigate();
@@ -33,7 +32,7 @@ function Settings() {
             });
 
             if (response.status === 401) {
-                navigate('/login', { replace: true }); // Redirect to login if unauthorized
+                navigate('/login', { replace: true });
             }
         };
 

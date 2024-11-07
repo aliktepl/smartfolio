@@ -5,7 +5,6 @@ import {columns, CoinsRow} from "@/Main/explore/columns.tsx";
 import {useEffect} from "react";
 
 export async function loader() {
-
     try {
         const response = await fetch("http://localhost:3000/api/coins", {
             credentials: "include", // Ensures cookies are sent with the request
