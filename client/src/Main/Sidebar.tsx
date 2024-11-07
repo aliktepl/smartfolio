@@ -1,10 +1,11 @@
 import {FaCog, FaSearch, FaSignOutAlt, FaWallet} from 'react-icons/fa';
 import {RxDashboard} from "react-icons/rx";
-import {NavLink, Outlet, redirect} from "react-router-dom";
+import {NavLink, Outlet, redirect, useNavigate} from "react-router-dom";
 import Logo from "../assets/Logo.tsx";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {PanelLeft} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
+import {useEffect} from "react";
 
 export async function loader() {
     try {
@@ -25,6 +26,24 @@ export async function loader() {
 }
 
 function Sidebar() {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Check if the user is authenticated (e.g., by making an API call or checking cookies)
+        const checkAuthStatus = async () => {
+            const response = await fetch("http://localhost:3000/api/user", {
+                credentials: "include",
+            });
+
+            if (response.status === 401) {
+                navigate('/login', { replace: true }); // Redirect to login if unauthorized
+            }
+        };
+
+        checkAuthStatus().then(() => {});
+    }, [navigate]);
+
     return (
         <div className="flex min-h-screen w-full bg-muted/40">
             <aside className="w-64 bg-background hidden sm:flex border-r">
