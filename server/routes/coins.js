@@ -8,7 +8,8 @@ const {isLoggedIn} = require('../routes/auth')
 //Get all coins
 router.get('/', isLoggedIn,coinsController.getAllCoins);
 
-//todo - Get a single coin by id
-router.get('/:id', isLoggedIn, userController.getWallet);
+router.get('/:id', isLoggedIn, coinsController.getCoin);
+
+// router.post('/:id',isLoggedIn,)
 
 module.exports = router;
