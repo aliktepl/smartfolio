@@ -18,7 +18,7 @@ router.get('/google/callback', passport.authenticate('google', {
     res.redirect(`http://localhost:5173`);
 });
 
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
     req.logout((err) => {
         if (err) {
             return res.status(500).send(err);
@@ -30,7 +30,7 @@ router.get('/logout', (req, res) => {
             }
             // Clear the cookie
             res.clearCookie('connect.sid'); // Adjust the cookie name if needed
-            res.sendStatus(200);
+            res.sendStatus(200)
         });
     });
 });

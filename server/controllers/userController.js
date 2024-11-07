@@ -18,7 +18,7 @@ exports.getUser= async (req, res) => {
     const username = req.user.displayName
     res.status(200).json(username);
   } catch (error) {
-    res.status(500).json({ message: 'Error retrieving wallet information' });
+    res.status(500).json({ message: 'Error retrieving user information' });
   }
 };
 // controllers/userController.js

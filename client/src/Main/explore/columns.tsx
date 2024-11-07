@@ -3,7 +3,6 @@ import {ArrowUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
 
 export interface CoinsRow {
-    id: number;
     name: string;
     symbol: string;
     change: number;

@@ -1,9 +1,10 @@
 import CoinCard from "@/Main/cards/CoinCard.tsx";
-import NewsCard from "@/Main/cards/NewsCard.tsx";
-// import WalletCard from "@/Main/cards/WalletCard.tsx";
-import {redirect, useLoaderData, useRouteLoaderData} from "react-router-dom";
+import ArticleCard from "@/Main/cards/ArticleCard.tsx";
+import WalletCard from "@/Main/cards/WalletCard.tsx";
+import {redirect, useLoaderData, useNavigate, useRouteLoaderData} from "react-router-dom";
 import {WalletRow} from '@/Main/wallet/columns.tsx'
 import {ModeToggle} from "@/components/mode-toggle.tsx";
+import {useEffect} from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
@@ -26,6 +27,23 @@ export async function loader() {
 }
 
 function Dashboard() {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Check if the user is authenticated (e.g., by making an API call or checking cookies)
+        const checkAuthStatus = async () => {
+            const response = await fetch("http://localhost:3000/api/user", {
+                credentials: "include",
+            });
+
+            if (response.status === 401) {
+                navigate('/login', { replace: true }); // Redirect to login if unauthorized
+            }
+        };
+
+        checkAuthStatus().then(() => {});
+    }, [navigate]);
 
     const cryptoPrices = [
         {name: 'Bitcoin', symbol: 'btc', price: 52291, change: 0.25},
@@ -59,7 +77,6 @@ function Dashboard() {
 
     const wallet = useLoaderData() as WalletRow[];
     const user = useRouteLoaderData('root') as string
-    console.log(wallet)
 
     return (
         <div className="p-6">
@@ -78,17 +95,17 @@ function Dashboard() {
                 ))}
             </div>
             <div className="grid gap-4 lg:grid-cols-2">
-                {/*<div>*/}
-                {/*    <h2 className="text-center font-semibold mb-4">My Top Coins</h2>*/}
-                {/*    {wallet.map((asset) => (*/}
-                {/*        <WalletCard asset={asset} cryptoPrices={cryptoPrices} key={asset.symbol}/>*/}
-                {/*    ))}*/}
-                {/*</div>*/}
+                <div>
+                    <h2 className="text-center font-semibold mb-4">My Top Coins</h2>
+                    {wallet ? wallet.map((asset) => (
+                        <WalletCard asset={asset} key={asset.symbol}/>
+                    )) : 'Your wallet is empty'}
+                </div>
                 <div>
                     <h2 className="text-center font-semibold mb-4">Top News</h2>
                     <div className="grid gap-4 md:grid-cols-2">
                         {news.map((article, index) => (
-                            <NewsCard article={article} key={index}/>
+                            <ArticleCard article={article} key={index}/>
                         ))}
                     </div>
                 </div>

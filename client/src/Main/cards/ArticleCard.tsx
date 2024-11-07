@@ -1,6 +1,12 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 
-function NewsCard({article}) {
+interface Article {
+    source: string;
+    time: string;
+    headline: string;
+}
+
+function ArticleCard({article}:{article:Article}) {
     return (
         <div className="mb-4">
             <Card>
@@ -20,4 +26,4 @@ function NewsCard({article}) {
     );
 }
 
-export default NewsCard;
+export default ArticleCard

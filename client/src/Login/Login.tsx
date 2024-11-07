@@ -2,7 +2,8 @@ import Logo from "@/assets/Logo.tsx";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {redirect} from "react-router-dom";
+import {useState} from "react";
+import {replace} from "react-router-dom";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
@@ -11,8 +12,7 @@ export async function loader() {
             credentials: "include", // Ensures cookies are sent with the request
         });
         if (response.ok) {
-            console.log(response.status);
-            return redirect("/");
+            return replace("/");
         } else {
             return null
         }
@@ -23,8 +23,11 @@ export async function loader() {
 }
 
 function Login() {
-    async function handleLogin() {
-        window.location.href = 'http://localhost:3000/api/auth/google';
+    const [isLoading, setIsLoading] = useState(false);
+
+    function handleLogin() {
+        setIsLoading(true);
+        window.location.replace(`http://localhost:3000/api/auth/google`);
     }
 
     return (
@@ -40,13 +43,13 @@ function Login() {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Button onClick={handleLogin}>
-                        Login with Google
+                    <Button onClick={handleLogin} disabled={isLoading}>
+                        {isLoading ? 'Redirecting...' : 'Login with Google'}
                     </Button>
                 </CardContent>
             </Card>
         </div>
-    )
+    );
 }
 
 export default Login;

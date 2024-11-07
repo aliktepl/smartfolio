@@ -9,8 +9,14 @@ import {
 
 import {Link} from "react-router-dom";
 
+interface Coin {
+    name: string;
+    symbol: string;
+    price: number;
+    change: number;
+}
 
-function CoinCard({ coin }) {
+function CoinCard({coin}:{coin:Coin}) {
     return (
         <Link to={coin.symbol}>
             <Card>

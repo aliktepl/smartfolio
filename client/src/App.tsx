@@ -1,13 +1,13 @@
-import {createBrowserRouter, redirect, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, replace, RouterProvider} from "react-router-dom";
+import {ThemeProvider} from "@/components/theme-provider"
 import Dashboard, {loader as dashboardLoader} from "./Main/Dashboard.tsx";
 import Sidebar, {loader as sidebarLoader} from "./Main/Sidebar.tsx";
 import Coin, {loader as coinLoader} from "@/Main/Coin.tsx";
-import {loader as settingsLoader} from "@/Main/Settings.tsx"
 import Login, {loader as loginLoader} from "@/Login/Login.tsx";
 import Explore, {loader as exploreLoader} from "@/Main/explore/Explore.tsx";
 import Wallet, {loader as walletLoader} from "@/Main/wallet/Wallet.tsx"
-import Settings from "@/Main/Settings.tsx";
-import {ThemeProvider} from "@/components/theme-provider"
+import Settings, {loader as settingsLoader} from "@/Main/Settings.tsx";
+import axios from "axios";
 
 const router = createBrowserRouter([
     {
@@ -19,12 +19,13 @@ const router = createBrowserRouter([
         path: "/logout",
         async loader() {
             try {
-                await fetch("http://localhost:3000/auth/logout", {
-                    credentials: "include"
-                });
-                return redirect("/login")
-            } catch (error) {
-                throw redirect('/login')
+                await axios.post('http://localhost:3000/api/auth/logout', {}, { withCredentials: true });
+                localStorage.clear();
+                return replace('/login'); // This will handle the redirection
+            } catch (err) {
+                console.error('Logout failed', err);
+                // You may want to handle error here, like returning a response with an error status
+                throw new Error('Logout failed');
             }
         }
     },
