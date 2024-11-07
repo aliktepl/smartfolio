@@ -6,5 +6,9 @@ class CoinsService {
         const res =  await coins.getAll()
         return res
     }
+    static async getOneCoin(id){
+        const res = await coins.getOne(id)
+        return res
+    }
 }
 module.exports = CoinsService

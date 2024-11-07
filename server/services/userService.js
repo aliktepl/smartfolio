@@ -19,18 +19,14 @@ const User = require('../models/userModel');
 
 
 class UserService {
-  static async getAllUsers() {
-    return await User.findAll(); // Calls the model method to fetch all users
-  }
-  static async getUserWallet(userID) {
-    return await User.findWalletById(userID); // Calls the model method to fetch all users
-  }
+
+  // static async getUserWallet(userID) {
+  //   return await User.findWalletById(userID); // Calls the model method to fetch all users
+  // }
   static async addUser(profile){
     const id  = profile.id
     const name  = profile.displayName
 
-    // const val = await User.isExist(id,name)
-    // console.log("value: ",val)
     const res =  await User.add(id,name)
     console.log('res: ', res)
   }
