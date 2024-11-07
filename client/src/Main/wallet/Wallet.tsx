@@ -7,7 +7,6 @@ import {useEffect} from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
-
     try {
         const response = await fetch("http://localhost:3000/api/wallet", {
             credentials: "include", // Ensures cookies are sent with the request
@@ -17,7 +16,7 @@ export async function loader() {
             return redirect("/login");
         }
         if (!response.ok) {
-            throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+            return new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
         return await response.json(); // Successful data retrieval
     } catch (error) {
