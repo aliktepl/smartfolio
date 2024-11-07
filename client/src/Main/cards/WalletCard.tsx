@@ -1,7 +1,7 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {WalletRow} from "@/Main/wallet/columns.tsx";
 
-function WalletCard({asset}: {asset: WalletRow}) {
+function WalletCard({asset} : {asset : WalletRow}) {
     return (
         <div className="mb-4">
             <Card>

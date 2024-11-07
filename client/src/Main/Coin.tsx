@@ -14,12 +14,20 @@ import {
 import {Input} from "@/components/ui/input"
 import {useEffect} from "react";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-// eslint-disable-next-line react-refresh/only-export-components
-export async function loader({params}) {
-    // should fetch coin data
-    return params.coinId;
+interface CoinParams {
+    coinId: string;
+}
+
+export async function loader({params} : {params: CoinParams}) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/coins/${params.coinId}`, {
+            credentials: "include",
+        });
+        console.log(await response.json());
+        return params.coinId
+    } catch (e) {
+        throw e
+    }
 }
 
 function Coin() {
@@ -34,7 +42,7 @@ function Coin() {
             });
 
             if (response.status === 401) {
-                navigate('/login', { replace: true }); // Redirect to login if unauthorized
+                navigate('/login', { replace: true });
             }
         };
 

@@ -3,7 +3,6 @@ import {DataTable} from "./data-table"
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {redirect, useLoaderData, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-import {Button} from "@/components/ui/button.tsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
@@ -45,10 +44,6 @@ export default function Wallet() {
         });
     }, [navigate]);
 
-    async function script() {
-        return null
-    }
-
     const data = useLoaderData() as WalletRow[];
     return (
         <>
@@ -56,7 +51,6 @@ export default function Wallet() {
                 <div className="hidden"><ModeToggle/></div>
                 <DataTable columns={columns} data={data}/>
             </div>
-            <Button onClick={script}>Run script</Button>
         </>
     )
 }

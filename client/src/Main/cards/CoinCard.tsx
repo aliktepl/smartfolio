@@ -16,7 +16,7 @@ interface Coin {
     change: number;
 }
 
-function CoinCard({coin}:{coin:Coin}) {
+function CoinCard({coin} : {coin:Coin}) {
     return (
         <Link to={coin.symbol}>
             <Card>

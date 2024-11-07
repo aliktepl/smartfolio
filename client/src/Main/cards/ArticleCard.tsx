@@ -6,7 +6,7 @@ interface Article {
     headline: string;
 }
 
-function ArticleCard({article}:{article:Article}) {
+function ArticleCard({article} : {article: Article}) {
     return (
         <div className="mb-4">
             <Card>
