@@ -1,9 +1,10 @@
 const express = require("express")
 const router = express.Router()
-const userController = require('../controllers/userController.js');
+const walletController = require('../controllers/walletController');
 const {isLoggedIn} = require('../routes/auth')
 
 // Get the user's wallet
-router.get('/', isLoggedIn ,userController.getWallet);
+router.get('/', isLoggedIn ,walletController.getWallet);
+// router.post('/:id',isLoggedIn,walletController)
 
 module.exports = router;

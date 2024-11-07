@@ -90,27 +90,27 @@ class User {
     //         console.error('Error executing query', error.stack);
     //     }
     // }
-    static async findWalletById(id) {
-        try {
-            // Query wallets table for all rows where id matches
-            const result = await pool`
-                SELECT c.name, c.symbol, c.change, w.amount
-                FROM wallets w
-                JOIN coins c ON w.coin_id = c.id
-                WHERE w.user_id = ${id}
-            `;
-            //
-            // // Remove `id` from each result row if needed
-            // const final = result.map(row => {
-            //     const { id, ...rest } = row;
-            //     return rest;
-            // });
-
-            return result;
-        } catch (error) {
-            console.error('Error executing query', error);
-        }
-    }
+    // static async findWalletById(id) {
+    //     try {
+    //         // Query wallets table for all rows where id matches
+    //         const result = await pool`
+    //             SELECT c.name, c.symbol, c.change, w.amount
+    //             FROM wallets w
+    //             JOIN coins c ON w.coin_id = c.id
+    //             WHERE w.user_id = ${id}
+    //         `;
+    //         //
+    //         // // Remove `id` from each result row if needed
+    //         // const final = result.map(row => {
+    //         //     const { id, ...rest } = row;
+    //         //     return rest;
+    //         // });
+    //
+    //         return result;
+    //     } catch (error) {
+    //         console.error('Error executing query', error);
+    //     }
+    // }
 
     // Additional methods (create, update, delete) can be added here
 }
