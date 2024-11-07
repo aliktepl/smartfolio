@@ -29,12 +29,34 @@ class Wallet{
     static async addCoin(userId,coinId,amount){
         try {
             // Query wallets table for all rows where id matches
-            const result = await pool`
+            await pool`
                 INSERT INTO wallets (user_id, coin_id, amount)
                 VALUES (${userId}, ${coinId}, ${amount});
             `;
 
-            return result;
+        } catch (error) {
+            console.error('Error executing query', error);
+        }
+    }
+    static async removeCoin(userId,coinId){
+        try {
+            // Query wallets table for all rows where id matches
+            await pool`
+                DELETE FROM wallets
+                WHERE user_id = ${userId} AND coin_id = ${coinId};
+            `;
+        } catch (error) {
+            console.error('Error executing query', error);
+        }
+    }
+    static async updateCoinAmount(userId,coinId,amount){
+        try {
+            // Query wallets table for all rows where id matches
+            await pool`
+                UPDATE wallets
+                SET amount = ${amount}
+                WHERE user_id = ${userId} AND coin_id = ${coinId};
+            `;
         } catch (error) {
             console.error('Error executing query', error);
         }
