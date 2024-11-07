@@ -46,7 +46,62 @@ export default function Wallet() {
     }, [navigate]);
 
     async function script() {
-        return null
+        // const getCoin = async () => {
+        //     const response = await fetch("http://localhost:3000/api/coins/BTC", {
+        //         credentials: "include",
+        //     });
+        //     const res = await response.json()
+        //     console.log("coin: ",res)
+        //     return res
+        // }
+        // await getCoin()
+
+        // const addCoinToWllet = async (amount : number) => {
+        //     const response = await fetch("http://localhost:3000/api/wallet/LTC", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         credentials: "include", // Include cookies if necessary for authentication
+        //         body: JSON.stringify({ amount: amount }) // Send the amount in the body
+        //     });
+        //
+        //     const res = await response.json();
+        //     console.log("wallet data: ", res);
+        //     return res;
+        // };
+        //
+        // await addCoinToWllet(12);
+//         const deleteWallet = async (id : string) => {
+//             const response = await fetch(`http://localhost:3000/api/wallet/${id}`, {
+//                 method: "DELETE",
+//                 credentials: "include", // Include cookies if necessary for authentication
+//             });
+//
+//             const res = await response.json();
+//             console.log("Deleted wallet: ", res);
+//             return res;
+//         };
+//
+// // Example usage:
+//         await deleteWallet('ETH');
+//         const updateWallet = async (id : string, amount : number) => {
+//             const response = await fetch(`http://localhost:3000/api/wallet/${id}`, {
+//                 method: "PUT",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                 },
+//                 credentials: "include", // Include cookies if necessary for authentication
+//                 body: JSON.stringify({ amount: amount }) // Send the amount in the body
+//             });
+//
+//             const res = await response.json();
+//             console.log("Updated wallet: ", res);
+//             return res;
+//         };
+//
+// // Example usage:
+//         await updateWallet('BTC', 21)
     }
 
     const data = useLoaderData() as WalletRow[];
