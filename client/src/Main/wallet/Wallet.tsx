@@ -1,9 +1,9 @@
-import {WalletRow, columns } from "./columns"
-import { DataTable } from "./data-table"
+import {columns, WalletRow} from "./columns"
+import {DataTable} from "./data-table"
 import {ModeToggle} from "@/components/mode-toggle.tsx";
-import {useLoaderData, useNavigate} from "react-router-dom";
-import {redirect} from "react-router-dom";
+import {redirect, useLoaderData, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
+import {Button} from "@/components/ui/button.tsx";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
@@ -37,18 +37,26 @@ export default function Wallet() {
             });
 
             if (response.status === 401) {
-                navigate('/login', { replace: true }); // Redirect to login if unauthorized
+                navigate('/login', {replace: true}); // Redirect to login if unauthorized
             }
         };
 
-        checkAuthStatus().then(() => {});
+        checkAuthStatus().then(() => {
+        });
     }, [navigate]);
+
+    async function script() {
+        return null
+    }
 
     const data = useLoaderData() as WalletRow[];
     return (
-        <div className="container mx-auto py-10">
-            <div className="hidden"><ModeToggle/></div>
-            <DataTable columns={columns} data={data}/>
-        </div>
+        <>
+            <div className="container mx-auto py-10">
+                <div className="hidden"><ModeToggle/></div>
+                <DataTable columns={columns} data={data}/>
+            </div>
+            <Button onClick={script}>Run script</Button>
+        </>
     )
 }
