@@ -42,7 +42,7 @@ function Login() {
                         <h2 className="font-bold text-center">Welcome to SmartFolio</h2>
                     </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className='flex justify-center'>
                     <Button onClick={handleLogin} disabled={isLoading}>
                         {isLoading ? 'Redirecting...' : 'Login with Google'}
                     </Button>
