@@ -35,7 +35,7 @@ function Coin() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Check if the user is authenticated (e.g., by making an API call or checking cookies)
+        // Check if the user is authenticated
         const checkAuthStatus = async () => {
             const response = await fetch("http://localhost:3000/api/user", {
                 credentials: "include",
