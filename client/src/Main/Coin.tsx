@@ -12,36 +12,87 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import {Input} from "@/components/ui/input"
-import {useEffect} from "react";
+import {SetStateAction, useEffect, useState} from "react";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-// eslint-disable-next-line react-refresh/only-export-components
+// @ts-ignore
 export async function loader({params}) {
-    // should fetch coin data
-    return params.coinId;
+    const responseCoin = await fetch(`http://localhost:3000/api/coins/${params.coinId.toUpperCase()}`, {
+        credentials: "include",
+    });
+    const resCoin = await responseCoin.json()
+    const responseWallet = await fetch("http://localhost:3000/api/wallet", {
+        credentials: "include", // Ensures cookies are sent with the request
+    });
+    const resWallet = await responseWallet.json()
+
+    return [resCoin, resWallet];
 }
 
 function Coin() {
 
+    // @ts-ignore
+    const [coin, wallet] = useLoaderData()
+    console.log(coin[0].name);
+    console.log(wallet)
+    const [amount, setAmount] = useState('');
     const navigate = useNavigate();
 
+    const hasCoin = wallet.some((item: { symbol: string; }) => item.symbol === coin[0].symbol);
+
+    const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+        const value = event.target.value
+        if (value === '' || parseFloat(value as string) > 0) {
+            setAmount(value); // Set the amount if it's positive or empty
+        }
+    };
+
     useEffect(() => {
-        // Check if the user is authenticated (e.g., by making an API call or checking cookies)
+        // Check if the user is authenticated
         const checkAuthStatus = async () => {
             const response = await fetch("http://localhost:3000/api/user", {
                 credentials: "include",
             });
 
             if (response.status === 401) {
-                navigate('/login', { replace: true }); // Redirect to login if unauthorized
+                navigate('/login', {replace: true});
             }
         };
-
-        checkAuthStatus().then(() => {});
+        checkAuthStatus().then(() => {
+        });
     }, [navigate]);
 
-    const coinId = useLoaderData() as string;
+    const addCoinToWallet = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/api/wallet/${coin[0].symbol}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include", // Include cookies if necessary for authentication
+                body: JSON.stringify({amount: parseFloat(amount)}) // Send the amount in the body
+            });
+            if(response.ok) {
+                return navigate(`/${coin[0].symbol}`)
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
+    const removeCoinFromWallet = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/api/wallet/${coin[0].symbol}`, {
+                method: "DELETE",
+                credentials: "include"
+            });
+            if(response.ok) {
+                console.log('here')
+                return navigate(`/${coin[0].symbol}`);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
 
     return (
         <>
@@ -51,14 +102,19 @@ function Coin() {
                     <ModeToggle/>
                 </div>
                 <span className="flex-grow text-center">
-                    {coinId.toUpperCase()}
+                    {coin[0].name}
                 </span>
+                {/*Wallet dialog*/}
                 <Dialog>
-                    <DialogTrigger asChild>
-                        <Button>
+                    {hasCoin ?
+                        <Button onClick={removeCoinFromWallet} variant='destructive'>
+                            - Remove From Wallet
+                        </Button> :
+                        <DialogTrigger>
+                            <Button>
                             + Add To Wallet
-                        </Button>
-                    </DialogTrigger>
+                            </Button>
+                        </DialogTrigger>}
                     <DialogContent className="sm:max-w-md">
                         <DialogHeader>
                             <DialogTitle>Insert amount to add</DialogTitle>
@@ -68,11 +124,14 @@ function Coin() {
                         </DialogHeader>
                         <div className="flex items-center space-x-2">
                             <div className="flex-1">
-                                <Input id="link" placeholder="Insert amount"/>
+                                <Input type="number" id="amount" value={amount} onChange={handleChange}
+                                       placeholder="Insert amount"/>
                             </div>
-                            <Button type="submit">
-                                Add
-                            </Button>
+                            <DialogClose asChild>
+                                <Button onClick={addCoinToWallet}>
+                                    Add
+                                </Button>
+                            </DialogClose>
                         </div>
                         <DialogFooter className="sm:justify-start">
                             <DialogClose asChild>
@@ -87,10 +146,16 @@ function Coin() {
             {/*charts*/}
             <div className={'grid grid-cols-2'}>
                 <div className={'justify-self-center'}>
-                    technical
+                    <h1>Technical Analysis</h1>
+                    <div>
+                        Chart
+                    </div>
                 </div>
                 <div className={'justify-self-center'}>
-                    sentiment
+                    <h1>Sentiment Analysis</h1>
+                    <div>
+                        Chart
+                    </div>
                 </div>
             </div>
             {/*sentiment breakdown*/}

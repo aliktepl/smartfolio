@@ -5,7 +5,6 @@ import {Button} from "@/components/ui/button.tsx";
 import {useState} from "react";
 import {replace} from "react-router-dom";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
     try {
         const response = await fetch("http://localhost:3000/api/user", {
@@ -42,7 +41,7 @@ function Login() {
                         <h2 className="font-bold text-center">Welcome to SmartFolio</h2>
                     </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className='flex justify-center'>
                     <Button onClick={handleLogin} disabled={isLoading}>
                         {isLoading ? 'Redirecting...' : 'Login with Google'}
                     </Button>
