@@ -7,6 +7,8 @@ import {PanelLeft} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
 import {useEffect} from "react";
 
+
+
 export async function loader() {
     try {
         const response = await fetch("http://localhost:3000/api/user", {

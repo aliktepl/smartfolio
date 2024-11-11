@@ -15,7 +15,7 @@ function WalletCard({asset} : {asset : WalletRow}) {
                 </CardHeader>
                 <CardContent>
                     <p>
-                        {asset.amount}$
+                        {asset.amount}{" "}{asset.symbol.toUpperCase()}
                     </p>
                     <p className={`${asset.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
                         {asset.change > 0 ? '+' : ''}{asset.change}%

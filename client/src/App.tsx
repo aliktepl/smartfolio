@@ -43,7 +43,8 @@ const router = createBrowserRouter([
             {
                 path: ":coinId",
                 element: <Coin/>,
-                loader: coinLoader
+                loader: coinLoader,
+                errorElement: <div className="flex justify-center">Such Coin Doesn't Exist</div>
             },
             {
                 path: "explore",
