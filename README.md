@@ -1,2 +1,2 @@
-# smartfolio
-A smart investment portfolio generator.
+# SmartFolio
+SmartFolio is a sentiment analysis service for cryptocurrencies. 
