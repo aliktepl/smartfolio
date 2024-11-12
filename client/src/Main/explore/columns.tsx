@@ -1,12 +1,12 @@
 import {ColumnDef} from "@tanstack/react-table"
-import {ArrowUpDown} from "lucide-react";
+import {ArrowUpDown, TrendingDown, TrendingUp} from "lucide-react";
 import {Button} from "@/components/ui/button";
 
 export interface CoinsRow {
     name: string;
     symbol: string;
     change: number;
-    sentiment: number;
+    sentiment: object;
 }
 
 export const columns: ColumnDef<CoinsRow>[] = [
@@ -27,7 +27,7 @@ export const columns: ColumnDef<CoinsRow>[] = [
                         variant="ghost"
                         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     >
-                        Change
+                        1 Day Change
                         <ArrowUpDown className="ml-2 h-4 w-4"/>
                     </Button>
                 </div>
@@ -35,11 +35,30 @@ export const columns: ColumnDef<CoinsRow>[] = [
             )
         },
         cell: ({row}) => {
-            return <div className="ml-4">{row.getValue("change")}</div>
+            // @ts-ignore
+            return row.getValue("change") > 0 ? (
+                <div className="text-green-500 flex items-center">
+                    <span>{row.getValue("change")}%</span>
+                    <TrendingUp className="ml-1"/>
+                </div>
+            ) : (
+                <div className="text-red-500 flex items-center">
+                    <span>{row.getValue("change")}%</span>
+                    <TrendingDown className="ml-1"/>
+                </div>
+            );
         }
     },
     {
         accessorKey: "sentiment",
         header: "Sentiment",
+        cell: ({row}) => {
+            console.log(row.getValue("sentiment"));
+            // @ts-ignore
+            return Object.entries(row.getValue('sentiment')).reduce((maxKey, [key, value]) => {
+                // @ts-ignore
+                return row.getValue('sentiment')[maxKey] >= value ? maxKey : key;
+            }, Object.keys(row.getValue('sentiment'))[0]);
+        }
     }
 ]

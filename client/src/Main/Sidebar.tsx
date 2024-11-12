@@ -1,13 +1,9 @@
-import {FaCog, FaSearch, FaSignOutAlt, FaWallet} from 'react-icons/fa';
-import {RxDashboard} from "react-icons/rx";
 import {NavLink, Outlet, redirect, useNavigate} from "react-router-dom";
 import Logo from "../assets/Logo.tsx";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import {PanelLeft} from "lucide-react";
+import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet"
+import {LayoutGrid, PanelLeft, Search, Wallet, Settings, LogOut} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
 import {useEffect} from "react";
-
-
 
 export async function loader() {
     try {
@@ -64,7 +60,7 @@ function Sidebar() {
                                 <NavLink to={'/'} className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
-                                    <RxDashboard className="mr-2"/>
+                                    <LayoutGrid className="mr-2"/>
                                     Dashboard
                                 </NavLink>
                             </li>
@@ -72,7 +68,7 @@ function Sidebar() {
                                 <NavLink to={'/explore'} className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
-                                    <FaSearch className="mr-2"/>
+                                    <Search className="mr-2"/>
                                     Explore
                                 </NavLink>
                             </li>
@@ -80,7 +76,7 @@ function Sidebar() {
                                 <NavLink to={'/wallet'} className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
-                                    <FaWallet className="mr-2"/>
+                                    <Wallet className="mr-2"/>
                                     Wallet
                                 </NavLink>
                             </li>
@@ -92,7 +88,7 @@ function Sidebar() {
                                 <NavLink to={'/settings'} className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
-                                    <FaCog className="mr-2"/>
+                                    <Settings className="mr-2"/>
                                     Settings
                                 </NavLink>
                             </li>
@@ -100,7 +96,7 @@ function Sidebar() {
                                 <NavLink to={'/logout'} className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
-                                    <FaSignOutAlt className="mr-2"/>
+                                    <LogOut className="mr-2"/>
                                     Logout
                                 </NavLink>
                             </li>
@@ -131,7 +127,7 @@ function Sidebar() {
                                             <NavLink to={'/'} className={({isActive}) => {
                                                 return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                             }}>
-                                                <RxDashboard className="mr-2"/>
+                                                <LayoutGrid className="mr-2"/>
                                                 Dashboard
                                             </NavLink>
                                         </li>
@@ -139,7 +135,7 @@ function Sidebar() {
                                             <NavLink to={'/explore'} className={({isActive}) => {
                                                 return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                             }}>
-                                                <FaSearch className="mr-2"/>
+                                                <Search className="mr-2"/>
                                                 Explore
                                             </NavLink>
                                         </li>
@@ -147,7 +143,7 @@ function Sidebar() {
                                             <NavLink to={'/wallet'} className={({isActive}) => {
                                                 return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                             }}>
-                                                <FaWallet className="mr-2"/>
+                                                <Wallet className="mr-2"/>
                                                 Wallet
                                             </NavLink>
                                         </li>
@@ -155,7 +151,7 @@ function Sidebar() {
                                             <NavLink to={'/settings'} className={({isActive}) => {
                                                 return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                             }}>
-                                                <FaCog className="mr-2"/>
+                                                <Settings className="mr-2"/>
                                                 Settings
                                             </NavLink>
                                         </li>
@@ -163,7 +159,7 @@ function Sidebar() {
                                             <NavLink to={'/logout'} className={({isActive}) => {
                                                 return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                             }}>
-                                                <FaSignOutAlt className="mr-2"/>
+                                                <LogOut className="mr-2"/>
                                                 Logout
                                             </NavLink>
                                         </li>

@@ -1,6 +1,7 @@
 import {ColumnDef} from "@tanstack/react-table"
 import {ArrowUpDown} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import {TrendingUp, TrendingDown} from "lucide-react";
 
 export interface WalletRow {
     name: string;
@@ -40,6 +41,20 @@ export const columns: ColumnDef<WalletRow>[] = [
     },
     {
         accessorKey: "change",
-        header: "Change",
+        header: "1 Day Change",
+        cell: ({row}) => {
+            // @ts-ignore
+            return row.getValue("change") > 0 ? (
+                <div className="text-green-500 flex items-center">
+                    <span>{row.getValue("change")}%</span>
+                    <TrendingUp className="ml-1" />
+                </div>
+            ) : (
+                <div className="text-red-500 flex items-center">
+                    <span>{row.getValue("change")}%</span>
+                    <TrendingDown className="ml-1" />
+                </div>
+            );
+        }
     }
 ]
