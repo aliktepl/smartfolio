@@ -9,7 +9,10 @@ const isLoggedIn = (req, res, next) => {
 const router = express.Router();
 
 // Google login route
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    prompt: 'select_account'
+}));
 
 // Google callback route
 router.get('/google/callback', passport.authenticate('google', {

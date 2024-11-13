@@ -3,16 +3,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {TrendingUp} from "lucide-react"
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {CartesianGrid, Label, Line, LineChart, Pie, PieChart, XAxis} from "recharts"
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
+import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
 import {SetStateAction, useEffect, useMemo, useState} from "react";
@@ -28,15 +19,8 @@ export async function loader({params}) {
         credentials: "include", // Ensures cookies are sent with the request
     });
     const resWallet = await responseWallet.json()
-
     return [resCoin, resWallet];
 }
-
-const chartData = [
-    {sentiment: "positive", entries: 275, fill: "var(--color-positive)"},
-    {sentiment: "neutral", entries: 200, fill: "var(--color-neutral)"},
-    {sentiment: "negative", entries: 287, fill: "var(--color-negative)"},
-]
 
 const lineChartData = [
     {month: "January", desktop: 186},
@@ -54,24 +38,6 @@ const lineChartConfig = {
     },
 } satisfies ChartConfig
 
-const chartConfig = {
-    entries: {
-        label: "Entries",
-    },
-    positive: {
-        label: "Positive",
-        color: "hsl(var(--chart-green))",
-    },
-    neutral: {
-        label: "Neutral",
-        color: "hsl(var(--chart-grey))",
-    },
-    negative: {
-        label: "Negative",
-        color: "hsl(var(--chart-red))",
-    },
-} satisfies ChartConfig
-
 function Coin() {
 
     // @ts-ignore
@@ -81,15 +47,38 @@ function Coin() {
 
     const hasCoin = wallet.some((item: { symbol: string; }) => item.symbol === coin[0].symbol);
 
+    const chartData = [
+        {sentiment: "positive", entries: parseFloat(coin[0].sentiment.positive), fill: "var(--color-positive)"},
+        {sentiment: "neutral", entries: parseFloat(coin[0].sentiment.neutral), fill: "var(--color-neutral)"},
+        {sentiment: "negative", entries: parseFloat(coin[0].sentiment.negative), fill: "var(--color-negative)"},
+    ]
+
+    const chartConfig = {
+        entries: {
+            label: "Sentiment",
+        },
+        positive: {
+            label: "Positive",
+            color: "hsl(var(--chart-green))",
+        },
+        neutral: {
+            label: "Neutral",
+            color: "hsl(var(--chart-grey))",
+        },
+        negative: {
+            label: "Negative",
+            color: "hsl(var(--chart-red))",
+        },
+    } satisfies ChartConfig
+
     const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
         const value = event.target.value
         if (value === '' || parseFloat(value as string) > 0) {
-            setAmount(value); // Set the amount if it's positive or empty
+            setAmount(value);
         }
     };
 
     useEffect(() => {
-        // Check if the user is authenticated
         const checkAuthStatus = async () => {
             const response = await fetch("http://localhost:3000/api/user", {
                 credentials: "include",
@@ -99,8 +88,7 @@ function Coin() {
                 navigate('/login', {replace: true});
             }
         };
-        checkAuthStatus().then(() => {
-        });
+        checkAuthStatus()
     }, [navigate]);
 
     const addCoinToWallet = async () => {
@@ -128,7 +116,6 @@ function Coin() {
                 credentials: "include"
             });
             if (response.ok) {
-                console.log('here')
                 return navigate(`/${coin[0].symbol}`);
             }
         } catch (error) {
@@ -149,9 +136,9 @@ function Coin() {
                 <div className="hidden">
                     <ModeToggle/>
                 </div>
-                <span className="flex-grow text-center">
+                <h1 className="flex-grow text-center">
                     {coin[0].name}
-                </span>
+                </h1>
                 {/*Wallet dialog*/}
                 <Dialog>
                     {hasCoin ?

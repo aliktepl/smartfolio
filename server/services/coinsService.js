@@ -2,13 +2,10 @@ const coins = require('../models/coinsModel');
 
 class CoinsService {
     static async getAllCoins(){
-
-        const res =  await coins.getAll()
-        return res
+        return await coins.getAll()
     }
     static async getOneCoin(id){
-        const res = await coins.getOne(id)
-        return res
+        return await coins.getOne(id)
     }
 }
 module.exports = CoinsService

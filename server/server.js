@@ -25,7 +25,6 @@ app.use(
 
 app.use(passport.session({pauseStream : false}));
 
-//linking a path to a specific router
 const userRouter = require("./routes/user");
 app.use("/api/user", userRouter);
 const authRouter = require("./routes/auth").router;
