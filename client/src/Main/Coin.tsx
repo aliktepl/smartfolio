@@ -136,9 +136,9 @@ function Coin() {
                 <div className="hidden">
                     <ModeToggle/>
                 </div>
-                <span className="flex-grow text-center">
+                <h1 className="flex-grow text-center">
                     {coin[0].name}
-                </span>
+                </h1>
                 {/*Wallet dialog*/}
                 <Dialog>
                     {hasCoin ?

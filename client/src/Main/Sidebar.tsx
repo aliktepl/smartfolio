@@ -123,44 +123,54 @@ function Sidebar() {
                             <nav className="flex-grow p-4 flex flex-col items-center">
                                 <ul className="space-y-4 w-full">
                                     <li>
+                                        <SheetTrigger asChild>
                                         <NavLink to={'/'} className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <LayoutGrid className="mr-2"/>
                                             Dashboard
                                         </NavLink>
+                                        </SheetTrigger>
                                     </li>
                                     <li>
+                                        <SheetTrigger asChild>
                                         <NavLink to={'/explore'} className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <Search className="mr-2"/>
                                             Explore
                                         </NavLink>
+                                        </SheetTrigger>
                                     </li>
                                     <li>
+                                        <SheetTrigger asChild>
                                         <NavLink to={'/wallet'} className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <Wallet className="mr-2"/>
                                             Wallet
                                         </NavLink>
+                                        </SheetTrigger>
                                     </li>
                                     <li>
+                                        <SheetTrigger asChild>
                                         <NavLink to={'/settings'} className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <Settings className="mr-2"/>
                                             Settings
                                         </NavLink>
+                                        </SheetTrigger>
                                     </li>
                                     <li>
+                                        <SheetTrigger asChild>
                                         <NavLink to={'/logout'} className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <LogOut className="mr-2"/>
                                             Logout
                                         </NavLink>
+                                        </SheetTrigger>
                                     </li>
                                 </ul>
                             </nav>
