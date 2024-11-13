@@ -35,6 +35,8 @@ const coinsRouter = require("./routes/coins");
 app.use("/api/coins", coinsRouter);
 
 PORT = process.env.PORT || 3000;
+//k
+//l
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
