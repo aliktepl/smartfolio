@@ -3,8 +3,5 @@ admin
 server/node_modules
 client/node_modules
 server/.env
-/sentimentModel/venv/
 /dataSource
-/sentimentModel/imdb_bert/
-
 
