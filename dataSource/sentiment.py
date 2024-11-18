@@ -37,12 +37,12 @@ def positive_negative(data):
         else:
             neutral += 1
     sum = pos + neg + neutral
-    sentiment = {"positive: ": (pos / sum) * 100, "negative: ": (neg / sum) * 100, "neutral: ": (neutral / sum) * 100}
+    sentiment = {"positive": (pos / sum) * 100, "negative": (neg / sum) * 100, "neutral": (neutral / sum) * 100}
     return sentiment
 
 
 def get_sentiment(data):
-    saved_model_path = r"C:\gitProjects\smartfolio\sentimentModel\imdb_bert"
+    saved_model_path = r"imdb_bert"
     reloaded_model = tf.saved_model.load(saved_model_path)
     # examples = scan_Reddit(name,symbol)
     print(data)
