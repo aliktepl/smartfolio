@@ -49,13 +49,26 @@ def top_stories(name, amount):
     #                                           )
     headlines = all_articles = newsapi.get_everything(
         q=name,
-        sources='bbc-news,the-verge,bloomberg,financial-times,cnbc,reuters',
-        domains='bbc.co.uk,techcrunch.com,bloomberg.com,ft.com,cnbc.com,reuters.com',
+        sources=(
+            'bbc-news,the-verge,bloomberg,financial-times,cnbc,reuters,'
+            'associated-press,cnn,fox-news,the-wall-street-journal,'
+            'time,forbes,usa-today,newsweek,abc-news,'
+            'business-insider,engadget,ars-technica,wired,'
+            'techradar,politico,the-hill'
+        ),
+        domains=(
+            'bbc.co.uk,techcrunch.com,bloomberg.com,ft.com,cnbc.com,reuters.com,'
+            'apnews.com,cnn.com,foxnews.com,wsj.com,time.com,forbes.com,'
+            'usatoday.com,newsweek.com,abcnews.go.com,businessinsider.com,'
+            'engadget.com,arstechnica.com,wired.com,techradar.com,'
+            'politico.com,thehill.com'
+        ),
         from_param='2024-10-20',
         to='2024-11-12',
         language='en',
         sort_by='relevancy'
     )
+
     # Check if the request was successful and print the top headlines
     topStories = []
     counter = 0

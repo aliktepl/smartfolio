@@ -3,27 +3,33 @@ import praw
 import pandas as pd
 from datetime import datetime, timedelta
 
-from DataFromAPI import get_coin_change
+from DataFromAPI import get_coin_change, get_coin_details
 from config_DB import insert_coin_data, insert_articles_to_DB
 from scaningTheInternet import scan_Reddit, scan_news, top_stories
 from sentiment import get_sentiment
 import json
 
 
-def insert_single_coin(name, symbol):
-    change = get_coin_change(symbol)
-    social_sentiment = get_sentiment(scan_Reddit(name, symbol))
 
+def insert_single_coin(name, symbol):
+    # change = get_coin_change(symbol)
+    tech_info=get_coin_details(symbol)
+    sentiment = get_sentiment(scan_Reddit(name, symbol))
     # news = scan_news(name, symbol)
-    # news_sentiment = get_sentiment(news)
+    # if len(news) > 0:
+    #     news_sentiment = get_sentiment(news)
+    # else:
+    #     news_sentiment=""
+
     # print("news sentiment: ", news_sentiment)
     data = (
         symbol,  # id
         name,  # name
         symbol,  # symbol
-        change,  # change
-        json.dumps(social_sentiment)
+        json.dumps(sentiment),  # sentiment (replaces social_sentiment and news_sentiment)
+        json.dumps(tech_info)  # tech_info
     )
+
     print(data)
     insert_coin_data(data)
 
