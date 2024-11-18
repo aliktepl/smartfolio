@@ -4,7 +4,7 @@ class Coins {
         try {
             // Insert user with `ON CONFLICT DO NOTHING`
             return await pool`
-            select  name, symbol, change, sentiment
+            select  name, symbol, sentiment,tech_info
             from coins
         `
         } catch (error) {
