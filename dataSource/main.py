@@ -9,6 +9,7 @@ from scaningTheInternet import top_stories
 import json
 from pytrends.request import TrendReq
 
+
 def temp():
     # Initialize pytrends
     pytrends = TrendReq(hl='en-US', tz=360)
@@ -28,16 +29,21 @@ def temp():
     # Display the trend data
     print(bitcoin_trends)
 
+
 def insert_top_articles():
-    insert_articles('cryptocurrency',"CRYPTO", 4)
+    insert_articles('cryptocurrency', "CRYPTO", 4)
+
 
 def insert_coins():
-    insert_single_coin('bitcoin',"BTC")
-    insert_single_coin('ethereum', "ETH")
+    insert_single_coin('Bitcoin', "BTC")
+    insert_single_coin('Ethereum', "ETH")
     insert_single_coin('Litecoin', "LTC")
     insert_single_coin('Pepe', "PEPE")
+
+
 if __name__ == "__main__":
     insert_top_articles()
     # temp()
     insert_coins()
     finish_DB_connection()
+

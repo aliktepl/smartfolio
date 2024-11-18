@@ -35,7 +35,7 @@ def insert_single_coin(name, symbol):
 
 
 def insert_articles(name, symbol,amount):
-    articles=top_stories(name,amount)
+    articles = top_stories(name,amount)
     data = []
     for i in range(1, amount + 1):
         article = articles[i - 1]

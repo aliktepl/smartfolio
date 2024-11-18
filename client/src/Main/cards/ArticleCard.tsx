@@ -1,28 +1,26 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Link} from "react-router-dom";
 
 interface Article {
     source: string;
-    time: string;
-    headline: string;
+    link: string;
+    title: string;
 }
 
 function ArticleCard({article} : {article: Article}) {
     return (
-        <div className="mb-4">
+        <Link to={article.link} className="mb-4">
             <Card>
                 <CardHeader>
                     <CardTitle>
                         {article.source}
                     </CardTitle>
-                    <CardDescription>
-                        {article.time}
-                    </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {article.headline}
+                    {article.title}
                 </CardContent>
             </Card>
-        </div>
+        </Link>
     );
 }
 

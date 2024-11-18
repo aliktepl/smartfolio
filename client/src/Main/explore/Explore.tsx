@@ -2,7 +2,6 @@ import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {redirect, useLoaderData, useNavigate} from "react-router-dom";
 import {DataTable} from "@/Main/wallet/data-table.tsx";
 import {columns, CoinsRow} from "@/Main/explore/columns.tsx";
-import {useEffect} from "react";
 
 export async function loader() {
     try {
@@ -10,51 +9,52 @@ export async function loader() {
             credentials: "include", // Ensures cookies are sent with the request
         });
 
-        // Check if the response is unauthorized
+        // Handle unauthorized status (401)
         if (response.status === 401) {
-            // Redirect to login page or handle unauthorized access
             console.error("Unauthorized access. Redirecting to login...");
-            return redirect("/login");
+            throw redirect("/login");
         }
-        // Check for other non-success statuses
+
+        // Handle non-OK responses
         if (!response.ok) {
-            return new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+            throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
-        // Parse and return the JSON data
+
+        // Return the JSON response as the data for the loader
         return await response.json();
     } catch (error) {
-        console.error("Error fetching wallet data:", error);
-        // Optionally return null or a default fallback object if needed
-        return null;
+        console.error("Error fetching coin data:", error);
+        return []; // Return empty array in case of error
     }
 }
 
+
+// Interface for coin data (Matches with the format returned from the API)
+interface CoinData {
+    name: string;
+    symbol: string;
+    tech_info: { change: number };
+    sentiment: object;
+}
+
 function Explore() {
+    // Load data from the loader
+    const data = useLoaderData() as CoinData[];
 
-    const navigate = useNavigate();
+    // Map data to CoinsRow format (if necessary)
+    const coinData: CoinsRow[] = data.map((coin) => ({
+        name: coin.name,
+        symbol: coin.symbol,
+        change: coin.tech_info.change,
+        sentiment: coin.sentiment,
+    }));
 
-    useEffect(() => {
-        // Check if the user is authenticated (e.g., by making an API call or checking cookies)
-        const checkAuthStatus = async () => {
-            const response = await fetch("http://localhost:3000/api/user", {
-                credentials: "include",
-            });
-
-            if (response.status === 401) {
-                navigate('/login', { replace: true }); // Redirect to login if unauthorized
-            }
-        };
-
-        checkAuthStatus().then(() => {});
-    }, [navigate]);
-
-    const data = useLoaderData() as CoinsRow[];
     return (
         <div className="container mx-auto py-10">
-            <div className="hidden"><ModeToggle/></div>
-            <DataTable columns={columns} data={data}/>
+            <div className="hidden"><ModeToggle /></div>
+            <DataTable columns={columns} data={coinData} />
         </div>
-    )
+    );
 }
 
 export default Explore;
