@@ -2,7 +2,7 @@ from DBservice import insert_single_coin, insert_articles
 from sentiment import get_sentiment
 from DataFromAPI import get_coin_change
 from DataFromAPI import get_coin_value
-from config_DB import insert_coin_data
+from config_DB import insert_coin_data, finish_DB_connection
 from scaningTheInternet import scan_Reddit
 from scaningTheInternet import scan_news
 from scaningTheInternet import top_stories
@@ -33,10 +33,11 @@ def insert_top_articles():
 
 def insert_coins():
     insert_single_coin('bitcoin',"BTC")
-    #insert_single_coin('ethereum', "ETH")
-    # insert_single_coin('Litecoin', "LTC")
-    #insert_single_coin('Pepe', "PEPE")
+    insert_single_coin('ethereum', "ETH")
+    insert_single_coin('Litecoin', "LTC")
+    insert_single_coin('Pepe', "PEPE")
 if __name__ == "__main__":
     insert_top_articles()
     # temp()
-    #insert_coins()
+    insert_coins()
+    finish_DB_connection()

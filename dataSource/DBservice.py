@@ -13,9 +13,9 @@ import json
 def insert_single_coin(name, symbol):
     change = get_coin_change(symbol)
     social_sentiment = get_sentiment(scan_Reddit(name, symbol))
-    news = scan_news(name, symbol)
 
-    news_sentiment = get_sentiment(news)
+    # news = scan_news(name, symbol)
+    # news_sentiment = get_sentiment(news)
     # print("news sentiment: ", news_sentiment)
     data = (
         symbol,  # id
