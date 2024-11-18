@@ -37,7 +37,7 @@ def positive_negative(data):
         else:
             neutral += 1
     sum = pos + neg + neutral
-    sentiment = {"positive: ": (pos / sum) * 100, "negative: ": (neg / sum) * 100, "neutral: ": (neutral / sum) * 100}
+    sentiment = {"positive": (pos / sum) * 100, "negative": (neg / sum) * 100, "neutral": (neutral / sum) * 100}
     return sentiment
 
 
