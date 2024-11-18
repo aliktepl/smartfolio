@@ -9,7 +9,7 @@ class Wallet{
         try {
             // Query wallets table for all rows where id matches
             const result = await pool`
-                SELECT c.name, c.symbol, c.change, w.amount
+                SELECT c.name, c.symbol, w.amount,c.tech_info
                 FROM wallets w
                 JOIN coins c ON w.coin_id = c.id
                 WHERE w.user_id = ${id}
