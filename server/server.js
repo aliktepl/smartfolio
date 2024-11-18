@@ -34,9 +34,11 @@ app.use("/api/wallet", walletRouter);
 const coinsRouter = require("./routes/coins");
 app.use("/api/coins", coinsRouter);
 
+const articlesRouter = require("./routes/articles");
+app.use("/api/articles", articlesRouter);
+
 PORT = process.env.PORT || 3000;
-//k
-//l
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
