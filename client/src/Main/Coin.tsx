@@ -1,14 +1,12 @@
 import {useLoaderData, useNavigate} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
-import {TrendingUp} from "lucide-react"
 import {ModeToggle} from "@/components/mode-toggle.tsx";
-import {CartesianGrid, Line, LineChart, XAxis} from "recharts"
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card"
+import {Card} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
 import {SetStateAction, useEffect, useState} from "react";
-import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent,} from "@/components/ui/chart"
 import SentimentChart from "@/Main/charts/SentimentChart.tsx";
+import TechnicalChart from "@/Main/charts/TechnicalChart.tsx";
 
 // @ts-ignore
 export async function loader({params}) {
@@ -20,24 +18,10 @@ export async function loader({params}) {
         credentials: "include", // Ensures cookies are sent with the request
     });
     const resWallet = await responseWallet.json()
+    console.log(resCoin)
+    console.log(resWallet)
     return [resCoin, resWallet];
 }
-
-const lineChartData = [
-    {month: "January", desktop: 186},
-    {month: "February", desktop: 305},
-    {month: "March", desktop: 237},
-    {month: "April", desktop: 73},
-    {month: "May", desktop: 209},
-    {month: "June", desktop: 214},
-]
-
-const lineChartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "hsl(var(--chart-blue))",
-    },
-} satisfies ChartConfig
 
 function Coin() {
 
@@ -48,29 +32,20 @@ function Coin() {
 
     const hasCoin = wallet.some((item: { symbol: string; }) => item.symbol === coin[0].symbol);
 
-    const chartData = [
+    const socialChartData = [
         {sentiment: "positive", entries: parseFloat(coin[0].sentiment.positive), fill: "var(--color-positive)"},
         {sentiment: "neutral", entries: parseFloat(coin[0].sentiment.neutral), fill: "var(--color-neutral)"},
         {sentiment: "negative", entries: parseFloat(coin[0].sentiment.negative), fill: "var(--color-negative)"},
     ]
 
-    const chartConfig = {
-        entries: {
-            label: "Sentiment",
-        },
-        positive: {
-            label: "Positive",
-            color: "hsl(var(--chart-green))",
-        },
-        neutral: {
-            label: "Neutral",
-            color: "hsl(var(--chart-grey))",
-        },
-        negative: {
-            label: "Negative",
-            color: "hsl(var(--chart-red))",
-        },
-    } satisfies ChartConfig
+    const lineChartData = [
+        {time: "00:00", price: 186},
+        {time: "04:00", price: 305},
+        {time: "08:00", price: 237},
+        {time: "12:00", price: 73},
+        {time: "16:00", price: 209},
+        {time: "20:00", price: 214},
+    ]
 
     const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
         const value = event.target.value
@@ -172,65 +147,35 @@ function Coin() {
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
+                {/*/Wallet Dialog*/}
             </div>
-            {/*charts*/}
-            <div className='grid grid-cols-2'>
-                <div className='justify-self-center'>
-                    <Card className="flex flex-col bg-transparent border-0">
-                        <CardHeader className="items-center pb-0">
-                            <CardTitle>Technical Analysis</CardTitle>
-                            <CardDescription>Last 24 hours</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <ChartContainer config={lineChartConfig}>
-                                <LineChart
-                                    accessibilityLayer
-                                    data={lineChartData}
-                                    margin={{
-                                        left: 12,
-                                        right: 12,
-                                    }}
-                                >
-                                    <CartesianGrid vertical={false}/>
-                                    <XAxis
-                                        dataKey="month"
-                                        tickLine={false}
-                                        axisLine={false}
-                                        tickMargin={8}
-                                        tickFormatter={(value) => value.slice(0, 3)}
-                                    />
-                                    <ChartTooltip
-                                        cursor={false}
-                                        content={<ChartTooltipContent hideLabel/>}
-                                    />
-                                    <Line
-                                        dataKey="desktop"
-                                        type="natural"
-                                        stroke="var(--color-desktop)"
-                                        strokeWidth={2}
-                                        dot={false}
-                                    />
-                                </LineChart>
-                            </ChartContainer>
-                        </CardContent>
-                        <CardFooter className="flex-col items-start gap-2 text-sm">
-                            <div className="flex gap-2 font-medium leading-none">
-                                Trending up by 5.2% this month <TrendingUp className="h-4 w-4"/>
-                            </div>
-                            <div className="leading-none text-muted-foreground">
-                                Showing total visitors for the last 6 months
-                            </div>
-                        </CardFooter>
-                    </Card>
+
+            {/*Charts*/}
+            <div className="flex flex-col items-start gap-6 w-full">
+                <div className="flex w-full max-w-full gap-6">
+                    <div className="flex-1">
+                        <TechnicalChart lineChartData={lineChartData}/>
+                    </div>
+                    <div className="grid grid-cols-2 gap-10 flex-1">
+                        <Card className=""></Card>
+                        <Card className=""></Card>
+                        <Card className=""></Card>
+                        <Card className=""></Card>
+                    </div>
                 </div>
-                <div className='justify-self-center'>
-                    <SentimentChart chartData={chartData}/>
+                <div className="flex w-full max-w-full gap-6">
+                    <div className="flex-1">
+                        <SentimentChart name="Social Sentiment" pieChartData={socialChartData}/>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 flex-1">
+                        <Card className=""></Card>
+                        <Card className=""></Card>
+                        <Card className=""></Card>
+                        <Card className=""></Card>
+                    </div>
                 </div>
             </div>
-            {/*sentiment breakdown*/}
-            <div className={'flex justify-center'}>
-                sentiment breakdown
-            </div>
+
         </>
     );
 }

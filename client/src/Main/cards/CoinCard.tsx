@@ -11,8 +11,14 @@ import {TrendingDown, TrendingUp} from "lucide-react";
 export interface Coin {
     name: string;
     symbol: string;
-    change: number;
     sentiment: object;
+    tech_info: tech_info
+    change: number
+}
+
+interface tech_info {
+    change: number;
+    price: number;
 }
 
 function CoinCard({coin} : {coin:Coin}) {
@@ -24,9 +30,9 @@ function CoinCard({coin} : {coin:Coin}) {
                     <CardDescription>{coin.symbol.toUpperCase()}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>{coin.change}$</p>
-                    <p className={`${coin.change > 0 ? 'flex text-green-500' : 'flex text-red-500'}`}>
-                        {coin.change > 0 ? '+' : ''}{coin.change}% {coin.change > 0 ? <TrendingUp/> : <TrendingDown/>}
+                    <p>{coin.tech_info.price}</p>
+                    <p className={`${coin.tech_info.change > 0 ? 'flex text-green-500' : 'flex text-red-500'}`}>
+                        {coin.tech_info.change > 0 ? '+' : ''}{coin.tech_info.change}% {coin.tech_info.change > 0 ? <TrendingUp/> : <TrendingDown/>}
                     </p>
                 </CardContent>
             </Card>

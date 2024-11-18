@@ -6,7 +6,12 @@ export interface CoinsRow {
     name: string;
     symbol: string;
     change: number;
+    tech_info: tech_info
     sentiment: object;
+}
+
+interface tech_info {
+    change: number;
 }
 
 export const columns: ColumnDef<CoinsRow>[] = [
