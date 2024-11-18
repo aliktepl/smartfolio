@@ -2,7 +2,7 @@ import {useLoaderData, useNavigate} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
-import {Card} from "@/components/ui/card"
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
 import {SetStateAction, useEffect, useState} from "react";
 import SentimentChart from "@/Main/charts/SentimentChart.tsx";
@@ -18,15 +18,20 @@ export async function loader({params}) {
         credentials: "include", // Ensures cookies are sent with the request
     });
     const resWallet = await responseWallet.json()
-    console.log(resCoin)
-    console.log(resWallet)
-    return [resCoin, resWallet];
+    const responseNews = await fetch(`http://localhost:3000/api/articles/${params.coinId.toUpperCase()}`, {
+        credentials: "include", // Ensures cookies are sent with the request
+    });
+    const resNews = await responseNews.json()
+    return [resCoin, resWallet, resNews];
 }
 
 function Coin() {
 
     // @ts-ignore
-    const [coin, wallet] = useLoaderData()
+    const [coin, wallet, news] = useLoaderData()
+
+    console.log(news)
+
     const [amount, setAmount] = useState('');
     const navigate = useNavigate();
 
@@ -151,31 +156,34 @@ function Coin() {
             </div>
 
             {/*Charts*/}
-            <div className="flex flex-col items-start gap-6 w-full">
-                <div className="flex w-full max-w-full gap-6">
+            <div >
+                <div>
+                    <div>
+                        <SentimentChart name="Sentiment" pieChartData={socialChartData}/>
+                    </div>
+                </div>
+                <div className="flex gap-6">
+                    {/* Card Section */}
+                    <div className="flex-none w-1/4">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Information</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p>Price: {coin[0].tech_info.price}</p>
+                                <p>Market Cap: {coin[0].tech_info.market_cap}</p>
+                                <p>Total Supply: {coin[0].tech_info.total_supply}</p>
+                                <p>Change: {coin[0].tech_info.change}%</p>
+                            </CardContent>
+                        </Card>
+                    </div>
+                    {/* Technical Chart Section */}
                     <div className="flex-1">
                         <TechnicalChart lineChartData={lineChartData}/>
                     </div>
-                    <div className="grid grid-cols-2 gap-10 flex-1">
-                        <Card className=""></Card>
-                        <Card className=""></Card>
-                        <Card className=""></Card>
-                        <Card className=""></Card>
-                    </div>
-                </div>
-                <div className="flex w-full max-w-full gap-6">
-                    <div className="flex-1">
-                        <SentimentChart name="Social Sentiment" pieChartData={socialChartData}/>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 flex-1">
-                        <Card className=""></Card>
-                        <Card className=""></Card>
-                        <Card className=""></Card>
-                        <Card className=""></Card>
-                    </div>
+
                 </div>
             </div>
-
         </>
     );
 }
