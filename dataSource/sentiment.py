@@ -42,7 +42,7 @@ def positive_negative(data):
 
 
 def get_sentiment(data):
-    saved_model_path = r"C:\gitProjects\smartfolio\sentimentModel\imdb_bert"
+    saved_model_path = r"imdb_bert"
     reloaded_model = tf.saved_model.load(saved_model_path)
     # examples = scan_Reddit(name,symbol)
     print(data)
