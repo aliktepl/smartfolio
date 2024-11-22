@@ -1,7 +1,6 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart.tsx";
 import { Label, Pie, PieChart } from "recharts";
-import { TrendingUp } from "lucide-react";
 
 const pieChartConfig = {
     entries: {
@@ -29,9 +28,6 @@ interface SentimentChartProps {
 
 function SentimentChart({name, pieChartData }: SentimentChartProps) {
     const currentDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-
-    // Calculate total sentiment entries
-    const totalSentiment = pieChartData.reduce((total, entry) => total + entry.entries, 0);
 
     return (
         <Card className="flex flex-col bg-transparent border-0">
@@ -71,14 +67,12 @@ function SentimentChart({name, pieChartData }: SentimentChartProps) {
                                                     y={viewBox.cy}
                                                     className="fill-foreground text-3xl font-bold"
                                                 >
-                                                    {totalSentiment.toLocaleString()}
                                                 </tspan>
                                                 <tspan
                                                     x={viewBox.cx}
                                                     y={(viewBox.cy || 0) + 24}
                                                     className="fill-muted-foreground"
                                                 >
-                                                    Sentiment
                                                 </tspan>
                                             </text>
                                         );
@@ -90,14 +84,6 @@ function SentimentChart({name, pieChartData }: SentimentChartProps) {
                     </PieChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col gap-2 text-sm">
-                <div className="flex items-center gap-2 font-medium leading-none">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="leading-none text-muted-foreground">
-                    Showing total visitors for the last 6 months
-                </div>
-            </CardFooter>
         </Card>
     );
 }

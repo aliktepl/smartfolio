@@ -1,7 +1,6 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart.tsx";
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
-import { TrendingUp } from "lucide-react";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart.tsx";
+import {CartesianGrid, Line, LineChart, XAxis} from "recharts";
 
 const lineChartConfig = {
     price: {
@@ -14,7 +13,7 @@ interface TechnicalChartProps {
     lineChartData: Array<{ time: string; price: number }>;
 }
 
-function TechnicalChart({ lineChartData }: TechnicalChartProps): JSX.Element {
+function TechnicalChart({lineChartData}: TechnicalChartProps): JSX.Element {
     return (
         <Card className="flex flex-col bg-transparent border-0">
             <CardHeader className="items-center pb-0">
@@ -32,7 +31,7 @@ function TechnicalChart({ lineChartData }: TechnicalChartProps): JSX.Element {
                             bottom: 10,
                         }}
                     >
-                        <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                        <CartesianGrid vertical={false} strokeDasharray="3 3"/>
                         <XAxis
                             dataKey="time"
                             tickLine={false}
@@ -41,7 +40,7 @@ function TechnicalChart({ lineChartData }: TechnicalChartProps): JSX.Element {
                         />
                         <ChartTooltip
                             cursor
-                            content={<ChartTooltipContent />}
+                            content={<ChartTooltipContent/>}
                         />
                         <Line
                             dataKey="price"
@@ -53,14 +52,6 @@ function TechnicalChart({ lineChartData }: TechnicalChartProps): JSX.Element {
                     </LineChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 font-medium leading-none">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="leading-none text-muted-foreground">
-                    Showing price trends for the last 24 hours
-                </div>
-            </CardFooter>
         </Card>
     );
 }
