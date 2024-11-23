@@ -24,7 +24,7 @@ interface tech_info {
 function CoinCard({coin} : {coin:Coin}) {
     return (
         <Link to={coin.symbol}>
-            <Card>
+            <Card className="hover:scale-105 transition-transform">
                 <CardHeader>
                     <CardTitle>{coin.name}</CardTitle>
                     <CardDescription>{coin.symbol.toUpperCase()}</CardDescription>

@@ -164,8 +164,8 @@ function Coin() {
                 </div>
                 <div className="flex gap-6">
                     {/* Card Section */}
-                    <div className="flex-none w-1/4">
-                        <Card>
+                    <div className="flex-none h-full w-1/4">
+                        <Card className="h-full">
                             <CardHeader>
                                 <CardTitle>Information</CardTitle>
                             </CardHeader>
@@ -179,9 +179,10 @@ function Coin() {
                     </div>
                     {/* Technical Chart Section */}
                     <div className="flex-1">
-                        <TechnicalChart lineChartData={lineChartData}/>
+                        <div className="h-full">
+                            <TechnicalChart lineChartData={lineChartData}/>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </>
