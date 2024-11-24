@@ -1,4 +1,4 @@
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {Link} from "react-router-dom";
 
 interface Article {
@@ -7,10 +7,10 @@ interface Article {
     title: string;
 }
 
-function ArticleCard({article} : {article: Article}) {
+function ArticleCard({ article }: { article: Article }) {
     return (
-        <Link to={article.link} className="mb-4">
-            <Card>
+        <Link to={article.link}>
+            <Card className="mb-4 w-full h-full hover:scale-105 transition-transform">
                 <CardHeader>
                     <CardTitle>
                         {article.source}
@@ -23,5 +23,6 @@ function ArticleCard({article} : {article: Article}) {
         </Link>
     );
 }
+
 
 export default ArticleCard

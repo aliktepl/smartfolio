@@ -29,6 +29,8 @@ interface SentimentChartProps {
 function SentimentChart({name, pieChartData }: SentimentChartProps) {
     const currentDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
+    const positive = pieChartData[0].entries;
+
     return (
         <Card className="flex flex-col bg-transparent border-0">
             <CardHeader className="items-center pb-0">
@@ -67,12 +69,14 @@ function SentimentChart({name, pieChartData }: SentimentChartProps) {
                                                     y={viewBox.cy}
                                                     className="fill-foreground text-3xl font-bold"
                                                 >
+                                                    {parseInt(String(positive), 10)}{"%"}
                                                 </tspan>
                                                 <tspan
                                                     x={viewBox.cx}
                                                     y={(viewBox.cy || 0) + 24}
                                                     className="fill-muted-foreground"
                                                 >
+                                                    Positive
                                                 </tspan>
                                             </text>
                                         );

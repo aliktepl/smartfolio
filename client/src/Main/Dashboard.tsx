@@ -51,13 +51,13 @@ export async function loader() {
         ]);
 
         return {
-            coins: coins || [], // Default to an empty array if null
-            wallet: wallet || [], // Default to an empty array if null
-            articles: articles || [], // Default to an empty array if null
+            coins: coins || [],
+            wallet: wallet || [],
+            articles: articles || [],
         };
     } catch (error) {
         console.error("Error fetching data in loader:", error);
-        throw error; // Let React Router's error boundary handle this
+        throw error;
     }
 }
 
@@ -95,7 +95,7 @@ function Dashboard() {
                             .filter((article) => article.coin === "CRYPTO")
                             .slice(0, 4)
                             .map((article, index) => (
-                                <ArticleCard article={article.article} key={index} />
+                                <ArticleCard article={article.article} key={index}/>
                             ))}
                     </div>
                 </div>

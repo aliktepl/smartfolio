@@ -6,8 +6,7 @@ import {WalletData} from "@/Main/wallet/Wallet.tsx";
 function WalletCard({coin} : {coin : WalletData}) {
     return (
         <Link to={coin.symbol}>
-        <div className="mb-4">
-            <Card>
+            <Card className="hover:scale-105 transition-transform mb-4">
                 <CardHeader>
                     <CardTitle>
                         {coin.name}
@@ -32,7 +31,6 @@ function WalletCard({coin} : {coin : WalletData}) {
                     </div>
                 </CardContent>
             </Card>
-        </div>
         </Link>
     );
 }
