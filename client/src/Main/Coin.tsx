@@ -1,16 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button.tsx";
 import { ModeToggle } from "@/components/mode-toggle.tsx";
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
+import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ArticleCard from "@/Main/cards/ArticleCard.tsx";
 import { Input } from "@/components/ui/input";
@@ -39,21 +30,29 @@ export async function loader({ params }) {
 function Coin() {
     // @ts-ignore
     const [coin, wallet, news] = useLoaderData();
-
-    console.log(coin.graph);
-
     const [amount, setAmount] = useState('');
     const navigate = useNavigate();
 
     const hasCoin = wallet.some((item: { symbol: string }) => item.symbol === coin.symbol);
 
+    const sentimentPositiveNegative = () => {
+        let neg=0
+        let pos=0
+        let neutral=0
+        neg=coin.sentiment[0].percentage+coin.sentiment[1].percentage+coin.sentiment[2].percentage+coin.sentiment[3].percentage
+        pos=coin.sentiment[6].percentage+coin.sentiment[7].percentage+coin.sentiment[8].percentage+coin.sentiment[9].percentage
+        neutral=coin.sentiment[5].percentage+coin.sentiment[6].percentage
+        return {pos:pos,neutral:neutral,neg:neg}
+    }
+
     const socialChartData = [
-        { sentiment: "positive", entries: parseFloat(coin.sentiment.positive), fill: "var(--color-positive)" },
-        { sentiment: "neutral", entries: parseFloat(coin.sentiment.neutral), fill: "var(--color-neutral)" },
-        { sentiment: "negative", entries: parseFloat(coin.sentiment.negative), fill: "var(--color-negative)" },
+        { sentiment: "positive", entries: parseFloat(String(sentimentPositiveNegative().pos)), fill: "var(--color-positive)" },
+        { sentiment: "neutral", entries: parseFloat(String(sentimentPositiveNegative().neutral)), fill: "var(--color-neutral)" },
+        { sentiment: "negative", entries: parseFloat(String(sentimentPositiveNegative().neg)), fill: "var(--color-negative)" },
     ];
 
     const lineChartData = coin.graph
+    const barChartData = coin.sentiment
 
     const handleChange = (event: { target: { value: SetStateAction<string> } }) => {
         const value = event.target.value;
@@ -164,7 +163,7 @@ function Coin() {
                 <div>
                     <div className="grid md:grid-cols-2 space-x-2">
                         <SentimentChart name="Sentiment" pieChartData={socialChartData} />
-                        <BarSentimentChart/>
+                        <BarSentimentChart barChartData={barChartData} />
                     </div>
                 </div>
                 <div className="grid md:grid-cols-4 space-x-2">

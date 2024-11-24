@@ -13,23 +13,20 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-]
 
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
+    percentage: {
+        label: "Percentage",
         color: "hsl(var(--chart-blue))",
     },
 } satisfies ChartConfig
 
-export function BarSentimentChart() {
+// Explicitly define the prop types for the component
+interface BarChartProps {
+    barChartData: Array<{ grade: number; percentage: number; color?: string }>;
+}
+
+export function BarSentimentChart({barChartData} : BarChartProps) {
     return (
         <Card className='flex flex-col bg-transparent border-0'>
             <CardHeader>
@@ -38,10 +35,10 @@ export function BarSentimentChart() {
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
-                    <BarChart accessibilityLayer data={chartData}>
+                    <BarChart accessibilityLayer data={barChartData}>
                         <CartesianGrid vertical={false} />
                         <XAxis
-                            dataKey="month"
+                            dataKey="grade"
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
@@ -51,11 +48,13 @@ export function BarSentimentChart() {
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
                         />
-                        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+                        <Bar
+                            dataKey="percentage"
+                            radius={8}
+                            fill={(entry) => entry.color || "hsl(var(--chart-blue))"} />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
         </Card>
     )
 }
-
