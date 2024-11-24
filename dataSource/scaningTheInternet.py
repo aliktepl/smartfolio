@@ -22,8 +22,8 @@ def scan_news(name, symbol):
     headlines = all_articles = newsapi.get_everything(q=name,
                                                       sources='bbc-news,the-verge',
                                                       domains='bbc.co.uk,techcrunch.com',
-                                                      from_param='2024-10-20',
-                                                      to='2024-11-12',
+                                                      from_param='2024-11-05',
+                                                      to='2024-11-21',
                                                       language='en',
                                                       sort_by='relevancy')
     # Check if the request was successful and print the top headlines
@@ -63,8 +63,8 @@ def top_stories(name, amount):
             'engadget.com,arstechnica.com,wired.com,techradar.com,'
             'politico.com,thehill.com'
         ),
-        from_param='2024-10-20',
-        to='2024-11-12',
+        from_param='2024-10-30',
+        to='2024-11-21',
         language='en',
         sort_by='relevancy'
     )

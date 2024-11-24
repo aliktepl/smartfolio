@@ -1,4 +1,7 @@
 import requests
+from datetime import datetime
+import json
+
 
 
 def get_coin_value(coin):
@@ -70,3 +73,99 @@ def get_coin_details(coin):
         print("Invalid data returned by the API.")
         return None
 # print(get_coin_details("SOL"))
+# def get_coin_24h_two_hour_intervals(coin):
+#     url = "https://min-api.cryptocompare.com/data/v2/histohour"
+#     params = {
+#         "fsym": coin,  # Coin symbol (e.g., BTC for Bitcoin)
+#         "tsym": "USD",  # Target currency (USD)
+#         "limit": 23,    # Get 24 data points (1 for each hour)
+#     }
+#
+#     try:
+#         # Make the API request
+#         response = requests.get(url, params=params)
+#         response.raise_for_status()  # Raise an error for bad responses (4xx and 5xx)
+#         data = response.json()
+#
+#         # Extract historical price data
+#         if data['Response'] == 'Success':
+#             # Keep every second hour's data (2-hour intervals)
+#             history = [
+#                 {"time":  datetime.utcfromtimestamp(entry["time"]).strftime('%H:%M'), "price": entry["close"]}
+#                 for i, entry in enumerate(data['Data']['Data'])
+#                 if i % 2 == 0  # Select data points at 2-hour intervals
+#             ]
+#             return history
+#         else:
+#             print(f"API error: {data.get('Message', 'Unknown error')}")
+#             return None
+#
+#     except requests.exceptions.RequestException as e:
+#         print(f"An error occurred: {e}")
+#         return None
+
+
+def get_coin_24h_two_hour_intervals(coin):
+    url = "https://min-api.cryptocompare.com/data/v2/histohour"
+    params = {
+        "fsym": coin,  # Coin symbol (e.g., BTC for Bitcoin)
+        "tsym": "USD",  # Target currency (USD)
+        "limit": 23,    # Get 24 data points (1 for each hour)
+    }
+
+    try:
+        # Make the API request
+        response = requests.get(url, params=params)
+        response.raise_for_status()  # Raise an error for bad responses (4xx and 5xx)
+        data = response.json()
+
+        # Extract historical price data
+        if data['Response'] == 'Success':
+            # Keep every second hour's data (2-hour intervals) and store in a dictionary
+            history = {
+                i // 2 + 1: {  # Key starts from 1 and increments by 1 for each 2-hour interval
+                    "time": datetime.utcfromtimestamp(entry["time"]).strftime('%H:%M'),
+                    "price": entry["close"]
+                }
+                for i, entry in enumerate(data['Data']['Data'])
+                if i % 2 == 0  # Select data points at 2-hour intervals
+            }
+            return history
+        else:
+            print(f"API error: {data.get('Message', 'Unknown error')}")
+            return None
+
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+        return None
+# def get_coin_24h_two_hour_intervals(coin):
+#     url = "https://min-api.cryptocompare.com/data/v2/histohour"
+#     params = {
+#         "fsym": coin,  # Coin symbol (e.g., BTC for Bitcoin)
+#         "tsym": "USD",  # Target currency (USD)
+#         "limit": 23,    # Get 24 data points (1 for each hour)
+#     }
+#
+#     try:
+#         # Make the API request
+#         response = requests.get(url, params=params)
+#         response.raise_for_status()  # Raise an error for bad responses (4xx and 5xx)
+#         data = response.json()
+#
+#         # Extract historical price data
+#         if data['Response'] == 'Success':
+#             # Create a dictionary with data points at 2-hour intervals
+#             history = {
+#                 f"data{i//2 + 1}": entry["close"]
+#                 for i, entry in enumerate(data['Data']['Data'])
+#                 if i % 2 == 0  # Select data points at 2-hour intervals
+#             }
+#             return history
+#         else:
+#             print(f"API error: {data.get('Message', 'Unknown error')}")
+#             return None
+#
+#     except requests.exceptions.RequestException as e:
+#         print(f"An error occurred: {e}")
+#         return None
+# print(get_coin_24h_two_hour_intervals('BTC'))
