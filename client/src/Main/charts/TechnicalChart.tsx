@@ -20,7 +20,7 @@ function TechnicalChart({ lineChartData }: TechnicalChartProps): JSX.Element {
 
     // Optionally format the price values on the Y-axis
     const formatPrice = (value: number) => {
-        return `$${value.toFixed(2)}`; // Format as currency (e.g., $123.45)
+        return `$${value}`;
     };
 
     return (

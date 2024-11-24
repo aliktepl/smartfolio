@@ -23,10 +23,13 @@ const chartConfig = {
 
 // Explicitly define the prop types for the component
 interface BarChartProps {
-    barChartData: Array<{ grade: number; percentage: number; color?: string }>;
+    barChartData: Array<{ grade: number; percentage: number;}>;
 }
 
 export function BarSentimentChart({barChartData} : BarChartProps) {
+
+    console.log(barChartData)
+
     return (
         <Card className='flex flex-col bg-transparent border-0'>
             <CardHeader>
@@ -51,7 +54,7 @@ export function BarSentimentChart({barChartData} : BarChartProps) {
                         <Bar
                             dataKey="percentage"
                             radius={8}
-                            fill={(entry) => entry.color || "hsl(var(--chart-blue))"} />
+                            fill="var(--chart-blue)" />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
