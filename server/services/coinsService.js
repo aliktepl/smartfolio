@@ -24,10 +24,14 @@ async function prepare_coin(data) {
     }
     if(coin.sentiment){
         const transformed = [];
+        // let c=""
         for (let key in coin.sentiment) {
             if (coin.sentiment.hasOwnProperty(key)) {
+                // if(key<5){
+                //     c=
+                // }
                 // Create an object for each key-value pair and push it to the array
-                transformed.push({ grade: key, percentage: coin.sentiment[key] });
+                transformed.push({ grade: key, percentage: coin.sentiment[key],color:"#FF0000" });
             }
         }
         coin.sentiment=transformed
