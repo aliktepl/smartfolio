@@ -12,10 +12,12 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ArticleCard from "@/Main/cards/ArticleCard.tsx";
 import { Input } from "@/components/ui/input";
 import { SetStateAction, useEffect, useState } from "react";
 import SentimentChart from "@/Main/charts/SentimentChart.tsx";
 import TechnicalChart from "@/Main/charts/TechnicalChart.tsx";
+import {BarSentimentChart} from "@/Main/charts/BarSentimentChart.tsx";
 
 // @ts-ignore
 export async function loader({ params }) {
@@ -38,7 +40,7 @@ function Coin() {
     // @ts-ignore
     const [coin, wallet, news] = useLoaderData();
 
-    console.log(news);
+    console.log(coin.graph);
 
     const [amount, setAmount] = useState('');
     const navigate = useNavigate();
@@ -51,14 +53,7 @@ function Coin() {
         { sentiment: "negative", entries: parseFloat(coin.sentiment.negative), fill: "var(--color-negative)" },
     ];
 
-    const lineChartData = [
-        { time: "00:00", price: 186 },
-        { time: "04:00", price: 305 },
-        { time: "08:00", price: 237 },
-        { time: "12:00", price: 73 },
-        { time: "16:00", price: 209 },
-        { time: "20:00", price: 214 },
-    ];
+    const lineChartData = coin.graph
 
     const handleChange = (event: { target: { value: SetStateAction<string> } }) => {
         const value = event.target.value;
@@ -121,9 +116,7 @@ function Coin() {
                 <div className="hidden">
                     <ModeToggle />
                 </div>
-                <h1 className="flex-grow text-center">
-                    {coin.name}
-                </h1>
+                <h1>{coin.name}</h1>
                 {/*Wallet dialog*/}
                 <Dialog>
                     {hasCoin ? (
@@ -169,13 +162,14 @@ function Coin() {
             {/*Charts*/}
             <div>
                 <div>
-                    <div>
+                    <div className="grid md:grid-cols-2 space-x-2">
                         <SentimentChart name="Sentiment" pieChartData={socialChartData} />
+                        <BarSentimentChart/>
                     </div>
                 </div>
-                <div className="flex gap-6">
+                <div className="grid md:grid-cols-4 space-x-2">
                     {/* Card Section */}
-                    <div className="flex-none h-full w-1/4">
+                    <div className="flex-none h-full">
                         <Card className="h-full">
                             <CardHeader>
                                 <CardTitle>Information</CardTitle>
@@ -189,14 +183,23 @@ function Coin() {
                         </Card>
                     </div>
                     {/* Technical Chart Section */}
-                    <div className="flex-1">
-                        <div className="h-full">
-                            <TechnicalChart lineChartData={lineChartData} />
-                        </div>
+                    <div className="col-span-3">
+                        <TechnicalChart lineChartData={lineChartData} />
                     </div>
+                </div>
+                <h1 className="flex justify-center">
+                    Top news about {coin.name}
+                </h1>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4">
+                    {news.map((article, index) => (
+                        <div key={index} className="p-2">
+                            <ArticleCard article={article.article} />
+                        </div>
+                    ))}
                 </div>
             </div>
         </>
+
     );
 }
 
