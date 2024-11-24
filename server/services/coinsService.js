@@ -22,6 +22,19 @@ async function prepare_coin(data) {
         // Replace the graph object with the new array
         coin.graph = graphArray;
     }
+    if(coin.sentiment){
+        const transformed = [];
+        for (let key in coin.sentiment) {
+            if (coin.sentiment.hasOwnProperty(key)) {
+                // Create an object for each key-value pair and push it to the array
+                transformed.push({ grade: key, percentage: coin.sentiment[key] });
+            }
+        }
+        coin.sentiment=transformed
+    }
+
+
+
 
     console.log("after prepare_coin:", coin);
     return data; // Return the modified coin object

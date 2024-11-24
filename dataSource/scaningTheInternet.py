@@ -110,11 +110,13 @@ def filter_relevant_text(comment, coin_name):
 
     return " ".join(relevant_sentences)
 
+# def find_top_comments():
 
 def scan_Reddit(name, symbol):
     username = "smartfolio"
     clientid = "_R8bExVBisPWMQACqQ3EpA"
     clientsecret = "6OWMvLjYGg_Fi1hjAPTMr1yg9Gjyag"
+    top_comments=[]
 
     reddit = praw.Reddit(client_id=clientid, client_secret=clientsecret, user_agent="human_behavior")
 
@@ -128,6 +130,7 @@ def scan_Reddit(name, symbol):
     for sub in subList:
         subreddit = reddit.subreddit(sub)
         for submission in subreddit.search(name, sort='relevance', limit=1000):
+
             comment = filter_relevant_text(submission.selftext, name)
             if comment != "":
                 # text.append(submission.selftext)
