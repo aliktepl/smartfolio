@@ -16,7 +16,7 @@ import {
 
 const chartConfig = {
     percentage: {
-        label: "Percentage",
+        label: "%",
         color: "hsl(var(--chart-blue))",
     },
 } satisfies ChartConfig
