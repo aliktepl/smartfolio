@@ -42,7 +42,7 @@ def insert_coins():
 
 
 if __name__ == "__main__":
-    insert_top_articles()
+    #insert_top_articles()
     # temp()
     insert_coins()
     finish_DB_connection()
