@@ -15,7 +15,7 @@ class Coins {
         try {
             // Insert user with `ON CONFLICT DO NOTHING`
             return await pool`
-            select  name, symbol, sentiment, tech_info
+            select  name, symbol, sentiment, tech_info,graph
             from coins
             where id = ${id}
         `

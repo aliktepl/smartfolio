@@ -18,16 +18,16 @@ conn = psycopg2.connect(
 def insert_coin_data(data):
     cur = conn.cursor()
     query = """
-        INSERT INTO coins (id, name, symbol, sentiment, tech_info)
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO coins (id, name, symbol, sentiment, tech_info, graph)
+        VALUES (%s, %s, %s, %s, %s, %s)
         ON CONFLICT (id)
         DO UPDATE SET
             name = EXCLUDED.name,
             symbol = EXCLUDED.symbol,
             sentiment = EXCLUDED.sentiment,
-            tech_info = EXCLUDED.tech_info;
+            tech_info = EXCLUDED.tech_info,
+            graph = EXCLUDED.graph;
     """
-
     cur.execute(query, data)
     conn.commit()
     cur.close()
