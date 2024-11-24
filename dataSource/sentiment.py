@@ -5,6 +5,7 @@ import tensorflow as tf
 from scaningTheInternet import scan_Reddit
 # import tensorflow_hub as hub
 import tensorflow_text as text
+
 # from official.nlp import optimization  # to create AdamW optimizer
 #
 # import matplotlib.pyplot as plt
@@ -41,6 +42,37 @@ def positive_negative(data):
     return sentiment
 
 
+def bar_chart_distribution(data):
+    values = [0] * 10
+    val = 0
+    sum=0
+    for s in data:
+        sum+=1
+        if s < 0.1:
+            values[0] += 1
+        elif s < 0.2:
+            values[1] += 1
+        elif s < 0.3:
+            values[2] += 1
+        elif s < 0.4:
+            values[3] += 1
+        elif s < 0.5:
+            values[4] += 1
+        elif s < 0.6:
+            values[5] += 1
+        elif s < 0.7:
+            values[6] += 1
+        elif s < 0.8:
+            values[7] += 1
+        elif s < 0.9:
+            values[8] += 1
+        elif s < 1.01:
+            values[9] += 1
+    sentiment = {str(i): (values[i - 1] /sum)*100 for i in range(1, 11)}
+    # print("wntiment: ", sentiment)
+    return sentiment
+
+
 def get_sentiment(data):
     saved_model_path = r"imdb_bert"
     reloaded_model = tf.saved_model.load(saved_model_path)
@@ -49,7 +81,8 @@ def get_sentiment(data):
     reloaded_results = tf.sigmoid(reloaded_model(tf.constant(data)))
     print('Results from the saved model:')
     print_my_examples(data, reloaded_results)
-    sentiment = positive_negative(reloaded_results)
+    # sentiment = positive_negative(reloaded_results)
+    sentiment = bar_chart_distribution(reloaded_results)
     # print_my_examples(data,sentiment)
     return sentiment
 # get_sentiment(["its bad"])

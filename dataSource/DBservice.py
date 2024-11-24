@@ -55,6 +55,9 @@ def insert_articles(name, symbol,amount):
         data.append((i, symbol, {"source": source_name, "title": title, "link": link}))
     insert_articles_to_DB(data)
 
-# def insert_comments(name,symbol,comments):
+def insert_comments(name,symbol,amount,comments):
+    for i in range(1,amount):
+        comment = comments[i-1]
+
 
 
