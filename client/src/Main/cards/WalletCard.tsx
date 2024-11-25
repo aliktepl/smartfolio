@@ -5,7 +5,7 @@ import {WalletData} from "@/Main/wallet/Wallet.tsx";
 
 function WalletCard({coin} : {coin : WalletData}) {
     return (
-        <Link to={coin.symbol}>
+        <Link to={coin.symbol} viewTransition>
             <Card className="hover:scale-105 transition-transform mb-4">
                 <CardHeader>
                     <CardTitle>

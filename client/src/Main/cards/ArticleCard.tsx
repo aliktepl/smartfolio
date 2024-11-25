@@ -9,7 +9,7 @@ interface Article {
 
 function ArticleCard({ article }: { article: Article }) {
     return (
-        <Link to={article.link}>
+        <Link to={article.link} viewTransition>
             <Card className="mb-4 w-full h-full hover:scale-105 transition-transform">
                 <CardHeader>
                     <CardTitle>

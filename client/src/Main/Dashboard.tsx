@@ -75,7 +75,7 @@ function Dashboard() {
             </header>
             <h2 className="text-center font-semibold mb-4">Hottest Right Now</h2>
             <div className="grid gap-4 mb-4 sm:grid-cols-2 lg:grid-cols-4">
-                {coins.map((coin) => (
+                {coins.slice(0, 4).map((coin) => (
                     <CoinCard coin={coin} key={coin.symbol} />
                 ))}
             </div>
