@@ -47,7 +47,7 @@ function Sidebar() {
         <div className="flex min-h-screen w-full bg-muted/40">
             <aside className="w-64 bg-background hidden sm:flex border-r">
                 <div className="sidebar-content">
-                    <Link to={'/'} className="flex items-center justify-center h-20">
+                    <Link to={'/'} viewTransition className="flex items-center justify-center h-20">
                         <Logo></Logo>
                         <h1 className="text-2xl ml-2 font-bold">
                             SmartFolio
@@ -56,7 +56,7 @@ function Sidebar() {
                     <nav className="flex-grow p-4 flex flex-col items-center">
                         <ul className="space-y-4 w-full">
                             <li>
-                                <NavLink to={'/'} className={({isActive}) => {
+                                <NavLink to={'/'} viewTransition className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
                                     <LayoutGrid className="mr-2"/>
@@ -64,7 +64,7 @@ function Sidebar() {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/explore'} className={({isActive}) => {
+                                <NavLink to={'/explore'} viewTransition className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
                                     <Search className="mr-2"/>
@@ -72,7 +72,7 @@ function Sidebar() {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/wallet'} className={({isActive}) => {
+                                <NavLink to={'/wallet'} viewTransition className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
                                     <Wallet className="mr-2"/>
@@ -84,7 +84,7 @@ function Sidebar() {
                     <nav className="p-4 flex flex-col items-center">
                         <ul className="space-y-4 w-full">
                             <li>
-                                <NavLink to={'/settings'} className={({isActive}) => {
+                                <NavLink to={'/settings'} viewTransition className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
                                     <Settings className="mr-2"/>
@@ -92,7 +92,7 @@ function Sidebar() {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/logout'} className={({isActive}) => {
+                                <NavLink to={'/logout'} viewTransition className={({isActive}) => {
                                     return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                 }}>
                                     <LogOut className="mr-2"/>
@@ -124,7 +124,7 @@ function Sidebar() {
                                 <ul className="space-y-4 w-full">
                                     <li>
                                         <SheetTrigger asChild>
-                                        <NavLink to={'/'} className={({isActive}) => {
+                                        <NavLink to={'/'} viewTransition className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <LayoutGrid className="mr-2"/>
@@ -134,7 +134,7 @@ function Sidebar() {
                                     </li>
                                     <li>
                                         <SheetTrigger asChild>
-                                        <NavLink to={'/explore'} className={({isActive}) => {
+                                        <NavLink to={'/explore'} viewTransition className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <Search className="mr-2"/>
@@ -144,7 +144,7 @@ function Sidebar() {
                                     </li>
                                     <li>
                                         <SheetTrigger asChild>
-                                        <NavLink to={'/wallet'} className={({isActive}) => {
+                                        <NavLink to={'/wallet'} viewTransition className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <Wallet className="mr-2"/>
@@ -154,7 +154,7 @@ function Sidebar() {
                                     </li>
                                     <li>
                                         <SheetTrigger asChild>
-                                        <NavLink to={'/settings'} className={({isActive}) => {
+                                        <NavLink to={'/settings'} viewTransition className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <Settings className="mr-2"/>
@@ -164,7 +164,7 @@ function Sidebar() {
                                     </li>
                                     <li>
                                         <SheetTrigger asChild>
-                                        <NavLink to={'/logout'} className={({isActive}) => {
+                                        <NavLink to={'/logout'} viewTransition className={({isActive}) => {
                                             return isActive ? "bg-primary text-foreground rounded-xl" : "text-muted-foreground hover:rounded-xl hover:ring-1 hover:text-foreground"
                                         }}>
                                             <LogOut className="mr-2"/>

@@ -23,7 +23,7 @@ interface tech_info {
 
 function CoinCard({coin} : {coin:Coin}) {
     return (
-        <Link to={coin.symbol}>
+        <Link to={coin.symbol} viewTransition>
             <Card className="hover:scale-105 transition-transform">
                 <CardHeader>
                     <CardTitle>{coin.name}</CardTitle>

@@ -139,7 +139,7 @@ function Coin() {
                         </DialogHeader>
                         <div className="flex items-center space-x-2">
                             <div className="flex-1">
-                                <Input type="number" id="amount" value={amount} onChange={handleChange} placeholder="Insert amount" />
+                                <Input type="text" id="amount" value={amount} onChange={handleChange} placeholder="Insert amount" inputMode="numeric" />
                             </div>
                             <DialogClose asChild>
                                 <Button onClick={addCoinToWallet}>
