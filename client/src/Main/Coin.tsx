@@ -2,7 +2,8 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button.tsx";
 import { ModeToggle } from "@/components/mode-toggle.tsx";
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import {TrendingUp,TrendingDown} from "lucide-react";
 import ArticleCard from "@/Main/cards/ArticleCard.tsx";
 import { Input } from "@/components/ui/input";
 import { SetStateAction, useEffect, useState } from "react";
@@ -115,7 +116,7 @@ function Coin() {
                 <div className="hidden">
                     <ModeToggle />
                 </div>
-                <h1>{coin.name}</h1>
+                <h1 className="text-2xl font-bold mb-4">{coin.name}</h1>
                 {/*Wallet dialog*/}
                 <Dialog>
                     {hasCoin ? (
@@ -159,44 +160,78 @@ function Coin() {
             </div>
 
             {/*Charts*/}
-            <div>
                 <div>
-                    <div className="grid md:grid-cols-2 space-x-2">
-                        <SentimentChart name="Sentiment" pieChartData={socialChartData} />
-                        <BarSentimentChart barChartData={barChartData} />
-                    </div>
-                </div>
-                <div className="grid md:grid-cols-4 space-x-2">
-                    {/* Card Section */}
-                    <div className="flex-none h-full">
-                        <Card className="h-full">
-                            <CardHeader>
-                                <CardTitle>Information</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p>Price: {coin.tech_info.price}</p>
-                                <p>Market Cap: {coin.tech_info.market_cap}</p>
-                                <p>Total Supply: {coin.tech_info.total_supply}</p>
-                                <p>Change: {coin.tech_info.change}%</p>
-                            </CardContent>
-                        </Card>
-                    </div>
-                    {/* Technical Chart Section */}
-                    <div className="col-span-3">
-                        <TechnicalChart lineChartData={lineChartData} />
-                    </div>
-                </div>
-                <h1 className="flex justify-center">
-                    Top news about {coin.name}
-                </h1>
-                <div className="grid md:grid-cols-2 lg:grid-cols-4">
-                    {news.map((article, index) => (
-                        <div key={index} className="p-2">
-                            <ArticleCard article={article.article} />
+                    <div>
+                        <div className="grid md:grid-cols-2 h-[375x] space-x-2">
+                            <SentimentChart name="Sentiment" pieChartData={socialChartData}/>
+                            <BarSentimentChart barChartData={barChartData}/>
                         </div>
-                    ))}
+                    </div>
+                    <div className="grid md:grid-cols-3 space-x-2">
+                        <div className="grid grid-cols-2 grid-rows-4 ml-2 gap-2">
+                            <Card>
+                                <CardHeader>
+                                    <CardDescription>
+                                        Price
+                                    </CardDescription>
+                                    <p className={`${coin.tech_info.change > 0 ? 'flex text-green-500' : 'flex text-red-500'}`}>
+                                        {coin.tech_info.price}{coin.tech_info.change > 0 ? <TrendingUp/> :
+                                        <TrendingDown/>}
+                                    </p>
+                                </CardHeader>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardDescription>
+                                        Market Cap
+                                    </CardDescription>
+                                    <p className={`${coin.tech_info.change > 0 ? 'flex text-green-500' : 'flex text-red-500'}`}>
+                                        {coin.tech_info.market_cap}{coin.tech_info.change > 0 ? <TrendingUp/> :
+                                        <TrendingDown/>}
+                                    </p>
+                                </CardHeader>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardDescription>
+                                        Total Supply
+                                    </CardDescription>
+                                    {coin.tech_info.total_supply}
+                                </CardHeader>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardDescription>
+                                        Change
+                                    </CardDescription>
+                                    <p className={`${coin.tech_info.change > 0 ? 'flex text-green-500' : 'flex text-red-500'}`}>
+                                        {coin.tech_info.change > 0 ? '+' : '-'}{coin.tech_info.change}% {coin.tech_info.change > 0 ?
+                                        <TrendingUp/> : <TrendingDown/>}
+                                    </p>
+                                </CardHeader>
+                            </Card>
+                            <Card className="col-span-2 row-span-2">
+                                <CardHeader>
+                                    <CardTitle>Converter</CardTitle>
+                                </CardHeader>
+                            </Card>
+                        </div>
+                        {/* Technical Chart Section */}
+                        <div className="col-span-2">
+                            <TechnicalChart lineChartData={lineChartData}/>
+                        </div>
+                    </div>
+                    <h1 className="text-2xl font-bold flex justify-center items-center my-4">
+                        Top News
+                    </h1>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4">
+                        {news.map((article, index) => (
+                            <div key={index} className="p-2">
+                                <ArticleCard article={article.article}/>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
         </>
 
     );
