@@ -1,7 +1,7 @@
 import {ModeToggle} from "@/components/mode-toggle.tsx";
-import {redirect, useLoaderData, useNavigate} from "react-router-dom";
+import {redirect, useLoaderData} from "react-router-dom";
 import {DataTable} from "@/Main/wallet/data-table.tsx";
-import {columns, CoinsRow} from "@/Main/explore/columns.tsx";
+import {CoinsRow, columns, tech_info} from "@/Main/explore/columns.tsx";
 
 export async function loader() {
     try {
@@ -33,7 +33,8 @@ export async function loader() {
 interface CoinData {
     name: string;
     symbol: string;
-    tech_info: { change: number };
+    change: number;
+    tech_info: tech_info
     sentiment: object;
 }
 
@@ -41,11 +42,11 @@ function Explore() {
     // Load data from the loader
     const data = useLoaderData() as CoinData[];
 
-    // Map data to CoinsRow format (if necessary)
     const coinData: CoinsRow[] = data.map((coin) => ({
         name: coin.name,
         symbol: coin.symbol,
         change: coin.tech_info.change,
+        tech_info: coin.tech_info,
         sentiment: coin.sentiment,
     }));
 

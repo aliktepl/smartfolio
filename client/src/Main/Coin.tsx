@@ -2,14 +2,22 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button.tsx";
 import { ModeToggle } from "@/components/mode-toggle.tsx";
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {TrendingUp,TrendingDown} from "lucide-react";
-import ArticleCard from "@/Main/cards/ArticleCard.tsx";
+import ArticleCard, {Article} from "@/Main/cards/ArticleCard.tsx";
 import { Input } from "@/components/ui/input";
 import { SetStateAction, useEffect, useState } from "react";
 import SentimentChart from "@/Main/charts/SentimentChart.tsx";
 import TechnicalChart from "@/Main/charts/TechnicalChart.tsx";
 import {BarSentimentChart} from "@/Main/charts/BarSentimentChart.tsx";
+import {CoinsRow} from "@/Main/explore/columns.tsx";
+import {WalletRow} from "@/Main/wallet/columns.tsx";
+
+interface LoaderData {
+    coin: CoinsRow;
+    wallet: WalletRow[];
+    articles: { coin: string; article: Article }[];
+}
 
 // @ts-ignore
 export async function loader({ params }) {
@@ -25,25 +33,28 @@ export async function loader({ params }) {
         credentials: "include", // Ensures cookies are sent with the request
     });
     const resNews = await responseNews.json();
-    return [resCoin[0], resWallet, resNews];
+
+    return {
+        coin: resCoin[0],
+        wallet: resWallet,
+        articles: resNews
+    };
 }
 
 function Coin() {
-    // @ts-ignore
-    const [coin, wallet, news] = useLoaderData();
+    const {coin, wallet, articles} = useLoaderData() as LoaderData;
     const [amount, setAmount] = useState('');
     const navigate = useNavigate();
+    console.log(coin.graph)
 
     const hasCoin = wallet.some((item: { symbol: string }) => item.symbol === coin.symbol);
 
     const sentimentPositiveNegative = () => {
-        let neg=0
-        let pos=0
-        let neutral=0
+        let neg, pos, neutral: number
         neg=coin.sentiment[0].percentage+coin.sentiment[1].percentage+coin.sentiment[2].percentage+coin.sentiment[3].percentage
         pos=coin.sentiment[6].percentage+coin.sentiment[7].percentage+coin.sentiment[8].percentage+coin.sentiment[9].percentage
         neutral=coin.sentiment[5].percentage+coin.sentiment[6].percentage
-        return {pos:pos,neutral:neutral,neg:neg}
+        return {pos: pos,neutral: neutral,neg: neg}
     }
 
     const socialChartData = [
@@ -225,7 +236,7 @@ function Coin() {
                         Top News
                     </h1>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4">
-                        {news.map((article, index) => (
+                        {articles.map((article, index) => (
                             <div key={index} className="p-2">
                                 <ArticleCard article={article.article}/>
                             </div>
