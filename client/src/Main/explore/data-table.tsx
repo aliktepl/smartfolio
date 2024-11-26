@@ -3,22 +3,15 @@
 import {
     ColumnDef,
     ColumnFiltersState,
-    SortingState,
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
     getSortedRowModel,
+    SortingState,
     useReactTable,
 } from "@tanstack/react-table"
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
 
 import {Input} from "@/components/ui/input"
 import React from "react";
@@ -54,7 +47,9 @@ export function DataTable<TData, TValue>({
                 <Input
                     placeholder="Filter coins..."
                     value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-                    onChange={(event) => {table.getColumn("name")?.setFilterValue(event.target.value)}}
+                    onChange={(event) => {
+                        table.getColumn("name")?.setFilterValue(event.target.value)
+                    }}
                     className="max-w-sm"
                 />
             </div>

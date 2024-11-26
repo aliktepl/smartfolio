@@ -1,7 +1,7 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {Link} from "react-router-dom";
 
-interface Article {
+export interface Article {
     source: string;
     link: string;
     title: string;

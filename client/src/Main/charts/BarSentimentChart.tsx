@@ -28,8 +28,6 @@ interface BarChartProps {
 
 export function BarSentimentChart({barChartData} : BarChartProps) {
 
-    console.log(barChartData)
-
     return (
         <Card className='flex flex-col bg-transparent border-0'>
             <CardHeader>

@@ -1,15 +1,15 @@
 import CoinCard from "@/Main/cards/CoinCard.tsx";
-import ArticleCard from "@/Main/cards/ArticleCard.tsx";
+import ArticleCard, {Article} from "@/Main/cards/ArticleCard.tsx";
 import WalletCard from "@/Main/cards/WalletCard.tsx";
 import {redirect, useLoaderData, useRouteLoaderData} from "react-router-dom";
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {WalletRow} from "./wallet/columns";
 import {CoinsRow} from "@/Main/explore/columns.tsx";
 
-interface LoaderData {
+export interface LoaderData {
     coins: CoinsRow[];
     wallet: WalletRow[];
-    articles: { coin: string; article: string }[];
+    articles: { coin: string; article: Article }[];
 }
 
 async function fetchWithRedirect(url: string) {

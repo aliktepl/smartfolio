@@ -2,7 +2,6 @@ import {columns, WalletRow} from "./columns"
 import {DataTable} from "./data-table"
 import {ModeToggle} from "@/components/mode-toggle.tsx";
 import {redirect, useLoaderData} from "react-router-dom";
-import {CoinsRow} from "@/Main/explore/columns.tsx";
 
 export async function loader() {
     try {
@@ -38,7 +37,7 @@ export default function Wallet() {
     // Get the data directly from the loader
     const data = useLoaderData() as WalletData[];
 
-    const walletData: CoinsRow[] = data.map((coin) => ({
+    const walletData: WalletRow[] = data.map((coin) => ({
         name: coin.name,
         symbol: coin.symbol,
         change: coin.tech_info.change,

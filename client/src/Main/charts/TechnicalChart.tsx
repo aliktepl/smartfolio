@@ -54,7 +54,6 @@ function TechnicalChart({ lineChartData }: TechnicalChartProps): JSX.Element {
                                 domain={[minPrice - (maxPrice - minPrice) * 0.05, maxPrice + (maxPrice - minPrice) * 0.05]}  // Add a buffer to the price range
                                 tickLine={false}
                                 axisLine={false}
-                                angle={-45}
                                 tickFormatter={formatPrice} // Format Y-axis ticks as currency
                             />
                             <ChartTooltip cursor content={<ChartTooltipContent />} />
