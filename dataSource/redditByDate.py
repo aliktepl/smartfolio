@@ -38,4 +38,4 @@ for topic in topic_lst:
 data = pd.DataFrame(comments_data)
 
 # Display or save the DataFrame as needed
-print(data)
+# print(data)

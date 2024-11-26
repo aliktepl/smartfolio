@@ -3,6 +3,8 @@ const app = express();
 const cors = require("cors");
 const session = require("express-session");
 const passport = require('passport');
+const { runPythonScript } = require("./scriptScheduling.js");
+
 require('./config/passport');
 const dotenv = require("dotenv");
 dotenv.config();
@@ -35,6 +37,7 @@ const coinsRouter = require("./routes/coins");
 app.use("/api/coins", coinsRouter);
 
 const articlesRouter = require("./routes/articles");
+const schedule = require("node-schedule");
 app.use("/api/articles", articlesRouter);
 
 PORT = process.env.PORT || 3000;
@@ -43,3 +46,8 @@ PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+// schedule.scheduleJob("0 * * * *", () => {
+//     console.log("Running Python script...");
+//     runPythonScript();
+// });
+// runPythonScript();

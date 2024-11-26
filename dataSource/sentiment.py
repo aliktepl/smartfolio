@@ -77,10 +77,10 @@ def get_sentiment(data):
     saved_model_path = r"imdb_bert"
     reloaded_model = tf.saved_model.load(saved_model_path)
     # examples = scan_Reddit(name,symbol)
-    print(data)
+    # print(data)
     reloaded_results = tf.sigmoid(reloaded_model(tf.constant(data)))
-    print('Results from the saved model:')
-    print_my_examples(data, reloaded_results)
+    # print('Results from the saved model:')
+    # print_my_examples(data, reloaded_results)
     # sentiment = positive_negative(reloaded_results)
     sentiment = bar_chart_distribution(reloaded_results)
     # print_my_examples(data,sentiment)

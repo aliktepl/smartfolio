@@ -11,6 +11,8 @@ nlp = spacy.load("en_core_web_sm")
 
 from newsapi import NewsApiClient
 
+AMOUNT = 4
+
 
 def scan_news(name, symbol):
     newsapi = NewsApiClient(api_key='81d1a6e52ee54215929a928dae60380a')
@@ -73,14 +75,14 @@ def top_stories(name, amount):
     topStories = []
     counter = 0
     if headlines['status'] == 'ok':
-        print("Top Headlines:")
+        # print("Top Headlines:")
         for article in headlines['articles']:
             if counter < amount:
                 topStories.append(article)
                 counter += 1
             else:
                 break
-            print(f"- {article['title']} : {article['description']} ({article['source']['name']})")
+            # print(f"- {article['title']} : {article['description']} ({article['source']['name']})")
     else:
         print("Failed to retrieve top headlines.")
     return topStories
@@ -110,13 +112,18 @@ def filter_relevant_text(comment, coin_name):
 
     return " ".join(relevant_sentences)
 
+
 # def find_top_comments():
+def prepare_for_top(submission):
+    return {"username": submission.author.name if submission.author else "anonymous", "title": submission.title,
+            "url": submission.url}
+
 
 def scan_Reddit(name, symbol):
     username = "smartfolio"
     clientid = "_R8bExVBisPWMQACqQ3EpA"
     clientsecret = "6OWMvLjYGg_Fi1hjAPTMr1yg9Gjyag"
-    top_comments=[]
+    top_comments = []
 
     reddit = praw.Reddit(client_id=clientid, client_secret=clientsecret, user_agent="human_behavior")
 
@@ -125,12 +132,15 @@ def scan_Reddit(name, symbol):
     text = []
     first_ts = 1e11
     last_ts = 0
+    counter = 0
     # queries to search in bitcoin subreddit
     subList = ['cryptocurrency', 'cryptoMarkets']
     for sub in subList:
         subreddit = reddit.subreddit(sub)
-        for submission in subreddit.search(name, sort='relevance', limit=1000):
-
+        for submission in subreddit.search(name, sort='relevance', limit=10000):
+            if counter < 4:
+                top_comments.append((counter + 1, symbol, prepare_for_top(submission)))
+            counter += 1
             comment = filter_relevant_text(submission.selftext, name)
             if comment != "":
                 # text.append(submission.selftext)
@@ -147,7 +157,7 @@ def scan_Reddit(name, symbol):
 
     data = data.drop_duplicates(subset=['Title', 'URL', 'Text'])
     query = search_queries(data, "")
-    return query
+    return query, counter, top_comments
 
     # print(query)
     # for q in query:
