@@ -236,11 +236,17 @@ function Coin() {
                         Top News
                     </h1>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4">
-                        {articles.map((article, index) => (
-                            <div key={index} className="p-2">
-                                <ArticleCard article={article.article}/>
+                        {articles.length > 0 ? (
+                            articles.map((article, index) => (
+                                <div key={index} className="p-2">
+                                    <ArticleCard article={article.article}/>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="col-span-full text-center p-4">
+                                <p>No available articles</p>
                             </div>
-                        ))}
+                        )}
                     </div>
                 </div>
         </>

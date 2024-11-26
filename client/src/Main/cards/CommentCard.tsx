@@ -1,6 +1,10 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 
-export function CommentCard() {
+export interface Comment {
+
+}
+
+export function CommentCard({comment} : {comment: Comment}) {
     return (
         <Card>
             <CardHeader>
