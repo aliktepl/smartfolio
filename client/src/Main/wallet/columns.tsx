@@ -105,7 +105,8 @@ export const columns: ColumnDef<WalletRow>[] = [
                         body: JSON.stringify({amount: parseFloat(amount)}), // Send the amount in the body
                     });
                     if (response.ok) {
-                        return navigate(`/${coin.symbol}`);
+                        navigate(`/wallet`);
+                        setAmount('');
                     }
                 } catch (error) {
                     console.error("Error:", error);
