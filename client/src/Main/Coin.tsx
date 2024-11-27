@@ -39,7 +39,7 @@ interface LoaderData {
     coin: CoinsRow;
     wallet: WalletRow[];
     articles: { coin: string; article: Article }[];
-    comments: string[];
+    comments: any;
 }
 
 // @ts-ignore
@@ -56,18 +56,25 @@ export async function loader({params}) {
         credentials: "include", // Ensures cookies are sent with the request
     });
     const resNews = await responseNews.json();
+    const responseComments = await fetch(`http://localhost:3000/api/comments/${params.coinId.toUpperCase()}`, {
+        credentials: "include", // Ensures cookies are sent with the request
+    });
+    const resComments = await responseComments.json();
 
     return {
         coin: resCoin[0],
         wallet: resWallet,
-        articles: resNews
+        articles: resNews,
+        comments: resComments
     };
 }
 
 function Coin() {
-    const {coin, wallet, articles} = useLoaderData() as LoaderData;
+    const {coin, wallet, articles, comments} = useLoaderData() as LoaderData;
     const [amount, setAmount] = useState('');
     const navigate = useNavigate();
+
+    console.log(comments);
 
     const hasCoin = wallet.some((item: { symbol: string }) => item.symbol === coin.symbol);
 
