@@ -36,6 +36,9 @@ app.use("/api/wallet", walletRouter);
 const coinsRouter = require("./routes/coins");
 app.use("/api/coins", coinsRouter);
 
+const commentsRouter = require("./routes/comments");
+app.use("/api/comments", commentsRouter);
+
 const articlesRouter = require("./routes/articles");
 const schedule = require("node-schedule");
 app.use("/api/articles", articlesRouter);
