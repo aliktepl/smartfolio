@@ -1,16 +1,7 @@
-import {useLoaderData, useNavigate} from "react-router-dom";
+import {useLoaderData,useNavigate} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
 import {ModeToggle} from "@/components/mode-toggle.tsx";
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger
-} from "@/components/ui/dialog";
+import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {TrendingDown, TrendingUp} from "lucide-react";
 import ArticleCard, {Article} from "@/Main/cards/ArticleCard.tsx";
@@ -18,28 +9,18 @@ import {Input} from "@/components/ui/input";
 import {useEffect, useState} from "react";
 import SentimentChart from "@/Main/charts/SentimentChart.tsx";
 import TechnicalChart from "@/Main/charts/TechnicalChart.tsx";
-import {BarSentimentChart} from "@/Main/charts/BarSentimentChart.tsx";
+import BarSentimentChart from "@/Main/charts/BarSentimentChart.tsx";
 import {CoinsRow} from "@/Main/explore/columns.tsx";
 import {WalletRow} from "@/Main/wallet/columns.tsx";
 import {Label} from "@/components/ui/label"
 import {Separator} from "@/components/ui/separator"
-
-
-export function InputWithLabel() {
-    return (
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" placeholder="Email"/>
-        </div>
-    )
-}
-
+import {CommentCard, Comment} from "@/Main/cards/CommentCard.tsx";
 
 interface LoaderData {
     coin: CoinsRow;
     wallet: WalletRow[];
     articles: { coin: string; article: Article }[];
-    comments: string[];
+    comments: {coin: string; comment: Comment}[];
 }
 
 // @ts-ignore
@@ -56,16 +37,21 @@ export async function loader({params}) {
         credentials: "include", // Ensures cookies are sent with the request
     });
     const resNews = await responseNews.json();
+    const responseComments = await fetch(`http://localhost:3000/api/comments/${params.coinId.toUpperCase()}`, {
+        credentials: "include", // Ensures cookies are sent with the request
+    });
+    const resComments = await responseComments.json();
 
     return {
         coin: resCoin[0],
         wallet: resWallet,
-        articles: resNews
+        articles: resNews,
+        comments: resComments
     };
 }
 
 function Coin() {
-    const {coin, wallet, articles} = useLoaderData() as LoaderData;
+    const {coin, wallet, articles, comments} = useLoaderData() as LoaderData;
     const [amount, setAmount] = useState('');
     const navigate = useNavigate();
 
@@ -108,24 +94,28 @@ function Coin() {
             setAmount(value);
         }
     };
-
     const addCoin = async () => {
         try {
             const response = await fetch(`http://localhost:3000/api/wallet/${coin.symbol}`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 credentials: "include",
-                body: JSON.stringify({amount: parseFloat(amount)}), // Send the amount in the body
+                body: JSON.stringify({ amount: parseFloat(amount) }),
             });
-            if (response.ok) {
-                return navigate(`/${coin.symbol}`);
+
+            if (!response.ok) {
+                const error = await response.json();
+                console.error('Add coin error:', error);
+                return;
             }
-        } catch (error) {
-            console.error("Error:", error);
+            await response.json();
+            navigate(`/${coin.symbol}`);
+        } catch (err) {
+            console.error('Fetch failed:', err);
         }
     };
+
+
 
     const removeCoin = async () => {
         try {
@@ -133,12 +123,16 @@ function Coin() {
                 method: "DELETE",
                 credentials: "include",
             });
-            if (response.ok) {
-                // After removing, update the wallet state to reflect the change
-                return navigate(`/${coin.symbol}`);
+
+            if (!response.ok) {
+                const error = await response.json();
+                console.error('Remove coin error:', error);
+                return;
             }
-        } catch (error) {
-            console.error("Error:", error);
+            navigate(`/${coin.symbol}`);
+            setAmount('')
+        } catch (err) {
+            console.error('Fetch failed:', err);
         }
     };
 
@@ -352,18 +346,24 @@ function Coin() {
                 </div>
             </div>
 
-            <Card className="m-2 p-4">
-                <div id="trends-widget" className="w-full h-[400px] overflow-hidden relative">
-                    <iframe
-                        title="Google Trends Widget"
-                        src="../../public/google-trends-widget.html" // Update the path accordingly
-                        className="w-full h-full"
-                        style={{
-                            border: "none",
-                        }}
-                    ></iframe>
+            <div>
+                <h1 className="text-2xl font-bold flex justify-center items-center my-4">
+                    Top Comments
+                </h1>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4">
+                    {comments.length > 0 ? (
+                        comments.slice(0, 4).map((comment, index) => (
+                            <div key={index} className="p-2">
+                                <CommentCard comment={comment.comment}/>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="col-span-full text-center p-4">
+                            <p>No available comments</p>
+                        </div>
+                    )}
                 </div>
-            </Card>
+            </div>
         </>
     );
 }

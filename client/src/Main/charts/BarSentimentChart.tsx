@@ -26,8 +26,7 @@ interface BarChartProps {
     barChartData: Array<{ grade: number; percentage: number;}>;
 }
 
-export function BarSentimentChart({barChartData} : BarChartProps) {
-
+function BarSentimentChart({barChartData} : BarChartProps) {
     return (
         <Card className='flex flex-col bg-transparent border-0'>
             <CardHeader>
@@ -59,3 +58,5 @@ export function BarSentimentChart({barChartData} : BarChartProps) {
         </Card>
     )
 }
+
+export default BarSentimentChart;

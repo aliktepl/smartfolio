@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const session = require("express-session");
 const passport = require('passport');
-const { runPythonScript } = require("./scriptScheduling.js");
+const {runPythonScript} = require("./scriptScheduling.js");
 
 require('./config/passport');
 const dotenv = require("dotenv");
@@ -25,7 +25,7 @@ app.use(
     })
 );
 
-app.use(passport.session({pauseStream : false}));
+app.use(passport.session({pauseStream: false}));
 
 const userRouter = require("./routes/user");
 app.use("/api/user", userRouter);
@@ -40,8 +40,8 @@ const commentsRouter = require("./routes/comments");
 app.use("/api/comments", commentsRouter);
 
 const articlesRouter = require("./routes/articles");
-const schedule = require("node-schedule");
 app.use("/api/articles", articlesRouter);
+const schedule = require("node-schedule");
 
 PORT = process.env.PORT || 3000;
 

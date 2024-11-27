@@ -42,7 +42,7 @@ function Login() {
                     </CardTitle>
                 </CardHeader>
                 <CardContent className='flex justify-center'>
-                    <Button onClick={handleLogin} disabled={isLoading}>
+                    <Button onClick={handleLogin} className="w-full" disabled={isLoading}>
                         {isLoading ? 'Redirecting...' : 'Login with Google'}
                     </Button>
                 </CardContent>
