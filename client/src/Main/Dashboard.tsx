@@ -83,7 +83,7 @@ function Dashboard() {
                 <div>
                     <h2 className="text-center font-semibold mb-4">My Top Coins</h2>
                     {wallet?.length ? (
-                        wallet.map((coin) => <WalletCard coin={coin} key={coin.symbol} />)
+                        wallet.slice(0, 3).map((coin) => <WalletCard coin={coin} key={coin.symbol} />)
                     ) : (
                         <p>Your wallet is empty</p>
                     )}
