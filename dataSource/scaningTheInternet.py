@@ -2,6 +2,8 @@ import praw
 import pandas as pd
 import re
 import spacy
+from datetime import datetime, timedelta
+
 
 # Load spaCy model
 
@@ -17,18 +19,21 @@ AMOUNT = 4
 def scan_news(name, symbol):
     newsapi = NewsApiClient(api_key='81d1a6e52ee54215929a928dae60380a')
 
-    # top_headlines = newsapi.get_top_headlines(q='bitcoin',
-    #                                           sources='bbc-news,the-verge,cnn,techcrunch,bbc.co.uk,fox-news,reuters,abc-news,associated-press,forbes,independent,usa-today',
-    #                                           language='en',
-    #                                           )
-    headlines = all_articles = newsapi.get_everything(q=name,
-                                                      sources='bbc-news,the-verge',
-                                                      domains='bbc.co.uk,techcrunch.com',
-                                                      from_param='2024-11-05',
-                                                      to='2024-11-21',
-                                                      language='en',
-                                                      sort_by='relevancy')
-    # Check if the request was successful and print the top headlines
+    # Calculate the date range: today to 20 days ago
+    today = datetime.now()
+    from_date = (today - timedelta(days=20)).strftime('%Y-%m-%d')
+    to_date = today.strftime('%Y-%m-%d')
+
+    # Fetch news articles
+    headlines = newsapi.get_everything(
+        q=name,
+        sources='bbc-news,the-verge',
+        domains='bbc.co.uk,techcrunch.com',
+        from_param=from_date,
+        to=to_date,
+        language='en',
+        sort_by='relevancy'
+    )
     articles = []
     if headlines['status'] == 'ok':
         print("news:")
@@ -44,6 +49,9 @@ def scan_news(name, symbol):
 
 def top_stories(name, amount):
     newsapi = NewsApiClient(api_key='81d1a6e52ee54215929a928dae60380a')
+    today = datetime.now()
+    from_date = (today - timedelta(days=30)).strftime('%Y-%m-%d')
+    to_date = today.strftime('%Y-%m-%d')
 
     # top_headlines = newsapi.get_top_headlines(q='bitcoin',
     #                                           sources='bbc-news,the-verge,cnn,techcrunch,bbc.co.uk,fox-news,reuters,abc-news,associated-press,forbes,independent,usa-today',
@@ -65,8 +73,8 @@ def top_stories(name, amount):
             'engadget.com,arstechnica.com,wired.com,techradar.com,'
             'politico.com,thehill.com'
         ),
-        from_param='2024-10-30',
-        to='2024-11-21',
+        from_param=from_date,
+        to=to_date,
         language='en',
         sort_by='relevancy'
     )
