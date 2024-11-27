@@ -7,10 +7,7 @@ from scaningTheInternet import scan_Reddit
 import tensorflow_text as text
 
 # from official.nlp import optimization  # to create AdamW optimizer
-#
-# import matplotlib.pyplot as plt
-#
-# import matplotlib.pyplot as plt
+
 
 tf.get_logger().setLevel('ERROR')
 

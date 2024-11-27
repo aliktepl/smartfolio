@@ -32,6 +32,7 @@ def temp():
 
 def insert_top_articles():
     insert_articles('cryptocurrency', "CRYPTO", 4)
+# def insert_google_trends():
 
 
 def insert_coins():
@@ -81,9 +82,9 @@ def insert_coins():
 
 
 if __name__ == "__main__":
-    create_tables()
-    #insert_top_articles()
+    # create_tables()
+    insert_top_articles()
 
-    insert_coins()
-    finish_DB_connection()
+    # insert_coins()
+    # finish_DB_connection()
     # temp()

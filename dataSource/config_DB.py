@@ -130,7 +130,7 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS wallets (
             user_id VARCHAR(100),
             coin_id VARCHAR(100),
-            amount INT,
+            amount DOUBLE PRECISION,
             UNIQUE (user_id, coin_id)
         );
         """
