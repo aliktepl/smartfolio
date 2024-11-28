@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card"
 import {Link} from "react-router-dom";
 import {TrendingDown, TrendingUp} from "lucide-react";
+import {TokenIcon} from "@web3icons/react";
 
 export interface Coin {
     name: string;
@@ -26,7 +27,10 @@ function CoinCard({coin} : {coin:Coin}) {
         <Link to={coin.symbol} viewTransition>
             <Card className="hover:scale-105 transition-transform">
                 <CardHeader>
-                    <CardTitle>{coin.name}</CardTitle>
+                    <CardTitle className={"flex items-center"}>
+                        <TokenIcon symbol={coin.symbol} variant="branded" />
+                        {coin.name}
+                    </CardTitle>
                     <CardDescription>{coin.symbol.toUpperCase()}</CardDescription>
                 </CardHeader>
                 <CardContent>
