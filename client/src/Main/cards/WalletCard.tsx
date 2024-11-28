@@ -2,13 +2,15 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import {TrendingDown, TrendingUp } from "lucide-react";
 import {Link} from "react-router-dom";
 import {WalletData} from "@/Main/wallet/Wallet.tsx";
+import {TokenIcon} from "@web3icons/react";
 
 function WalletCard({coin} : {coin : WalletData}) {
     return (
         <Link to={coin.symbol} viewTransition>
             <Card className="hover:scale-105 transition-transform mb-4">
                 <CardHeader>
-                    <CardTitle>
+                    <CardTitle className="flex items-center">
+                        <TokenIcon symbol={coin.symbol} variant="branded" />
                         {coin.name}
                     </CardTitle>
                     <CardDescription>

@@ -15,6 +15,8 @@ import {WalletRow} from "@/Main/wallet/columns.tsx";
 import {Label} from "@/components/ui/label"
 import {Separator} from "@/components/ui/separator"
 import {CommentCard, Comment} from "@/Main/cards/CommentCard.tsx";
+import GoogleTrendsWidget from "@/Main/charts/GoogleTrendsWidget.tsx";
+import { TokenIcon } from '@web3icons/react'
 
 interface LoaderData {
     coin: CoinsRow;
@@ -50,6 +52,14 @@ export async function loader({params}) {
     };
 }
 
+const sentimentPositiveNegative = (coin : CoinsRow) => {
+    const {sentiment} = coin;
+    const neg = sentiment.slice(0, 4).reduce((sum, {percentage}) => sum + percentage, 0);
+    const pos = sentiment.slice(6, 10).reduce((sum, {percentage}) => sum + percentage, 0);
+    const neutral = sentiment[5].percentage + sentiment[6].percentage;
+    return {pos, neutral, neg};
+}
+
 function Coin() {
     const {coin, wallet, articles, comments} = useLoaderData() as LoaderData;
     const [amount, setAmount] = useState('');
@@ -57,29 +67,20 @@ function Coin() {
 
     const hasCoin = wallet.some((item: { symbol: string }) => item.symbol === coin.symbol);
 
-    const sentimentPositiveNegative = () => {
-        const {sentiment} = coin;
-        const neg = sentiment.slice(0, 4).reduce((sum, {percentage}) => sum + percentage, 0);
-        const pos = sentiment.slice(6, 10).reduce((sum, {percentage}) => sum + percentage, 0);
-        const neutral = sentiment[5].percentage + sentiment[6].percentage;
-        return {pos, neutral, neg};
-    }
-
-
     const socialChartData = [
         {
             sentiment: "positive",
-            entries: parseFloat(String(sentimentPositiveNegative().pos)),
+            entries: parseFloat(String(sentimentPositiveNegative(coin).pos)),
             fill: "var(--color-positive)"
         },
         {
             sentiment: "neutral",
-            entries: parseFloat(String(sentimentPositiveNegative().neutral)),
+            entries: parseFloat(String(sentimentPositiveNegative(coin).neutral)),
             fill: "var(--color-neutral)"
         },
         {
             sentiment: "negative",
-            entries: parseFloat(String(sentimentPositiveNegative().neg)),
+            entries: parseFloat(String(sentimentPositiveNegative(coin).neg)),
             fill: "var(--color-negative)"
         },
     ];
@@ -211,7 +212,10 @@ function Coin() {
                 <div className="hidden">
                     <ModeToggle/>
                 </div>
-                <h1 className="text-2xl font-bold mb-4">{coin.name}</h1>
+                <h1 className="flex text-2xl items-center font-bold mb-4">
+                    <TokenIcon symbol={coin.symbol} variant="branded" />
+                    {coin.name}
+                </h1>
                 <Dialog>
                     {hasCoin ? (
                         <Button onClick={removeCoin} variant="destructive">
@@ -364,6 +368,9 @@ function Coin() {
                     )}
                 </div>
             </div>
+            <Card className="md:h-[350px] h-[300px] m-2">
+                <GoogleTrendsWidget keyword={coin.name}/>
+            </Card>
         </>
     );
 }

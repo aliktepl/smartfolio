@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dialog"
 import {Input} from "@/components/ui/input.tsx";
 import React from "react";
+import {TokenIcon} from "@web3icons/react";
 
 
 export interface WalletRow {
@@ -36,6 +37,14 @@ export const columns: ColumnDef<WalletRow>[] = [
     {
         accessorKey: "name",
         header: "Name",
+        cell: ({row}) => {
+            return (
+                <span className="flex items-center">
+                    <TokenIcon symbol={row.original.symbol} variant="branded" />
+                    {row.original.name}
+                </span>
+            )
+        }
     },
     {
         accessorKey: "symbol",
