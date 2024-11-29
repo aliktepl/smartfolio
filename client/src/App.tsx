@@ -56,6 +56,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "explore",
+                id: "explore",
                 element: <Explore/>,
                 loader: exploreLoader
             },

@@ -1,10 +1,26 @@
 import {ColumnDef} from "@tanstack/react-table"
-import {ArrowUpDown, TrendingDown, TrendingUp} from "lucide-react";
+import {ArrowUpDown, MoreHorizontal, TrendingDown, TrendingUp} from "lucide-react";
 import {Button} from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react"
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger} from "@/components/ui/dropdown-menu"
-import {Link} from "react-router-dom";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
+import {Link, useNavigate, useRouteLoaderData} from "react-router-dom";
 import {TokenIcon} from "@web3icons/react";
+import {
+    Dialog,
+    DialogClose, DialogContent,
+    DialogDescription, DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from "@/components/ui/dialog.tsx";
+import {Input} from "@/components/ui/input.tsx";
+import React from "react";
+import {LoaderData} from "@/Main/explore/Explore.tsx";
 
 export interface CoinsRow {
     graph: graph[];
@@ -45,7 +61,7 @@ const sentimentPositiveNegative = (sentiment: Record<string, number>) => {
             pos += value;
         }
     }
-    return { pos, neutral, neg };
+    return {pos, neutral, neg};
 };
 
 
@@ -56,7 +72,7 @@ export const columns: ColumnDef<CoinsRow>[] = [
         cell: ({row}) => {
             return (
                 <span className="flex items-center">
-                    <TokenIcon symbol={row.original.symbol} variant="branded" />
+                    <TokenIcon symbol={row.original.symbol} variant="branded"/>
                     {row.original.name}
                 </span>
             )
@@ -100,11 +116,9 @@ export const columns: ColumnDef<CoinsRow>[] = [
     {
         accessorKey: "sentiment",
         header: "Sentiment",
-        cell: ({ row }) => {
-            const { pos, neutral, neg } = sentimentPositiveNegative(row.getValue("sentiment"));
+        cell: ({row}) => {
+            const {pos, neutral, neg} = sentimentPositiveNegative(row.getValue("sentiment"));
             const maxSentiment = Math.max(pos, neutral, neg);
-
-            // Determine the Tailwind CSS class based on which value is the maximum
             let sentimentClass = '';
             let sentimentText = '';
             if (maxSentiment === pos) {
@@ -117,7 +131,6 @@ export const columns: ColumnDef<CoinsRow>[] = [
                 sentimentClass = 'text-gray-500';
                 sentimentText = 'Neutral';
             }
-
             return (
                 <div className={`${sentimentClass}`}>
                     {sentimentText}
@@ -127,24 +140,94 @@ export const columns: ColumnDef<CoinsRow>[] = [
     },
     {
         id: "actions",
-        cell: ({ row }) => {
+        cell: ({row}) => {
+            const [amount, setAmount] = React.useState('');
+            const coin = row.original
+            const navigate = useNavigate();
+            const {wallet} = useRouteLoaderData('explore') as LoaderData;
+
+            const hasCoin = wallet.some((item: { symbol: string }) => item.symbol === coin.symbol);
+
+            const handleChange = (event: { target: { value: string } }) => {
+                const value = event.target.value;
+                const isValidFloat = /^(\d+\.?\d*|\.\d*)$/.test(value);
+                if (value === '' || isValidFloat) {
+                    setAmount(value);
+                }
+            };
+
+            const addCoin = async () => {
+                try {
+                    const response = await fetch(`http://localhost:3000/api/wallet/${coin.symbol}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                        body: JSON.stringify({ amount: parseFloat(amount) }),
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json();
+                        console.error('Add coin error:', error);
+                        return;
+                    }
+                    await response.json();
+                    navigate(`/explore`);
+                } catch (err) {
+                    console.error('Fetch failed:', err);
+                }
+            };
+
             return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>
-                            <Link to={`../${row.original.symbol}`}>
-                                View Coin
-                            </Link>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <Dialog>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" className="h-8 w-8 p-0">
+                                <span className="sr-only">Open menu</span>
+                                <MoreHorizontal className="h-4 w-4"/>
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuItem>
+                                <Link to={`../${row.original.symbol}`}>
+                                    View Coin
+                                </Link>
+                            </DropdownMenuItem>
+                            {!hasCoin &&
+                            <DropdownMenuItem>
+                                <DialogTrigger>
+                                    Add to wallet
+                                </DialogTrigger>
+                            </DropdownMenuItem>}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                    <DialogContent className="sm:max-w-md">
+                        <DialogHeader>
+                            <DialogTitle>Insert amount to add</DialogTitle>
+                            <DialogDescription>
+                                How much of the coin do you want to add to the wallet?
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="flex items-center space-x-2">
+                            <div className="flex-1">
+                                <Input type="text" id="amount" value={amount} onChange={handleChange}
+                                       placeholder="Insert amount" inputMode="numeric"/>
+                            </div>
+                            <DialogClose asChild>
+                                <Button onClick={addCoin}>
+                                    Add
+                                </Button>
+                            </DialogClose>
+                        </div>
+                        <DialogFooter className="sm:justify-start">
+                            <DialogClose asChild>
+                                <Button type="button" variant="secondary">
+                                    Close
+                                </Button>
+                            </DialogClose>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             )
         },
     },
