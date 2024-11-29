@@ -3,7 +3,6 @@ import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -31,7 +30,6 @@ function BarSentimentChart({barChartData} : BarChartProps) {
         <Card className='flex flex-col bg-transparent border-0'>
             <CardHeader>
                 <CardTitle>Sentiment Breakdown</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
