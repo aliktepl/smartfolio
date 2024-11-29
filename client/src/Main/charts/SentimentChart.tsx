@@ -20,7 +20,6 @@ const pieChartConfig = {
     },
 } satisfies ChartConfig;
 
-// Explicitly define the prop types for the component
 interface SentimentChartProps {
     pieChartData: Array<{ sentiment: string; entries: number }>;
     name: string
@@ -28,8 +27,18 @@ interface SentimentChartProps {
 
 function SentimentChart({name, pieChartData }: SentimentChartProps) {
     const currentDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-
-    const positive = pieChartData[0].entries;
+    const pos = pieChartData[0].entries
+    const neutral = pieChartData[1].entries
+    const neg = pieChartData[2].entries
+    const maxSentiment = Math.max(pos, neutral, neg);
+    let sentimentText = '';
+    if (maxSentiment === pos) {
+        sentimentText = 'Positive';
+    } else if (maxSentiment === neg) {
+        sentimentText = 'Negative';
+    } else if (maxSentiment === neutral) {
+        sentimentText = 'Neutral';
+    }
 
     return (
         <Card className="flex flex-col bg-transparent border-0">
@@ -69,14 +78,14 @@ function SentimentChart({name, pieChartData }: SentimentChartProps) {
                                                     y={viewBox.cy}
                                                     className="fill-foreground text-3xl font-bold"
                                                 >
-                                                    {parseInt(String(positive), 10)}{"%"}
+                                                    {parseInt(String(maxSentiment), 10)}{"%"}
                                                 </tspan>
                                                 <tspan
                                                     x={viewBox.cx}
                                                     y={(viewBox.cy || 0) + 24}
                                                     className="fill-muted-foreground"
                                                 >
-                                                    Positive
+                                                    {sentimentText}
                                                 </tspan>
                                             </text>
                                         );

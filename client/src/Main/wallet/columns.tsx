@@ -24,7 +24,6 @@ import {Input} from "@/components/ui/input.tsx";
 import React from "react";
 import {TokenIcon} from "@web3icons/react";
 
-
 export interface WalletRow {
     name: string;
     symbol: string;
@@ -122,6 +121,25 @@ export const columns: ColumnDef<WalletRow>[] = [
                 }
             };
 
+            const removeCoin = async () => {
+                try {
+                    const response = await fetch(`http://localhost:3000/api/wallet/${coin.symbol}`, {
+                        method: "DELETE",
+                        credentials: "include",
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json();
+                        console.error('Remove coin error:', error);
+                        return;
+                    }
+                    navigate(`/wallet`);
+                    setAmount('')
+                } catch (err) {
+                    console.error('Fetch failed:', err);
+                }
+            };
+
             return (
                 <Dialog>
                     <DropdownMenu>
@@ -141,6 +159,9 @@ export const columns: ColumnDef<WalletRow>[] = [
                             <DropdownMenuItem>
                                 <DialogTrigger>Change Amount</DialogTrigger>
                             </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <div onClick={removeCoin}>Remove from Wallet</div>
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <DialogContent>
@@ -152,8 +173,7 @@ export const columns: ColumnDef<WalletRow>[] = [
                         </DialogHeader>
                         <div className="flex items-center space-x-2">
                             <div className="flex-1">
-                                <Input type="text" id="amount" value={amount} onChange={handleChange}
-                                       placeholder="Insert amount" inputMode="numeric"/>
+                                <Input type="text" id="amount" value={amount} onChange={handleChange} placeholder="Insert amount" inputMode="numeric"/>
                             </div>
                             <DialogClose asChild>
                                 <Button onClick={changeCoin}>

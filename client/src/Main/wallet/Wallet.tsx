@@ -42,7 +42,7 @@ export default function Wallet() {
         symbol: coin.symbol,
         tech_info: coin.tech_info,
         change: coin.tech_info.change,
-        amount: coin.amount,
+        amount: coin.amount
     }));
     return (
         <>
