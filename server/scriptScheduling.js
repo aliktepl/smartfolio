@@ -19,8 +19,3 @@ function runPythonScript() {
 }
 module.exports = { runPythonScript };
 
-// Schedule the task to run every hour
-// schedule.scheduleJob("0 * * * *", () => {
-//     console.log("Running Python script...");
-//     runPythonScript();
-// });

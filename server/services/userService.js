@@ -1,17 +1,4 @@
 
-// const User = require('../models/userModel');  // The User model to interact with the database
-
-// exports.getUserWallet = async (userId) => {
-//   // Fetch the user’s wallet data from the database
-//   const user = await User.findByPk(userId, { attributes: ['wallet'] });
-  
-//   if (!user) {
-//     throw new Error('User not found');
-//   }
-
-//   // Returning the wallet information
-//   return user.wallet;  // Assuming wallet is an object with balance and coin information
-// };
 
 
 // services/userService.js
