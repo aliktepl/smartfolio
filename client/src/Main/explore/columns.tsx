@@ -84,13 +84,13 @@ export const columns: ColumnDef<CoinsRow>[] = [
         },
         cell: ({row}) => {
             // @ts-ignore
-            return row.getValue("change") > 0 ? (
-                <div className="text-green-500 flex items-center">
+            return row.getValue("change") >= 0 ? (
+                <div className="pl-10 text-green-500 flex items-center">
                     <span>{row.getValue("change")}%</span>
                     <TrendingUp className="ml-1"/>
                 </div>
             ) : (
-                <div className="text-red-500 flex items-center">
+                <div className="pl-8 text-red-500 flex items-center">
                     <span>{row.getValue("change")}%</span>
                     <TrendingDown className="ml-1"/>
                 </div>

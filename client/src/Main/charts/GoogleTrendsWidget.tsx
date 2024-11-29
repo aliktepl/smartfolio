@@ -7,7 +7,7 @@ const GoogleTrendsWidget = ({ keyword = 'bitcoin', geo = '', time = 'now 7-d' })
             <iframe
                 src={trendsEmbedUrl}
                 title="Google Trends Widget"
-                className="w-full h-full border-0"
+                className="w-full h-full border-0 dark:hue-rotate-180 dark:invert"
                 loading="lazy"
                 sandbox="allow-scripts allow-same-origin"
             ></iframe>
