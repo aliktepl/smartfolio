@@ -37,12 +37,13 @@ export const columns: ColumnDef<WalletRow>[] = [
         accessorKey: "name",
         header: "Name",
         cell: ({row}) => {
+            const symbol: string = row.getValue("symbol");
             return (
                 <span className="flex items-center">
-                    <TokenIcon symbol={row.original.symbol} variant="branded" />
-                    {row.original.name}
+                    <TokenIcon key={symbol} symbol={symbol} variant="branded"/>
+                    {row.getValue("name")}
                 </span>
-            )
+            );
         }
     },
     {
@@ -62,7 +63,6 @@ export const columns: ColumnDef<WalletRow>[] = [
                         <ArrowUpDown className="ml-2 h-4 w-4"/>
                     </Button>
                 </div>
-
             )
         },
         cell: ({row}) => {
@@ -91,7 +91,7 @@ export const columns: ColumnDef<WalletRow>[] = [
         id: "actions",
         cell: ({row}) => {
             const [amount, setAmount] = React.useState('');
-            const coin = row.original
+            // const coin = row.original
             const navigate = useNavigate();
 
             const handleChange = (event: { target: { value: string } }) => {
@@ -104,7 +104,7 @@ export const columns: ColumnDef<WalletRow>[] = [
 
             const changeCoin = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3000/api/wallet/${coin.symbol}`, {
+                    const response = await fetch(`http://localhost:3000/api/wallet/${row.getValue("symbol")}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -123,7 +123,7 @@ export const columns: ColumnDef<WalletRow>[] = [
 
             const removeCoin = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3000/api/wallet/${coin.symbol}`, {
+                    const response = await fetch(`http://localhost:3000/api/wallet/${row.getValue("symbol")}`, {
                         method: "DELETE",
                         credentials: "include",
                     });
@@ -152,7 +152,7 @@ export const columns: ColumnDef<WalletRow>[] = [
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem>
-                                <Link to={`../${coin.symbol}`}>
+                                <Link to={`../${row.getValue("symbol")}`}>
                                     View Coin
                                 </Link>
                             </DropdownMenuItem>
@@ -173,7 +173,8 @@ export const columns: ColumnDef<WalletRow>[] = [
                         </DialogHeader>
                         <div className="flex items-center space-x-2">
                             <div className="flex-1">
-                                <Input type="text" id="amount" value={amount} onChange={handleChange} placeholder="Insert amount" inputMode="numeric"/>
+                                <Input type="text" id="amount" value={amount} onChange={handleChange}
+                                       placeholder="Insert amount" inputMode="numeric"/>
                             </div>
                             <DialogClose asChild>
                                 <Button onClick={changeCoin}>
