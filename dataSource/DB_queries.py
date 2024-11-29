@@ -151,16 +151,3 @@ def create_tables():
         print(f"Error: {e}")
     finally:
         cur.close()
-# data = (
-#     'BTC',  # id
-#     'Bitcoin',  # name
-#     'BTC',  # symbol
-#     2.5,  # change
-#     json.dumps({"mood": "positive", "score": 8})  # sentiment as JSON
-# )
-# insert_coin_data(data)
-# Example query
-
-# Close the cursor and connection
-
-

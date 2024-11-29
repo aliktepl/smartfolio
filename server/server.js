@@ -49,8 +49,8 @@ PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-// schedule.scheduleJob("0 * * * *", () => {
-//     console.log("Running Python script...");
-//     runPythonScript();
-// });
+schedule.scheduleJob("0 * * * *", () => {
+    console.log("Running Python script...");
+    runPythonScript();
+});
 // runPythonScript();
