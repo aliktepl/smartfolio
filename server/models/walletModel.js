@@ -14,12 +14,7 @@ class Wallet{
                 JOIN coins c ON w.coin_id = c.id
                 WHERE w.user_id = ${id}
             `;
-            //
-            // // Remove `id` from each result row if needed
-            // const final = result.map(row => {
-            //     const { id, ...rest } = row;
-            //     return rest;
-            // });
+
 
             return result;
         } catch (error) {

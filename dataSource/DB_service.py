@@ -22,7 +22,6 @@ def insert_single_coin(name, symbol):
         popularity
     )
 
-    # todo - open this:
     insert_articles(name, symbol, AMOUNT_OF_ARTICLES)
     insert_comments(top_comments)
     insert_coin_data(data)

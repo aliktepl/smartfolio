@@ -2,7 +2,6 @@ const coins = require('../models/coinsModel');
 const {data} = require("express-session/session/cookie");
 
 async function prepare_coin(data) {
-    // console.log("before prepare_coin:", data);
 
     // Ensure we're modifying the first element if data is an array
     const coin = await data[0]; // Access the first element if it's wrapped in an array
@@ -45,7 +44,6 @@ async function prepare_coin(data) {
 
 
 
-    // console.log("after prepare_coin:", coin);
     return data; // Return the modified coin object
 }
 class CoinsService {
