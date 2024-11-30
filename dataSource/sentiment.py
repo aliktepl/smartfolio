@@ -10,7 +10,7 @@ tf.get_logger().setLevel('ERROR')
 
 NEGATIVE_THRESHOLD = 0.4
 POSITIVE_THRESHOLD = 0.6
-saved_model_path = r"imdb_bert"
+saved_model_path = r"Bert"
 reloaded_model = tf.saved_model.load(saved_model_path)
 def bar_chart_distribution(data):
     values = [0] * 10

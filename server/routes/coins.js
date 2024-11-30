@@ -10,6 +10,4 @@ router.get('/', isLoggedIn,coinsController.getAllCoins);
 
 router.get('/:id', isLoggedIn, coinsController.getCoin);
 
-// router.post('/:id',isLoggedIn,)
-
 module.exports = router;
