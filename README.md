@@ -22,7 +22,7 @@ SmartFolio is a web application designed for cryptocurrency investors, offering 
 To set up SmartFolio locally, follow these steps:
 
 1. Ensure that you have **Node.js** and **PostgreSQL** installed on your system.
-2. Create a new PostgreSQL database and update the connection data in the dataSource\DB_queries accordingly.
+2. Create a new PostgreSQL database and update the connection data in dataSource\DB_queries accordingly.
 3. Clone the repository and navigate to the project directory.
 4. In the `dataSource` directory, run the following command:
 
