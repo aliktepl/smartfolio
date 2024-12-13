@@ -26,21 +26,39 @@ To set up SmartFolio locally, follow these steps:
 1. Ensure that you have **Node.js** and **PostgreSQL** installed on your system.
 2. Create a new PostgreSQL database and update the connection data in dataSource\DB_queries accordingly.
 3. Clone the repository and navigate to the project directory.
-4. In the `dataSource` directory, run the following command:
+4. Create a Python virtual environment to manage dependencies:
+   ```bash
+   python -m venv venv
+   ```
 
+   Activate the virtual environment:  
+    - On Windows:
+    ```bash
+    venv\Scripts\activate
+    ```
+    - On MacOS/Linux:
+    ```bash
+    source venv/bin/activate
+    ```
+   Install the required Python dependencies:  
+    ```bash
+    pip install -r requirements.txt
+    ```
+5. In the dataSource directory, run the following command:  
    ```bash
    python main.py
-5. Install the required dependencies for the project:
+   
+6. Install the required dependencies for the project:
     
     ```bash
    npm install
-6. Next, navigate to the server directory and run the following command to start the backend server:
+7. Next, navigate to the server directory and run the following command to start the backend server:
     ```bash
    npm run dev
-7. After that, navigate to the client directory and run the following command to start the frontend:
+8. After that, navigate to the client directory and run the following command to start the frontend:
     ```bash
    npm run dev
-8. Open your browser and go to the following URL to view the application:
+9. Open your browser and go to the following URL to view the application:
     ```url
    http://localhost:5173/
 
