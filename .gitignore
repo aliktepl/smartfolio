@@ -3,10 +3,10 @@ admin
 server/node_modules
 client/node_modules
 server/.env
-/sentimentModel
 /dataSource/.idea
-/dataSource/imdb_bert
+/dataSource/bert
 /dataSource/myenv
+/dataSource/.env
 
 
 

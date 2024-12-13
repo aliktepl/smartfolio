@@ -3,16 +3,15 @@ from datetime import datetime, timedelta
 import time
 import pandas as pd
 import praw
-
 import re
 import spacy
-
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Load spaCy model
 
 nlp = spacy.load("en_core_web_sm")
-
 
 from newsapi import NewsApiClient
 
@@ -130,7 +129,7 @@ def get_coin_24h_two_hour_intervals(coin):
 
 def top_stories(name, amount):
     # Define both API keys
-    api_keys = ['81d1a6e52ee54215929a928dae60380a', 'd567c85b2e474871861ae7f5d6407df6']
+    api_keys = [os.getenv("NEWSAPI_KEY"), os.getenv("NEWSAPI_KEY_BACKUP")]
 
     today = datetime.now()
     from_date = (today - timedelta(days=30)).strftime('%Y-%m-%d')
@@ -214,8 +213,8 @@ def prepare_for_top(submission):
 
 def scan_Reddit(name, symbol):
     username = "smartfolio"
-    clientid = "_R8bExVBisPWMQACqQ3EpA"
-    clientsecret = "6OWMvLjYGg_Fi1hjAPTMr1yg9Gjyag"
+    clientid = os.getenv("CLIENT_ID")
+    clientsecret = os.getenv("CLIENT_SECRET")
     top_comments = []
 
     reddit = praw.Reddit(client_id=clientid, client_secret=clientsecret, user_agent="human_behavior")

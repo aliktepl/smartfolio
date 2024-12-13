@@ -54,9 +54,9 @@ export async function loader({params}) {
 
 const sentimentPositiveNegative = (coin : CoinsRow) => {
     const {sentiment} = coin;
-    const neg = sentiment.slice(0, 4).reduce((sum, {percentage}) => sum + percentage, 0);
-    const pos = sentiment.slice(6, 10).reduce((sum, {percentage}) => sum + percentage, 0);
-    const neutral = sentiment[5].percentage + sentiment[6].percentage;
+    const neg = sentiment.slice(0, 4).reduce((sum, { percentage }) => sum + percentage, 0);
+    const neutral = sentiment.slice(4, 6).reduce((sum, { percentage }) => sum + percentage, 0);
+    const pos = sentiment.slice(6, 10).reduce((sum, { percentage }) => sum + percentage, 0);
     return {pos, neutral, neg};
 }
 
