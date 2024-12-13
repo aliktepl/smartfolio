@@ -69,4 +69,3 @@ def get_sentiment(data):
     reloaded_results = tf.sigmoid(reloaded_model(tf.constant(data)))
     sentiment = bar_chart_distribution(reloaded_results)
     return sentiment
-
