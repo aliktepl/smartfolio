@@ -2,6 +2,8 @@
 
 SmartFolio is a web application designed for cryptocurrency investors, offering real-time sentiment analysis to help users make informed investment decisions. At the core of SmartFolio is a powerful sentiment analysis engine that evaluates market sentiment for various cryptocurrencies, providing valuable insights into price trends and investor sentiment. Additionally, the platform includes a personal wallet system that allows users to securely track and manage their cryptocurrency portfolios.
 
+![ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/53ace8c7-ae0f-4c37-a974-e8a3a454ae4f)
+
 ## Features
 
 - **Sentiment Analysis**: Real-time sentiment analysis of various cryptocurrencies, providing insights into market trends.
